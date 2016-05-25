@@ -6,6 +6,8 @@
 - [g3log](https://github.com/KjellKod/g3log) is an asynchronous logging library
 - [ØMQ](http://zero.mq/) is a communication protocol and a set of library for the XXI century
 
+This project is a hommage to the aforementioned libraries. Its own feature set is arbitrary and will grow at will, but it builds upon the tiny giants mentioned above. 
+
 <!-- [![Build Status](https://travis-ci.org/d-led/crow_example.svg)](https://travis-ci.org/d-led/crow_example) -->
 
 ## Log via HTTP ##
