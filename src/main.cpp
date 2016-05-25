@@ -18,7 +18,7 @@ public:
 
     void log(std::string message, crow::LogLevel level) override {
         if (cfg.logging)
-            std::cout << "DefaultLogger -> " << message;
+            std::cout << "cg3lz -> " << message;
     }
 };
 
@@ -34,12 +34,19 @@ int main()
         return "Hello World!";
     });
 
+    CROW_ROUTE(app, "/log")
+    .methods("PUT"_method)
+    ([](const crow::request& req){
+        std::cout<<"LOG: "<<req.body<<std::endl;
+        return crow::response(200);
+    });
+
     // ignore all log
     crow::logger::setLogLevel(crow::LogLevel::DEBUG);
     auto handler(std::make_shared<DefaultLogger>(cfg));
     crow::logger::setHandler(handler.get());
 
     app.port(cfg.port)
-    .multithreaded()
-    .run();
+        .multithreaded()
+        .run();
 }
