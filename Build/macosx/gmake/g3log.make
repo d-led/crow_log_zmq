@@ -13,8 +13,8 @@ endif
 ifeq ($(config),debug_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x32/Debug
-  TARGET = $(TARGETDIR)/cg3lz
-  OBJDIR = ../../../obj/macosx/gmake/x32/Debug/cg3lz
+  TARGET = $(TARGETDIR)/libg3log.a
+  OBJDIR = ../../../obj/macosx/gmake/x32/Debug/g3log
   DEFINES += -D_DEBUG
   INCLUDES += -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src
   FORCE_INCLUDE +=
@@ -22,10 +22,10 @@ ifeq ($(config),debug_x32)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -g -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x32/Debug/libg3log.a -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread
-  LDDEPS += ../../../bin/macosx/gmake/x32/Debug/libg3log.a
+  LIBS +=
+  LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib32 -L/usr/local/lib -m32
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -40,8 +40,8 @@ endif
 ifeq ($(config),debug_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x64/Debug
-  TARGET = $(TARGETDIR)/cg3lz
-  OBJDIR = ../../../obj/macosx/gmake/x64/Debug/cg3lz
+  TARGET = $(TARGETDIR)/libg3log.a
+  OBJDIR = ../../../obj/macosx/gmake/x64/Debug/g3log
   DEFINES += -D_DEBUG
   INCLUDES += -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src
   FORCE_INCLUDE +=
@@ -49,10 +49,10 @@ ifeq ($(config),debug_x64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x64/Debug/libg3log.a -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread
-  LDDEPS += ../../../bin/macosx/gmake/x64/Debug/libg3log.a
+  LIBS +=
+  LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -L/usr/local/lib -m64
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -67,8 +67,8 @@ endif
 ifeq ($(config),release_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x32/Release
-  TARGET = $(TARGETDIR)/cg3lz
-  OBJDIR = ../../../obj/macosx/gmake/x32/Release/cg3lz
+  TARGET = $(TARGETDIR)/libg3log.a
+  OBJDIR = ../../../obj/macosx/gmake/x32/Release/g3log
   DEFINES +=
   INCLUDES += -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src
   FORCE_INCLUDE +=
@@ -76,10 +76,10 @@ ifeq ($(config),release_x32)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -O2 -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x32/Release/libg3log.a -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread
-  LDDEPS += ../../../bin/macosx/gmake/x32/Release/libg3log.a
+  LIBS +=
+  LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib32 -L/usr/local/lib -m32 -Wl,-x
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -94,8 +94,8 @@ endif
 ifeq ($(config),release_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x64/Release
-  TARGET = $(TARGETDIR)/cg3lz
-  OBJDIR = ../../../obj/macosx/gmake/x64/Release/cg3lz
+  TARGET = $(TARGETDIR)/libg3log.a
+  OBJDIR = ../../../obj/macosx/gmake/x64/Release/g3log
   DEFINES +=
   INCLUDES += -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src
   FORCE_INCLUDE +=
@@ -103,10 +103,10 @@ ifeq ($(config),release_x64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x64/Release/libg3log.a -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread
-  LDDEPS += ../../../bin/macosx/gmake/x64/Release/libg3log.a
+  LIBS +=
+  LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -L/usr/local/lib -m64 -Wl,-x
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -119,7 +119,14 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/main.o \
+	$(OBJDIR)/crashhandler_unix.o \
+	$(OBJDIR)/filesink.o \
+	$(OBJDIR)/g3log.o \
+	$(OBJDIR)/logcapture.o \
+	$(OBJDIR)/loglevels.o \
+	$(OBJDIR)/logmessage.o \
+	$(OBJDIR)/logworker.o \
+	$(OBJDIR)/time.o \
 
 RESOURCES := \
 
@@ -134,7 +141,7 @@ ifeq (/bin,$(findstring /bin,$(SHELL)))
 endif
 
 $(TARGET): $(GCH) $(OBJECTS) $(LDDEPS) $(RESOURCES) ${CUSTOMFILES}
-	@echo Linking cg3lz
+	@echo Linking g3log
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -155,7 +162,7 @@ else
 endif
 
 clean:
-	@echo Cleaning cg3lz
+	@echo Cleaning g3log
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -177,7 +184,28 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
-$(OBJDIR)/main.o: ../../../src/main.cpp
+$(OBJDIR)/crashhandler_unix.o: ../../../deps/g3log/src/crashhandler_unix.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/filesink.o: ../../../deps/g3log/src/filesink.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/g3log.o: ../../../deps/g3log/src/g3log.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/logcapture.o: ../../../deps/g3log/src/logcapture.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/loglevels.o: ../../../deps/g3log/src/loglevels.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/logmessage.o: ../../../deps/g3log/src/logmessage.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/logworker.o: ../../../deps/g3log/src/logworker.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/time.o: ../../../deps/g3log/src/time.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

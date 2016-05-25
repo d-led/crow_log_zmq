@@ -11,31 +11,42 @@ ifndef verbose
 endif
 
 ifeq ($(config),debug_x32)
+  g3log_config = debug_x32
   cg3lz_config = debug_x32
 endif
 ifeq ($(config),debug_x64)
+  g3log_config = debug_x64
   cg3lz_config = debug_x64
 endif
 ifeq ($(config),release_x32)
+  g3log_config = release_x32
   cg3lz_config = release_x32
 endif
 ifeq ($(config),release_x64)
+  g3log_config = release_x64
   cg3lz_config = release_x64
 endif
 
-PROJECTS := cg3lz
+PROJECTS := g3log cg3lz
 
 .PHONY: all clean help $(PROJECTS) 
 
 all: $(PROJECTS)
 
-cg3lz:
+g3log:
+ifneq (,$(g3log_config))
+	@echo "==== Building g3log ($(g3log_config)) ===="
+	@${MAKE} --no-print-directory -C . -f g3log.make config=$(g3log_config)
+endif
+
+cg3lz: g3log
 ifneq (,$(cg3lz_config))
 	@echo "==== Building cg3lz ($(cg3lz_config)) ===="
 	@${MAKE} --no-print-directory -C . -f cg3lz.make config=$(cg3lz_config)
 endif
 
 clean:
+	@${MAKE} --no-print-directory -C . -f g3log.make clean
 	@${MAKE} --no-print-directory -C . -f cg3lz.make clean
 
 help:
@@ -50,6 +61,7 @@ help:
 	@echo "TARGETS:"
 	@echo "   all (default)"
 	@echo "   clean"
+	@echo "   g3log"
 	@echo "   cg3lz"
 	@echo ""
 	@echo "For more information, see http://industriousone.com/premake/quick-start"

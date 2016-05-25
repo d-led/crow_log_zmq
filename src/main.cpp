@@ -7,6 +7,13 @@
 #include <chrono>
 #include <thread>
 
+#include <boost/filesystem.hpp>
+#include <boost/algorithm/string/trim.hpp>
+
+//g3log
+#include <g3log/g3log.hpp>
+#include <g3log/logworker.hpp>
+
 struct config {
     bool logging = true;
     int port = 18080;
@@ -20,14 +27,26 @@ public:
 
     void log(std::string message, crow::LogLevel level) override {
         if (cfg.logging)
-            std::cout << "cg3lz -> " << message;
+            std::cout << "cg3lz " << message;
     }
 };
 
+
 class g3logLogger : public crow::ILogHandler {
+   std::unique_ptr<g3::LogWorker> worker;
+
+public:
+    g3logLogger(std::string name, std::string path)
+        : worker(g3::LogWorker::createLogWorker()) {
+            boost::filesystem::path dir(path);
+            boost::filesystem::create_directory(dir);
+            auto logger = worker->addDefaultLogger(name,path);
+            g3::initializeLogging(worker.get());
+    }
+
 public:
     void log(std::string message, crow::LogLevel level) override {
-        std::cout << "cg3lz -> " << message;
+        LOG(INFO) << boost::trim_copy(message);
     }
 };
 
@@ -37,7 +56,7 @@ int main(int argc, char* argv[])
 
     config cfg;
 
-    g3logLogger log;
+    g3logLogger log(argv[0],"logs");
     
     CROW_ROUTE(app, "/")
     .name("hello")
