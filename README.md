@@ -20,9 +20,7 @@ echo bla | http put http://localhost:18080/log
 
 ## Log via 0mq ##
 
-i.e. in Python
-
-(`apt-get install python-pip python-dev libzmq3-dev python3-zmq`)
+i.e. in Python:
 
 ```python
 #!/usr/bin/env python
