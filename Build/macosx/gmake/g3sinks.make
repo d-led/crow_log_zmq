@@ -13,8 +13,8 @@ endif
 ifeq ($(config),debug_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x32/Debug
-  TARGET = $(TARGETDIR)/libg3log.a
-  OBJDIR = ../../../obj/macosx/gmake/x32/Debug/g3log
+  TARGET = $(TARGETDIR)/libg3sinks.a
+  OBJDIR = ../../../obj/macosx/gmake/x32/Debug/g3sinks
   DEFINES += -D_DEBUG
   INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src
   FORCE_INCLUDE +=
@@ -40,8 +40,8 @@ endif
 ifeq ($(config),debug_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x64/Debug
-  TARGET = $(TARGETDIR)/libg3log.a
-  OBJDIR = ../../../obj/macosx/gmake/x64/Debug/g3log
+  TARGET = $(TARGETDIR)/libg3sinks.a
+  OBJDIR = ../../../obj/macosx/gmake/x64/Debug/g3sinks
   DEFINES += -D_DEBUG
   INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src
   FORCE_INCLUDE +=
@@ -67,8 +67,8 @@ endif
 ifeq ($(config),release_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x32/Release
-  TARGET = $(TARGETDIR)/libg3log.a
-  OBJDIR = ../../../obj/macosx/gmake/x32/Release/g3log
+  TARGET = $(TARGETDIR)/libg3sinks.a
+  OBJDIR = ../../../obj/macosx/gmake/x32/Release/g3sinks
   DEFINES +=
   INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src
   FORCE_INCLUDE +=
@@ -94,8 +94,8 @@ endif
 ifeq ($(config),release_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x64/Release
-  TARGET = $(TARGETDIR)/libg3log.a
-  OBJDIR = ../../../obj/macosx/gmake/x64/Release/g3log
+  TARGET = $(TARGETDIR)/libg3sinks.a
+  OBJDIR = ../../../obj/macosx/gmake/x64/Release/g3sinks
   DEFINES +=
   INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src
   FORCE_INCLUDE +=
@@ -119,14 +119,9 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/crashhandler_unix.o \
-	$(OBJDIR)/filesink.o \
-	$(OBJDIR)/g3log.o \
-	$(OBJDIR)/logcapture.o \
-	$(OBJDIR)/loglevels.o \
-	$(OBJDIR)/logmessage.o \
-	$(OBJDIR)/logworker.o \
-	$(OBJDIR)/time.o \
+	$(OBJDIR)/LogRotate.o \
+	$(OBJDIR)/LogRotateUtility.o \
+	$(OBJDIR)/LogRotateWithFilter.o \
 
 RESOURCES := \
 
@@ -141,7 +136,7 @@ ifeq (/bin,$(findstring /bin,$(SHELL)))
 endif
 
 $(TARGET): $(GCH) $(OBJECTS) $(LDDEPS) $(RESOURCES) ${CUSTOMFILES}
-	@echo Linking g3log
+	@echo Linking g3sinks
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -162,7 +157,7 @@ else
 endif
 
 clean:
-	@echo Cleaning g3log
+	@echo Cleaning g3sinks
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -184,28 +179,13 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
-$(OBJDIR)/crashhandler_unix.o: ../../../deps/g3log/src/crashhandler_unix.cpp
+$(OBJDIR)/LogRotate.o: ../../../deps/g3sinks/logrotate/src/LogRotate.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/filesink.o: ../../../deps/g3log/src/filesink.cpp
+$(OBJDIR)/LogRotateUtility.o: ../../../deps/g3sinks/logrotate/src/LogRotateUtility.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/g3log.o: ../../../deps/g3log/src/g3log.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/logcapture.o: ../../../deps/g3log/src/logcapture.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/loglevels.o: ../../../deps/g3log/src/loglevels.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/logmessage.o: ../../../deps/g3log/src/logmessage.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/logworker.o: ../../../deps/g3log/src/logworker.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/time.o: ../../../deps/g3log/src/time.cpp
+$(OBJDIR)/LogRotateWithFilter.o: ../../../deps/g3sinks/logrotate/src/LogRotateWithFilter.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

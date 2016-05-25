@@ -81,6 +81,7 @@ includedirs {
 	'deps/crow/amalgamate',
 	'deps/g3log_config',
 	'deps/g3log/src',
+	'deps/g3sinks/logrotate/src',
 }
 
 --------------------------------------------------------------------
@@ -101,10 +102,17 @@ configuration 'not windows'
 use_standard('c++14')
 
 --------------------------------------------------------------------
+make_static_lib('g3sinks', {
+	'deps/g3sinks/logrotate/src/**.cpp',
+})
+
+use_standard('c++14')
+
+--------------------------------------------------------------------
 make_console_app('cg3lz', { 'src/main.cpp' })
 use_standard('c++14')
 
-links { 'g3log' }
+links { 'g3log', 'g3sinks' }
 
 link_zeromq()
 deploy_libzmq()
