@@ -5,34 +5,41 @@
 #include <sstream>
 #include <atomic>
 
-class ExampleLogHandler : public crow::ILogHandler {
-    public:
-        void log(std::string message, crow::LogLevel level) override {
-           std::cout << "ExampleLogHandler -> " << message;
-        }
+struct config {
+    bool logging = true;
+    int port = 18080;
 };
 
-#ifdef CROW_MSVC_WORKAROUND
-#undef CROW_ROUTE
-#define CROW_ROUTE(app, url) app.route_dynamic(url)
-#endif
+class DefaultLogger : public crow::ILogHandler {
+    config& cfg;
+public:
+
+    DefaultLogger(config& c):cfg(c) {}
+
+    void log(std::string message, crow::LogLevel level) override {
+        if (cfg.logging)
+            std::cout << "DefaultLogger -> " << message;
+    }
+};
 
 int main()
 {
     crow::SimpleApp app;
+
+    config cfg;
     
     CROW_ROUTE(app, "/")
-        .name("hello")
+    .name("hello")
     ([]{
         return "Hello World!";
     });
 
     // ignore all log
     crow::logger::setLogLevel(crow::LogLevel::DEBUG);
-    auto handler(std::make_shared<ExampleLogHandler>());
+    auto handler(std::make_shared<DefaultLogger>(cfg));
     crow::logger::setHandler(handler.get());
 
-    app.port(18080)
-        .multithreaded()
-        .run();
+    app.port(cfg.port)
+    .multithreaded()
+    .run();
 }
