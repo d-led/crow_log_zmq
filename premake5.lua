@@ -123,7 +123,8 @@ configuration 'not windows'
 		'boost_date_time',
 		'boost_regex',
 		'boost_filesystem',
-		'pthread'
+		'pthread',
+		'z'
 	}
 configuration '*'
 

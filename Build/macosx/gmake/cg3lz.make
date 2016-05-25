@@ -22,7 +22,7 @@ ifeq ($(config),debug_x32)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -g -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x32/Debug/libg3log.a ../../../bin/macosx/gmake/x32/Debug/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread
+  LIBS += ../../../bin/macosx/gmake/x32/Debug/libg3log.a ../../../bin/macosx/gmake/x32/Debug/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
   LDDEPS += ../../../bin/macosx/gmake/x32/Debug/libg3log.a ../../../bin/macosx/gmake/x32/Debug/libg3sinks.a
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib32 -L/usr/local/Cellar/zeromq/4.1.4/lib -L/usr/local/lib -m32
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -49,7 +49,7 @@ ifeq ($(config),debug_x64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x64/Debug/libg3log.a ../../../bin/macosx/gmake/x64/Debug/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread
+  LIBS += ../../../bin/macosx/gmake/x64/Debug/libg3log.a ../../../bin/macosx/gmake/x64/Debug/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
   LDDEPS += ../../../bin/macosx/gmake/x64/Debug/libg3log.a ../../../bin/macosx/gmake/x64/Debug/libg3sinks.a
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -L/usr/local/Cellar/zeromq/4.1.4/lib -L/usr/local/lib -m64
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -76,7 +76,7 @@ ifeq ($(config),release_x32)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -O2 -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x32/Release/libg3log.a ../../../bin/macosx/gmake/x32/Release/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread
+  LIBS += ../../../bin/macosx/gmake/x32/Release/libg3log.a ../../../bin/macosx/gmake/x32/Release/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
   LDDEPS += ../../../bin/macosx/gmake/x32/Release/libg3log.a ../../../bin/macosx/gmake/x32/Release/libg3sinks.a
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib32 -L/usr/local/Cellar/zeromq/4.1.4/lib -L/usr/local/lib -m32 -Wl,-x
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -103,7 +103,7 @@ ifeq ($(config),release_x64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x64/Release/libg3log.a ../../../bin/macosx/gmake/x64/Release/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread
+  LIBS += ../../../bin/macosx/gmake/x64/Release/libg3log.a ../../../bin/macosx/gmake/x64/Release/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
   LDDEPS += ../../../bin/macosx/gmake/x64/Release/libg3log.a ../../../bin/macosx/gmake/x64/Release/libg3sinks.a
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -L/usr/local/Cellar/zeromq/4.1.4/lib -L/usr/local/lib -m64 -Wl,-x
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)

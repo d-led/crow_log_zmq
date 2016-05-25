@@ -14,6 +14,8 @@
 // g3log
 #include <g3log/g3log.hpp>
 #include <g3log/logworker.hpp>
+#include <g3log/std2_make_unique.hpp>
+#include <g3sinks/LogRotate.h>
 
 // zeromq
 #include <zmq.hpp>
@@ -22,6 +24,7 @@ struct config {
   bool logging = true;
   int port = 18080;
   int zeromq_log_port = 18090;
+  std::string log_path = "logs";
 };
 
 class DefaultLogger : public crow::ILogHandler {
@@ -43,7 +46,12 @@ class g3logLogger : public crow::ILogHandler {
       : worker(g3::LogWorker::createLogWorker()) {
     boost::filesystem::path dir(path);
     boost::filesystem::create_directory(dir);
+#if 1//ifdef __MSC_VER
     auto logger = worker->addDefaultLogger(name, path);
+#else
+    auto logger = worker->addSink(std2::make_unique<LogRotate>(name, path),
+                                  &LogRotate::save);
+#endif
     g3::initializeLogging(worker.get());
   }
 
@@ -107,9 +115,12 @@ int main(int argc, char* argv[]) {
   config cfg;
 
   DefaultLogger default_log(cfg);
-  g3logLogger log(argv[0], "logs");
+  g3logLogger log(argv[0], cfg.log_path);
 
   zeromq_log_sink sink(cfg, default_log, log);
+
+  default_log.log(std::string("Saving logs to: ") + cfg.log_path + "\n",
+                  crow::LogLevel::INFO);
 
   sink.start_once();
 
@@ -136,7 +147,7 @@ int main(int argc, char* argv[]) {
     std::thread([] {
                   std::this_thread::sleep_for(std::chrono::seconds(1));
                   std::exit(0);
-    }).detach();
+                }).detach();
     return "OK! Shutting down!";
   });
 
