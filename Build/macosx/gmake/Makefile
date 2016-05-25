@@ -11,32 +11,32 @@ ifndef verbose
 endif
 
 ifeq ($(config),debug_x32)
-  example_with_all_config = debug_x32
+  cg3lz_config = debug_x32
 endif
 ifeq ($(config),debug_x64)
-  example_with_all_config = debug_x64
+  cg3lz_config = debug_x64
 endif
 ifeq ($(config),release_x32)
-  example_with_all_config = release_x32
+  cg3lz_config = release_x32
 endif
 ifeq ($(config),release_x64)
-  example_with_all_config = release_x64
+  cg3lz_config = release_x64
 endif
 
-PROJECTS := example_with_all
+PROJECTS := cg3lz
 
 .PHONY: all clean help $(PROJECTS) 
 
 all: $(PROJECTS)
 
-example_with_all:
-ifneq (,$(example_with_all_config))
-	@echo "==== Building example_with_all ($(example_with_all_config)) ===="
-	@${MAKE} --no-print-directory -C . -f example_with_all.make config=$(example_with_all_config)
+cg3lz:
+ifneq (,$(cg3lz_config))
+	@echo "==== Building cg3lz ($(cg3lz_config)) ===="
+	@${MAKE} --no-print-directory -C . -f cg3lz.make config=$(cg3lz_config)
 endif
 
 clean:
-	@${MAKE} --no-print-directory -C . -f example_with_all.make clean
+	@${MAKE} --no-print-directory -C . -f cg3lz.make clean
 
 help:
 	@echo "Usage: make [config=name] [target]"
@@ -50,6 +50,6 @@ help:
 	@echo "TARGETS:"
 	@echo "   all (default)"
 	@echo "   clean"
-	@echo "   example_with_all"
+	@echo "   cg3lz"
 	@echo ""
 	@echo "For more information, see http://industriousone.com/premake/quick-start"

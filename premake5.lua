@@ -1,6 +1,6 @@
 include 'premake'
 
-make_solution 'test'
+make_solution 'cg3lz'
 
 -------------------------------
 configuration 'windows'
@@ -22,7 +22,7 @@ includedirs {
 }
 
 --------------------------------------------------------------------
-make_console_app('example_with_all', { 'src/example_with_all.cpp' })
+make_console_app('cg3lz', { 'src/main.cpp' })
 use_standard('c++11')
 
 configuration 'not windows'
@@ -33,12 +33,3 @@ configuration 'not windows'
 		'pthread'
 	}
 configuration '*'
-
----------------------------------------------
-if os.get() == 'windows' then
-make_console_app('client', { 'src/client.cs' })
-language 'C#'
-links {
-	'System'
-}
-end

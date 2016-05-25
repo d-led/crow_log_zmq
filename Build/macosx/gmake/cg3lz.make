@@ -13,8 +13,8 @@ endif
 ifeq ($(config),debug_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x32/Debug
-  TARGET = $(TARGETDIR)/example_with_all
-  OBJDIR = ../../../obj/macosx/gmake/x32/Debug/example_with_all
+  TARGET = $(TARGETDIR)/cg3lz
+  OBJDIR = ../../../obj/macosx/gmake/x32/Debug/cg3lz
   DEFINES += -D_DEBUG
   INCLUDES += -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate
   FORCE_INCLUDE +=
@@ -40,8 +40,8 @@ endif
 ifeq ($(config),debug_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x64/Debug
-  TARGET = $(TARGETDIR)/example_with_all
-  OBJDIR = ../../../obj/macosx/gmake/x64/Debug/example_with_all
+  TARGET = $(TARGETDIR)/cg3lz
+  OBJDIR = ../../../obj/macosx/gmake/x64/Debug/cg3lz
   DEFINES += -D_DEBUG
   INCLUDES += -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate
   FORCE_INCLUDE +=
@@ -67,8 +67,8 @@ endif
 ifeq ($(config),release_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x32/Release
-  TARGET = $(TARGETDIR)/example_with_all
-  OBJDIR = ../../../obj/macosx/gmake/x32/Release/example_with_all
+  TARGET = $(TARGETDIR)/cg3lz
+  OBJDIR = ../../../obj/macosx/gmake/x32/Release/cg3lz
   DEFINES +=
   INCLUDES += -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate
   FORCE_INCLUDE +=
@@ -94,8 +94,8 @@ endif
 ifeq ($(config),release_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x64/Release
-  TARGET = $(TARGETDIR)/example_with_all
-  OBJDIR = ../../../obj/macosx/gmake/x64/Release/example_with_all
+  TARGET = $(TARGETDIR)/cg3lz
+  OBJDIR = ../../../obj/macosx/gmake/x64/Release/cg3lz
   DEFINES +=
   INCLUDES += -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate
   FORCE_INCLUDE +=
@@ -119,7 +119,7 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/example_with_all.o \
+	$(OBJDIR)/main.o \
 
 RESOURCES := \
 
@@ -134,7 +134,7 @@ ifeq (/bin,$(findstring /bin,$(SHELL)))
 endif
 
 $(TARGET): $(GCH) $(OBJECTS) $(LDDEPS) $(RESOURCES) ${CUSTOMFILES}
-	@echo Linking example_with_all
+	@echo Linking cg3lz
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -155,7 +155,7 @@ else
 endif
 
 clean:
-	@echo Cleaning example_with_all
+	@echo Cleaning cg3lz
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -177,7 +177,7 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
-$(OBJDIR)/example_with_all.o: ../../../src/example_with_all.cpp
+$(OBJDIR)/main.o: ../../../src/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
