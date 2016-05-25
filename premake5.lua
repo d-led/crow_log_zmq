@@ -23,7 +23,7 @@ includedirs {
 
 --------------------------------------------------------------------
 make_console_app('cg3lz', { 'src/main.cpp' })
-use_standard('c++11')
+use_standard('c++14')
 
 configuration 'not windows'
 	links {
