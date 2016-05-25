@@ -4,3 +4,6 @@
 [submodule "deps/crow"]
 	path = deps/crow
 	url = https://github.com/ipkn/crow.git
+[submodule "deps/g3log"]
+	path = deps/g3log
+	url = https://github.com/KjellKod/g3log.git
