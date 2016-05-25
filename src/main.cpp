@@ -72,6 +72,13 @@ int main(int argc, char* argv[])
         return crow::response(200);
     });
 
+    // http get http://localhost:18080/toggle_logging
+    CROW_ROUTE(app, "/toggle_logging")
+    ([&cfg]{
+        cfg.logging = !cfg.logging;
+        return std::string("Logging now: ") + (cfg.logging ? "on" : "off");
+    });
+
     // http get http://localhost:18080/kill
     CROW_ROUTE(app, "/kill")
     ([]{
