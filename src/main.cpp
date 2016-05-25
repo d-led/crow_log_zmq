@@ -53,6 +53,7 @@ int main(int argc, char* argv[])
         return crow::response(200);
     });
 
+    // http get http://localhost:18080/kill
     CROW_ROUTE(app, "/kill")
     ([]{
         std::thread([]{
