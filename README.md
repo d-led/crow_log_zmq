@@ -50,3 +50,22 @@ http get http://localhost:18080/kill
 - [cg3lz (server)](src/main.cpp)
 - [log_some](src/log_some.py)
 - [build config](premake5.lua)
+
+<!-- 
+813008/s, total: 100000
+452489/s, total: 200000
+117096/s, total: 300000
+182149/s, total: 400000
+154321/s, total: 500000
+132450/s, total: 600000
+134953/s, total: 700000
+134953/s, total: 800000
+253165/s, total: 900000
+156006/s, total: 1000000
+138313/s, total: 1100000
+200000/s, total: 1200000
+90497.7/s, total: 1300000
+135685/s, total: 1400000
+228311/s, total: 1500000
+134953/s, total: 1600000
+... -->
