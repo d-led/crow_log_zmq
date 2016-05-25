@@ -6,6 +6,7 @@
 #include <atomic>
 #include <chrono>
 #include <thread>
+#include <string>
 
 #include <boost/filesystem.hpp>
 #include <boost/algorithm/string/trim.hpp>
@@ -20,6 +21,7 @@
 struct config {
     bool logging = true;
     int port = 18080;
+    int zeromq_log_port = 18090;
 };
 
 class DefaultLogger : public crow::ILogHandler {
@@ -53,13 +55,67 @@ public:
     }
 };
 
+class zeromq_log_sink {
+    config& cfg;
+    crow::ILogHandler& log;
+    crow::ILogHandler& log_sink;
+    zmq::context_t context;
+    zmq::socket_t pull;
+    std::atomic<bool> started;
+
+public:
+    zeromq_log_sink(config& c, crow::ILogHandler& default_log, crow::ILogHandler& sink)
+        :   cfg(c),
+            log(default_log),
+            log_sink(sink),
+            context(1),
+            pull(context,ZMQ_PULL),
+            started(false) {
+                std::string port=std::to_string(cfg.zeromq_log_port);
+                std::string socket_config="tcp://*:";
+                socket_config+=port;
+                pull.bind(socket_config.c_str());
+
+                log.log(std::string("Listening to 0mq incoming logs on: ")+socket_config+"\n",crow::LogLevel::INFO);
+    }
+
+    ~zeromq_log_sink() {
+        this->stop();
+    }
+
+    void start_once() {
+        if (started)
+            return;
+
+        std::thread([this]{
+            while(started) {
+                zmq::message_t request;
+                pull.recv(&request);
+                std::string log_line(static_cast<char*>(request.data()), request.size());
+                log_sink.log(log_line,crow::LogLevel::INFO);
+            }
+        }).detach();
+
+        started = true;
+    }
+
+    void stop() {
+        started = false;
+    }
+};
+
 int main(int argc, char* argv[])
 {
     crow::SimpleApp app;
 
     config cfg;
 
+    DefaultLogger default_log(cfg);
     g3logLogger log(argv[0],"logs");
+
+    zeromq_log_sink sink(cfg,default_log,log);
+
+    sink.start_once();
     
     CROW_ROUTE(app, "/")
     .name("hello")
@@ -84,7 +140,8 @@ int main(int argc, char* argv[])
 
     // http get http://localhost:18080/kill
     CROW_ROUTE(app, "/kill")
-    ([]{
+    ([&sink]{
+        sink.stop();
         std::thread([]{
             std::this_thread::sleep_for(std::chrono::seconds(1));
             std::exit(0);

@@ -118,3 +118,15 @@ configuration 'not windows'
 		'pthread'
 	}
 configuration '*'
+
+--------------------------------------------------------------------
+make_console_app('log_some', { 'src/log_some.cpp' })
+use_standard('c++14')
+
+link_zeromq()
+
+configuration 'not windows'
+	links {
+		'pthread'
+	}
+configuration '*'
