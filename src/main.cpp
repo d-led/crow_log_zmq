@@ -14,6 +14,9 @@
 #include <g3log/g3log.hpp>
 #include <g3log/logworker.hpp>
 
+//zeromq
+#include <zmq.hpp>
+
 struct config {
     bool logging = true;
     int port = 18080;

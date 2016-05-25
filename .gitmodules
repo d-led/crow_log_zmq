@@ -10,3 +10,6 @@
 [submodule "deps/g3sinks"]
 	path = deps/g3sinks
 	url = https://github.com/KjellKod/g3sinks.git
+[submodule "deps/cppzmq"]
+	path = deps/cppzmq
+	url = https://github.com/zeromq/cppzmq.git
