@@ -1,5 +1,7 @@
 # crow + g3log + 0mq == a simple log server #
 
+> no warranties / use at your own risk
+
 - [crow](https://github.com/ipkn/crow) is a C++11 micro web framework
 - [g3log](https://github.com/KjellKod/g3log) is an asynchronous logging library
 
