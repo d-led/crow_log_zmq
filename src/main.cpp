@@ -57,7 +57,7 @@ class g3logLogger : public crow::ILogHandler {
 
  public:
   void log(std::string message, crow::LogLevel level) override {
-    LOG(INFO) << boost::trim_copy(message);
+    LOG(INFO) << message;//boost::trim_copy(message);
   }
 };
 
@@ -126,7 +126,7 @@ int main(int argc, char* argv[]) {
 
   CROW_ROUTE(app, "/").name("hello")([] { return "Hello World!"; });
 
-  // echo bla | http put http://localhost:18080/log
+  // echo "bla\c" | http put http://localhost:18080/log
   CROW_ROUTE(app, "/log")
       .methods("PUT"_method)([&log](const crow::request& req) {
          log.log(req.body, crow::LogLevel::INFO);

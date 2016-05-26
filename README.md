@@ -15,7 +15,7 @@ This project is a hommage to the aforementioned libraries. Its own feature set i
 using [httpie](http://httpie.org):
 
 ```
-echo bla | http put http://localhost:18080/log
+echo "bla\c" | http put http://localhost:18080/log
 ```
 
 ## Log via 0mq ##
