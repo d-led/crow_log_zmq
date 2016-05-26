@@ -6,7 +6,7 @@ make_solution 'cg3lz'
 configuration 'windows'
 	defines {
 		'NOGDI',
-		'CROW_MSVC_WORKAROUND'
+		-- 'CROW_MSVC_WORKAROUND'
 	}
 configuration '*'
 

@@ -8,7 +8,6 @@
 // zeromq
 #include <zmq.hpp>
 
-#include <crow_all.h>
 
 struct zeromq_log_sink::impl {
   config& cfg;

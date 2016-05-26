@@ -97,7 +97,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NOGDI;CROW_MSVC_WORKAROUND;_WIN32_WINNT=0x0501;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files (x86)\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_56_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\g3log_config;..\..\..\deps\g3log\src;..\..\..\deps\g3sinks\logrotate\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
@@ -115,7 +115,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NOGDI;CROW_MSVC_WORKAROUND;_WIN32_WINNT=0x0501;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_56_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\g3log_config;..\..\..\deps\g3log\src;..\..\..\deps\g3sinks\logrotate\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
@@ -133,7 +133,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NOGDI;CROW_MSVC_WORKAROUND;_WIN32_WINNT=0x0501;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files (x86)\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_56_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\g3log_config;..\..\..\deps\g3log\src;..\..\..\deps\g3sinks\logrotate\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -155,7 +155,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NOGDI;CROW_MSVC_WORKAROUND;_WIN32_WINNT=0x0501;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_56_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\g3log_config;..\..\..\deps\g3log\src;..\..\..\deps\g3sinks\logrotate\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
