@@ -54,7 +54,7 @@ class cg3lz {
       std::string res("Logs: \n");
       auto logs = view.get_logs();
       for (auto& entry : logs) {
-        res += " " + entry + "\n";
+        res += " " + entry.filename + " [" + std::to_string(entry.size) + "B] \n";
       }
       res += "\n";
       return res;

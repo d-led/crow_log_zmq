@@ -4,10 +4,6 @@
 
 #include <boost/filesystem.hpp>
 
-struct file_entry {
-  std::string filename;
-  size_t size;
-};
 
 using namespace boost::filesystem;
 
@@ -24,6 +20,7 @@ struct file_info {
       if (is_regular_file(it->path())) {
         file_entry e;
         e.filename = it->path().filename().string();
+        e.size = file_size(it->path());
         res.emplace_back(e);
       }
     }
@@ -31,12 +28,6 @@ struct file_info {
   }
 };
 
-std::vector<std::string> log_view::get_logs() const {
-  file_info info(cfg.log_path);
-  std::vector<std::string> res;
-  auto logs = info.get();
-  for(auto& entry: logs) {
-    res.emplace_back(entry.filename);
-  }
-  return res;
+std::vector<file_entry> log_view::get_logs() const {
+  return file_info(cfg.log_path).get();
 }
