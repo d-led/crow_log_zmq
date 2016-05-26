@@ -37,7 +37,7 @@ configuration {'x64','windows'}
 	libdirs { path.join(zeromq_root.x64,'lib') }
 configuration 'macosx'
 	includedirs { path.join(zeromq_root.osx,'include') }
-	libdirs { path.join(zeromq_root.osx,'lib') }	
+	libdirs { path.join(zeromq_root.osx,'lib') }
 configuration '*'
 
 function deploy_libzmq()
@@ -102,17 +102,22 @@ configuration 'not windows'
 use_standard('c++14')
 
 --------------------------------------------------------------------
-make_static_lib('g3sinks', {
-	'deps/g3sinks/logrotate/src/**.cpp',
-})
+if os.get() ~= 'windows' then
+	make_static_lib('g3sinks', {
+		'deps/g3sinks/logrotate/src/**.cpp',
+	})
 
-use_standard('c++14')
-
+	use_standard('c++14')
+end
 --------------------------------------------------------------------
 make_console_app('cg3lz', { 'src/main.cpp' })
 use_standard('c++14')
 
-links { 'g3log', 'g3sinks' }
+links { 'g3log' }
+
+configuration 'not windows'
+	links { 'g3sinks' }
+configuration '*'
 
 link_zeromq()
 deploy_libzmq()
