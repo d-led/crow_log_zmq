@@ -186,7 +186,17 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\src\config.h" />
+    <ClInclude Include="..\..\..\src\default_logger.h" />
+    <ClInclude Include="..\..\..\src\g3logger.h" />
+    <ClInclude Include="..\..\..\src\log_view.h" />
+    <ClInclude Include="..\..\..\src\zeromq_log_sink.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\g3logger.cpp" />
+    <ClCompile Include="..\..\..\src\log_view.cpp" />
     <ClCompile Include="..\..\..\src\main.cpp" />
+    <ClCompile Include="..\..\..\src\zeromq_log_sink.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="g3log.vcxproj">

@@ -108,6 +108,27 @@ if os.get() ~= 'windows' then
 	})
 
 	use_standard('c++14')
+
+	--------------------------------------------------------------------
+	make_console_app('g3log_repro', { 'src/g3log_repro.cpp' })
+	use_standard('c++14')
+
+	links { 'g3log' }
+
+	configuration 'not windows'
+		links { 'g3sinks' }
+	configuration '*'
+
+	configuration 'not windows'
+		links {
+			'boost_system',
+			'boost_date_time',
+			'boost_regex',
+			'boost_filesystem',
+			'pthread',
+			'z'
+		}
+	configuration '*'
 end
 
 --------------------------------------------------------------------
@@ -152,23 +173,3 @@ configuration 'not windows'
 	}
 configuration '*'
 
---------------------------------------------------------------------
-make_console_app('g3log_repro', { 'src/g3log_repro.cpp' })
-use_standard('c++14')
-
-links { 'g3log' }
-
-configuration 'not windows'
-	links { 'g3sinks' }
-configuration '*'
-
-configuration 'not windows'
-	links {
-		'boost_system',
-		'boost_date_time',
-		'boost_regex',
-		'boost_filesystem',
-		'pthread',
-		'z'
-	}
-configuration '*'
