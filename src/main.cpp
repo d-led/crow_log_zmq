@@ -46,7 +46,7 @@ class g3logLogger : public crow::ILogHandler {
       : worker(g3::LogWorker::createLogWorker()) {
     boost::filesystem::path dir(path);
     boost::filesystem::create_directory(dir);
-#if 1//ifdef __MSC_VER
+#ifdef __MSC_VER
     auto logger = worker->addDefaultLogger(name, path);
 #else
     auto logger = worker->addSink(std2::make_unique<LogRotate>(name, path),
@@ -109,13 +109,13 @@ class zeromq_log_sink {
   void stop() { started = false; }
 };
 
-int main(int argc, char* argv[]) {
+static void run(std::string name) {
   crow::SimpleApp app;
 
   config cfg;
 
   DefaultLogger default_log(cfg);
-  g3logLogger log(argv[0], cfg.log_path);
+  g3logLogger log(name, cfg.log_path);
 
   zeromq_log_sink sink(cfg, default_log, log);
 
@@ -157,4 +157,12 @@ int main(int argc, char* argv[]) {
   crow::logger::setHandler(handler.get());
 
   app.port(cfg.port).multithreaded().run();
+}
+
+int main(int argc, char* argv[]) {
+  try {
+    run(argv[0]);
+  } catch (std::exception& e) {
+    std::cerr<<"Sorry, crashed: "<<e.what()<<std::endl;
+  }
 }
