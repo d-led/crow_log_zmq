@@ -113,6 +113,7 @@ end
 --------------------------------------------------------------------
 make_console_app('cg3lz', {
 	'src/main.cpp',
+	'src/g3logger.cpp',
 	'src/*.h'
 })
 use_standard('c++14')

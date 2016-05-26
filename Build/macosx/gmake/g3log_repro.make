@@ -13,8 +13,8 @@ endif
 ifeq ($(config),debug_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x32/Debug
-  TARGET = $(TARGETDIR)/cg3lz
-  OBJDIR = ../../../obj/macosx/gmake/x32/Debug/cg3lz
+  TARGET = $(TARGETDIR)/g3log_repro
+  OBJDIR = ../../../obj/macosx/gmake/x32/Debug/g3log_repro
   DEFINES += -D_DEBUG
   INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src
   FORCE_INCLUDE +=
@@ -22,7 +22,7 @@ ifeq ($(config),debug_x32)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -g -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x32/Debug/libg3log.a ../../../bin/macosx/gmake/x32/Debug/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
+  LIBS += ../../../bin/macosx/gmake/x32/Debug/libg3log.a ../../../bin/macosx/gmake/x32/Debug/libg3sinks.a -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
   LDDEPS += ../../../bin/macosx/gmake/x32/Debug/libg3log.a ../../../bin/macosx/gmake/x32/Debug/libg3sinks.a
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib32 -L/usr/local/Cellar/zeromq/4.1.4/lib -L/usr/local/lib -m32
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -40,8 +40,8 @@ endif
 ifeq ($(config),debug_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x64/Debug
-  TARGET = $(TARGETDIR)/cg3lz
-  OBJDIR = ../../../obj/macosx/gmake/x64/Debug/cg3lz
+  TARGET = $(TARGETDIR)/g3log_repro
+  OBJDIR = ../../../obj/macosx/gmake/x64/Debug/g3log_repro
   DEFINES += -D_DEBUG
   INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src
   FORCE_INCLUDE +=
@@ -49,7 +49,7 @@ ifeq ($(config),debug_x64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x64/Debug/libg3log.a ../../../bin/macosx/gmake/x64/Debug/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
+  LIBS += ../../../bin/macosx/gmake/x64/Debug/libg3log.a ../../../bin/macosx/gmake/x64/Debug/libg3sinks.a -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
   LDDEPS += ../../../bin/macosx/gmake/x64/Debug/libg3log.a ../../../bin/macosx/gmake/x64/Debug/libg3sinks.a
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -L/usr/local/Cellar/zeromq/4.1.4/lib -L/usr/local/lib -m64
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -67,8 +67,8 @@ endif
 ifeq ($(config),release_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x32/Release
-  TARGET = $(TARGETDIR)/cg3lz
-  OBJDIR = ../../../obj/macosx/gmake/x32/Release/cg3lz
+  TARGET = $(TARGETDIR)/g3log_repro
+  OBJDIR = ../../../obj/macosx/gmake/x32/Release/g3log_repro
   DEFINES +=
   INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src
   FORCE_INCLUDE +=
@@ -76,7 +76,7 @@ ifeq ($(config),release_x32)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -O2 -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x32/Release/libg3log.a ../../../bin/macosx/gmake/x32/Release/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
+  LIBS += ../../../bin/macosx/gmake/x32/Release/libg3log.a ../../../bin/macosx/gmake/x32/Release/libg3sinks.a -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
   LDDEPS += ../../../bin/macosx/gmake/x32/Release/libg3log.a ../../../bin/macosx/gmake/x32/Release/libg3sinks.a
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib32 -L/usr/local/Cellar/zeromq/4.1.4/lib -L/usr/local/lib -m32 -Wl,-x
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -94,8 +94,8 @@ endif
 ifeq ($(config),release_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x64/Release
-  TARGET = $(TARGETDIR)/cg3lz
-  OBJDIR = ../../../obj/macosx/gmake/x64/Release/cg3lz
+  TARGET = $(TARGETDIR)/g3log_repro
+  OBJDIR = ../../../obj/macosx/gmake/x64/Release/g3log_repro
   DEFINES +=
   INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src
   FORCE_INCLUDE +=
@@ -103,7 +103,7 @@ ifeq ($(config),release_x64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x64/Release/libg3log.a ../../../bin/macosx/gmake/x64/Release/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
+  LIBS += ../../../bin/macosx/gmake/x64/Release/libg3log.a ../../../bin/macosx/gmake/x64/Release/libg3sinks.a -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
   LDDEPS += ../../../bin/macosx/gmake/x64/Release/libg3log.a ../../../bin/macosx/gmake/x64/Release/libg3sinks.a
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -L/usr/local/Cellar/zeromq/4.1.4/lib -L/usr/local/lib -m64 -Wl,-x
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
@@ -119,8 +119,7 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/g3logger.o \
-	$(OBJDIR)/main.o \
+	$(OBJDIR)/g3log_repro.o \
 
 RESOURCES := \
 
@@ -135,7 +134,7 @@ ifeq (/bin,$(findstring /bin,$(SHELL)))
 endif
 
 $(TARGET): $(GCH) $(OBJECTS) $(LDDEPS) $(RESOURCES) ${CUSTOMFILES}
-	@echo Linking cg3lz
+	@echo Linking g3log_repro
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -156,7 +155,7 @@ else
 endif
 
 clean:
-	@echo Cleaning cg3lz
+	@echo Cleaning g3log_repro
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -178,10 +177,7 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
-$(OBJDIR)/g3logger.o: ../../../src/g3logger.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/main.o: ../../../src/main.cpp
+$(OBJDIR)/g3log_repro.o: ../../../src/g3log_repro.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

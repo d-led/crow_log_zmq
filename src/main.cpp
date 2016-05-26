@@ -8,55 +8,24 @@
 #include <string>
 #include <thread>
 
-#include <boost/algorithm/string/trim.hpp>
-#include <boost/filesystem.hpp>
-
-// g3log
-#include <g3sinks/LogRotate.h>
-#include <g3log/g3log.hpp>
-#include <g3log/logworker.hpp>
-#include <g3log/std2_make_unique.hpp>
-
 // zeromq
 #include <zmq.hpp>
 
 #include "config.h"
 #include "default_logger.h"
-
-class g3logLogger : public crow::ILogHandler {
-  std::unique_ptr<g3::LogWorker> worker;
-
- public:
-  g3logLogger(std::string name, std::string path)
-      : worker(g3::LogWorker::createLogWorker()) {
-    boost::filesystem::path dir(path);
-    boost::filesystem::create_directory(dir);
-#ifdef __MSC_VER
-    auto logger = worker->addDefaultLogger(name, path);
-#else
-    auto logger = worker->addSink(std2::make_unique<LogRotate>(name, path),
-                                  &LogRotate::save);
-#endif
-    g3::initializeLogging(worker.get());
-  }
-
- public:
-  void log(std::string message, crow::LogLevel level) override {
-    LOG(INFO) << message;  // boost::trim_copy(message);
-  }
-};
+#include "g3logger.h"
 
 class zeromq_log_sink {
   config& cfg;
   crow::ILogHandler& log;
-  crow::ILogHandler& log_sink;
+  g3logLogger& log_sink;
   zmq::context_t context;
   zmq::socket_t pull;
   std::atomic<bool> started;
 
  public:
   zeromq_log_sink(config& c, crow::ILogHandler& default_log,
-                  crow::ILogHandler& sink)
+                  g3logLogger& sink)
       : cfg(c),
         log(default_log),
         log_sink(sink),
@@ -84,7 +53,7 @@ class zeromq_log_sink {
         pull.recv(&request);
         std::string log_line(static_cast<char*>(request.data()),
                              request.size());
-        log_sink.log(log_line, crow::LogLevel::INFO);
+        log_sink.log(log_line);
       }
     }).detach();
 
@@ -114,7 +83,7 @@ static void run(std::string name) {
   // echo "bla\c" | http put http://localhost:18080/log
   CROW_ROUTE(app, "/log")
       .methods("PUT"_method)([&log](const crow::request& req) {
-        log.log(req.body, crow::LogLevel::INFO);
+        log.log(req.body);
         return crow::response(200);
       });
 
