@@ -2,66 +2,14 @@
 
 // based on original example_with_all.cpp
 
-#include <atomic>
-#include <chrono>
-#include <sstream>
 #include <string>
+#include <chrono>
 #include <thread>
-
-// zeromq
-#include <zmq.hpp>
 
 #include "config.h"
 #include "default_logger.h"
 #include "g3logger.h"
-
-class zeromq_log_sink {
-  config& cfg;
-  crow::ILogHandler& log;
-  g3logLogger& log_sink;
-  zmq::context_t context;
-  zmq::socket_t pull;
-  std::atomic<bool> started;
-
- public:
-  zeromq_log_sink(config& c, crow::ILogHandler& default_log,
-                  g3logLogger& sink)
-      : cfg(c),
-        log(default_log),
-        log_sink(sink),
-        context(1),
-        pull(context, ZMQ_PULL),
-        started(false) {
-    std::string port = std::to_string(cfg.zeromq_log_port);
-    std::string socket_config = "tcp://*:";
-    socket_config += port;
-    pull.bind(socket_config.c_str());
-
-    log.log(std::string("Listening to 0mq incoming logs on: ") + socket_config +
-                "\n",
-            crow::LogLevel::INFO);
-  }
-
-  ~zeromq_log_sink() { this->stop(); }
-
-  void start_once() {
-    if (started) return;
-
-    std::thread([this] {
-      while (started) {
-        zmq::message_t request;
-        pull.recv(&request);
-        std::string log_line(static_cast<char*>(request.data()),
-                             request.size());
-        log_sink.log(log_line);
-      }
-    }).detach();
-
-    started = true;
-  }
-
-  void stop() { started = false; }
-};
+#include "zeromq_log_sink.h"
 
 static void run(std::string name) {
   crow::SimpleApp app;
@@ -71,7 +19,10 @@ static void run(std::string name) {
   DefaultLogger default_log(cfg);
   g3logLogger log(name, cfg.log_path);
 
-  zeromq_log_sink sink(cfg, default_log, log);
+  zeromq_log_sink sink(cfg, [&default_log](std::string const& m) {
+                              default_log.log(m, crow::LogLevel::INFO);
+                            },
+                       log);
 
   default_log.log(std::string("Saving logs to: ") + cfg.log_path + "\n",
                   crow::LogLevel::INFO);
@@ -83,9 +34,9 @@ static void run(std::string name) {
   // echo "bla\c" | http put http://localhost:18080/log
   CROW_ROUTE(app, "/log")
       .methods("PUT"_method)([&log](const crow::request& req) {
-        log.log(req.body);
-        return crow::response(200);
-      });
+         log.log(req.body);
+         return crow::response(200);
+       });
 
   // http get http://localhost:18080/toggle_logging
   CROW_ROUTE(app, "/toggle_logging")
@@ -99,13 +50,12 @@ static void run(std::string name) {
   ([&sink] {
     sink.stop();
     std::thread([] {
-      std::this_thread::sleep_for(std::chrono::seconds(1));
-      std::exit(0);
-    }).detach();
+                  std::this_thread::sleep_for(std::chrono::seconds(1));
+                  std::exit(0);
+                }).detach();
     return "OK! Shutting down!";
   });
 
-  // ignore all log
   crow::logger::setLogLevel(crow::LogLevel::DEBUG);
   auto handler(std::make_shared<DefaultLogger>(cfg));
   crow::logger::setHandler(handler.get());
@@ -116,9 +66,11 @@ static void run(std::string name) {
 int main(int argc, char* argv[]) {
   try {
     run(argv[0]);
-  } catch (std::bad_alloc& e) {
+  }
+  catch (std::bad_alloc& e) {
     std::cerr << "Sorry, bad alloc: " << e.what() << std::endl;
-  } catch (std::exception& e) {
+  }
+  catch (std::exception& e) {
     std::cerr << "Sorry, crashed: " << e.what() << std::endl;
   }
 }

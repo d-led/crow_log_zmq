@@ -121,6 +121,7 @@ endif
 OBJECTS := \
 	$(OBJDIR)/g3logger.o \
 	$(OBJDIR)/main.o \
+	$(OBJDIR)/zeromq_log_sink.o \
 
 RESOURCES := \
 
@@ -182,6 +183,9 @@ $(OBJDIR)/g3logger.o: ../../../src/g3logger.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/main.o: ../../../src/main.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zeromq_log_sink.o: ../../../src/zeromq_log_sink.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
