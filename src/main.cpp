@@ -20,23 +20,8 @@
 // zeromq
 #include <zmq.hpp>
 
-struct config {
-  bool logging = true;
-  int port = 18080;
-  int zeromq_log_port = 18090;
-  std::string log_path = "logs";
-};
-
-class DefaultLogger : public crow::ILogHandler {
-  config& cfg;
-
- public:
-  DefaultLogger(config& c) : cfg(c) {}
-
-  void log(std::string message, crow::LogLevel level) override {
-    if (cfg.logging) std::cout << "cg3lz " << message;
-  }
-};
+#include "config.h"
+#include "default_logger.h"
 
 class g3logLogger : public crow::ILogHandler {
   std::unique_ptr<g3::LogWorker> worker;

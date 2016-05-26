@@ -111,7 +111,10 @@ if os.get() ~= 'windows' then
 end
 
 --------------------------------------------------------------------
-make_console_app('cg3lz', { 'src/main.cpp' })
+make_console_app('cg3lz', {
+	'src/main.cpp',
+	'src/*.h'
+})
 use_standard('c++14')
 
 links { 'g3log' }
