@@ -2,20 +2,20 @@
 
 // based on original example_with_all.cpp
 
-#include <sstream>
 #include <atomic>
 #include <chrono>
-#include <thread>
+#include <sstream>
 #include <string>
+#include <thread>
 
-#include <boost/filesystem.hpp>
 #include <boost/algorithm/string/trim.hpp>
+#include <boost/filesystem.hpp>
 
 // g3log
+#include <g3sinks/LogRotate.h>
 #include <g3log/g3log.hpp>
 #include <g3log/logworker.hpp>
 #include <g3log/std2_make_unique.hpp>
-#include <g3sinks/LogRotate.h>
 
 // zeromq
 #include <zmq.hpp>
@@ -57,7 +57,7 @@ class g3logLogger : public crow::ILogHandler {
 
  public:
   void log(std::string message, crow::LogLevel level) override {
-    LOG(INFO) << message;//boost::trim_copy(message);
+    LOG(INFO) << message;  // boost::trim_copy(message);
   }
 };
 
@@ -94,14 +94,14 @@ class zeromq_log_sink {
     if (started) return;
 
     std::thread([this] {
-                  while (started) {
-                    zmq::message_t request;
-                    pull.recv(&request);
-                    std::string log_line(static_cast<char*>(request.data()),
-                                         request.size());
-                    log_sink.log(log_line, crow::LogLevel::INFO);
-                  }
-                }).detach();
+      while (started) {
+        zmq::message_t request;
+        pull.recv(&request);
+        std::string log_line(static_cast<char*>(request.data()),
+                             request.size());
+        log_sink.log(log_line, crow::LogLevel::INFO);
+      }
+    }).detach();
 
     started = true;
   }
@@ -129,9 +129,9 @@ static void run(std::string name) {
   // echo "bla\c" | http put http://localhost:18080/log
   CROW_ROUTE(app, "/log")
       .methods("PUT"_method)([&log](const crow::request& req) {
-         log.log(req.body, crow::LogLevel::INFO);
-         return crow::response(200);
-       });
+        log.log(req.body, crow::LogLevel::INFO);
+        return crow::response(200);
+      });
 
   // http get http://localhost:18080/toggle_logging
   CROW_ROUTE(app, "/toggle_logging")
@@ -145,9 +145,9 @@ static void run(std::string name) {
   ([&sink] {
     sink.stop();
     std::thread([] {
-                  std::this_thread::sleep_for(std::chrono::seconds(1));
-                  std::exit(0);
-                }).detach();
+      std::this_thread::sleep_for(std::chrono::seconds(1));
+      std::exit(0);
+    }).detach();
     return "OK! Shutting down!";
   });
 
@@ -162,7 +162,9 @@ static void run(std::string name) {
 int main(int argc, char* argv[]) {
   try {
     run(argv[0]);
+  } catch (std::bad_alloc& e) {
+    std::cerr << "Sorry, bad alloc: " << e.what() << std::endl;
   } catch (std::exception& e) {
-    std::cerr<<"Sorry, crashed: "<<e.what()<<std::endl;
+    std::cerr << "Sorry, crashed: " << e.what() << std::endl;
   }
 }

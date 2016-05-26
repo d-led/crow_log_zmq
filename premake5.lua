@@ -109,6 +109,7 @@ if os.get() ~= 'windows' then
 
 	use_standard('c++14')
 end
+
 --------------------------------------------------------------------
 make_console_app('cg3lz', { 'src/main.cpp' })
 use_standard('c++14')
@@ -142,5 +143,26 @@ link_zeromq()
 configuration 'not windows'
 	links {
 		'pthread'
+	}
+configuration '*'
+
+--------------------------------------------------------------------
+make_console_app('g3log_repro', { 'src/g3log_repro.cpp' })
+use_standard('c++14')
+
+links { 'g3log' }
+
+configuration 'not windows'
+	links { 'g3sinks' }
+configuration '*'
+
+configuration 'not windows'
+	links {
+		'boost_system',
+		'boost_date_time',
+		'boost_regex',
+		'boost_filesystem',
+		'pthread',
+		'z'
 	}
 configuration '*'
