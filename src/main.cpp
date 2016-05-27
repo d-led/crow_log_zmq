@@ -12,6 +12,7 @@
 #include "g3logger.h"
 #include "zeromq_log_sink.h"
 #include "log_view.h"
+#include "file_contents.h"
 
 class cg3lz {
   crow::SimpleApp app;
@@ -57,6 +58,7 @@ class cg3lz {
     add_logging_rest_endpoint();
     add_crow_logging_toggle();
     add_kill_switch();
+    add_naive_log_file_download();
   }
 
   void add_kill_switch() {
@@ -101,6 +103,25 @@ class cg3lz {
       return res;
     });
   }
+
+  void add_naive_log_file_download() {
+    CROW_ROUTE(app,
+               "/logs/<string>")([this](std::string filename)->crow::response {
+      auto file = file_contents(cfg.log_path + "/" + filename);
+      if (!file.exists()) {
+        auto response = crow::response();
+        response.code = 404;
+        return response;
+      } else {
+        auto response = crow::response(file.contents());
+        response.set_header(
+            "Content-Type",
+            "application/octet-stream");  // or set to whatever you need
+        return response;
+      }
+    });
+  }
+
 };
 
 int main(int argc, char* argv[]) {
