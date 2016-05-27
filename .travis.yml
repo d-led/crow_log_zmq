@@ -16,9 +16,11 @@ addons:
 cache:
  - apt
 
+before_install:
+  - gem install rufus-scheduler
+
 before_script:
   - export CXX="g++-5"
-  - gem install --user-install rufus-scheduler
 
 script:
   - make -C Build/linux/gmake config=release_x64
