@@ -55,7 +55,7 @@ class cg3lz {
   void configure_routing() {
     add_front_page();
     add_logging_rest_endpoint();
-    add_app_logging_toggle();
+    add_crow_logging_toggle();
     add_kill_switch();
   }
 
@@ -72,7 +72,7 @@ class cg3lz {
     });
   }
 
-  void add_app_logging_toggle() {
+  void add_crow_logging_toggle() {
     // http get http://localhost:18080/toggle_logging
     CROW_ROUTE(app, "/toggle_logging")
     ([this] {
