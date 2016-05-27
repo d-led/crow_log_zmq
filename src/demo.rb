@@ -30,7 +30,7 @@ end
 
 scheduler.in '3s' do
     http = Net::HTTP.new('localhost', 18080)
-    42.times do |i|
+    3.times do |i|
         response = http.send_request('PUT', '/log', "Hello \##{i+1}")
     end
 end
