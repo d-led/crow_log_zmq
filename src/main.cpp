@@ -23,6 +23,7 @@ class cg3lz {
   log_view view;
 
  public:
+  //////////////////////////////
   cg3lz(std::string const& name)
       : default_log(cfg),
         log(name, cfg.log_path),
@@ -35,6 +36,7 @@ class cg3lz {
     configure_crow_logging();
   }
 
+  ////////////
   void run() {
     default_log.log(std::string("Saving logs to: ") + cfg.log_path + "\n",
                     crow::LogLevel::INFO);
@@ -51,30 +53,13 @@ class cg3lz {
   }
 
   void configure_routing() {
-    CROW_ROUTE(app, "/").name("front_end")([this] {
-      std::string res("Logs: \n");
-      auto logs = view.get_logs();
-      for (auto& entry : logs) {
-        res += " " + entry.filename + " [" + std::to_string(entry.size) + "B] \n";
-      }
-      res += "\n";
-      return res;
-    });
+    add_front_page();
+    add_logging_rest_endpoint();
+    add_app_logging_toggle();
+    add_kill_switch();
+  }
 
-    // echo "bla\c" | http put http://localhost:18080/log
-    CROW_ROUTE(app, "/log")
-        .methods("PUT"_method)([this](const crow::request& req) {
-           log.log(req.body);
-           return crow::response(200);
-         });
-
-    // http get http://localhost:18080/toggle_logging
-    CROW_ROUTE(app, "/toggle_logging")
-    ([this] {
-      cfg.logging = !cfg.logging;
-      return std::string("Logging now: ") + (cfg.logging ? "on" : "off");
-    });
-
+  void add_kill_switch() {
     // http get http://localhost:18080/kill
     CROW_ROUTE(app, "/kill")
     ([this] {
@@ -84,6 +69,36 @@ class cg3lz {
                     std::exit(0);
                   }).detach();
       return "OK! Shutting down!";
+    });
+  }
+
+  void add_app_logging_toggle() {
+    // http get http://localhost:18080/toggle_logging
+    CROW_ROUTE(app, "/toggle_logging")
+    ([this] {
+      cfg.logging = !cfg.logging;
+      return std::string("Logging now: ") + (cfg.logging ? "on" : "off");
+    });
+  }
+
+  void add_logging_rest_endpoint() {
+    // echo "bla\c" | http put http://localhost:18080/log
+    CROW_ROUTE(app, "/log")
+        .methods("PUT"_method)([this](const crow::request& req) {
+           log.log(req.body);
+           return crow::response(200);
+         });
+  }
+
+  void add_front_page() {
+    CROW_ROUTE(app, "/").name("front_end")([this] {
+      std::string res("Logs: \n");
+      auto logs = view.get_logs();
+      for (auto& entry : logs) {
+        res += " " + entry.filename + " [" + std::to_string(entry.size) + "B] \n";
+      }
+      res += "\n";
+      return res;
     });
   }
 };
