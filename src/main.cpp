@@ -15,6 +15,8 @@
 #include "file_contents.h"
 #include "resources.h"
 
+#include <mstch/mstch.hpp>
+
 class cg3lz {
   crow::SimpleApp app;
   config cfg;
@@ -61,8 +63,13 @@ class cg3lz {
     add_kill_switch();
     add_naive_log_file_download();
 
-    CROW_ROUTE(app,"/m")([this] {
-      auto response = crow::response(resources::index_html);
+    CROW_ROUTE(app, "/m")([this] {
+      mstch::map context{
+          {"logs",
+           mstch::array{mstch::map{{"filename", std::string{"a.log"}}},
+                        mstch::map{{"filename", std::string{"b.log"}}},
+                        mstch::map{{"filename", std::string{"c.log"}}}, }}};
+      auto response = crow::response(mstch::render(resources::index_html,context));
       response.set_header(
             "Content-Type",
             "text/html;charset=UTF-8");

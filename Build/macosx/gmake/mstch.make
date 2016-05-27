@@ -13,8 +13,8 @@ endif
 ifeq ($(config),debug_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x32/Debug
-  TARGET = $(TARGETDIR)/cg3lz
-  OBJDIR = ../../../obj/macosx/gmake/x32/Debug/cg3lz
+  TARGET = $(TARGETDIR)/libmstch.a
+  OBJDIR = ../../../obj/macosx/gmake/x32/Debug/mstch
   DEFINES += -D_DEBUG
   INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src
   FORCE_INCLUDE +=
@@ -22,10 +22,10 @@ ifeq ($(config),debug_x32)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -g -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x32/Debug/libg3log.a ../../../bin/macosx/gmake/x32/Debug/libmstch.a ../../../bin/macosx/gmake/x32/Debug/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
-  LDDEPS += ../../../bin/macosx/gmake/x32/Debug/libg3log.a ../../../bin/macosx/gmake/x32/Debug/libmstch.a ../../../bin/macosx/gmake/x32/Debug/libg3sinks.a
+  LIBS +=
+  LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib32 -L/usr/local/Cellar/zeromq/4.1.4/lib -L/usr/local/lib -m32
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -40,8 +40,8 @@ endif
 ifeq ($(config),debug_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x64/Debug
-  TARGET = $(TARGETDIR)/cg3lz
-  OBJDIR = ../../../obj/macosx/gmake/x64/Debug/cg3lz
+  TARGET = $(TARGETDIR)/libmstch.a
+  OBJDIR = ../../../obj/macosx/gmake/x64/Debug/mstch
   DEFINES += -D_DEBUG
   INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src
   FORCE_INCLUDE +=
@@ -49,10 +49,10 @@ ifeq ($(config),debug_x64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x64/Debug/libg3log.a ../../../bin/macosx/gmake/x64/Debug/libmstch.a ../../../bin/macosx/gmake/x64/Debug/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
-  LDDEPS += ../../../bin/macosx/gmake/x64/Debug/libg3log.a ../../../bin/macosx/gmake/x64/Debug/libmstch.a ../../../bin/macosx/gmake/x64/Debug/libg3sinks.a
+  LIBS +=
+  LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -L/usr/local/Cellar/zeromq/4.1.4/lib -L/usr/local/lib -m64
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -67,8 +67,8 @@ endif
 ifeq ($(config),release_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x32/Release
-  TARGET = $(TARGETDIR)/cg3lz
-  OBJDIR = ../../../obj/macosx/gmake/x32/Release/cg3lz
+  TARGET = $(TARGETDIR)/libmstch.a
+  OBJDIR = ../../../obj/macosx/gmake/x32/Release/mstch
   DEFINES +=
   INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src
   FORCE_INCLUDE +=
@@ -76,10 +76,10 @@ ifeq ($(config),release_x32)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -O2 -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x32/Release/libg3log.a ../../../bin/macosx/gmake/x32/Release/libmstch.a ../../../bin/macosx/gmake/x32/Release/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
-  LDDEPS += ../../../bin/macosx/gmake/x32/Release/libg3log.a ../../../bin/macosx/gmake/x32/Release/libmstch.a ../../../bin/macosx/gmake/x32/Release/libg3sinks.a
+  LIBS +=
+  LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib32 -L/usr/local/Cellar/zeromq/4.1.4/lib -L/usr/local/lib -m32 -Wl,-x
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -94,8 +94,8 @@ endif
 ifeq ($(config),release_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/macosx/gmake/x64/Release
-  TARGET = $(TARGETDIR)/cg3lz
-  OBJDIR = ../../../obj/macosx/gmake/x64/Release/cg3lz
+  TARGET = $(TARGETDIR)/libmstch.a
+  OBJDIR = ../../../obj/macosx/gmake/x64/Release/mstch
   DEFINES +=
   INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src
   FORCE_INCLUDE +=
@@ -103,10 +103,10 @@ ifeq ($(config),release_x64)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += ../../../bin/macosx/gmake/x64/Release/libg3log.a ../../../bin/macosx/gmake/x64/Release/libmstch.a ../../../bin/macosx/gmake/x64/Release/libg3sinks.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
-  LDDEPS += ../../../bin/macosx/gmake/x64/Release/libg3log.a ../../../bin/macosx/gmake/x64/Release/libmstch.a ../../../bin/macosx/gmake/x64/Release/libg3sinks.a
+  LIBS +=
+  LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -L/usr/local/Cellar/zeromq/4.1.4/lib -L/usr/local/lib -m64 -Wl,-x
-  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
   define PREBUILDCMDS
   endef
   define PRELINKCMDS
@@ -119,12 +119,13 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/file_contents.o \
-	$(OBJDIR)/g3logger.o \
-	$(OBJDIR)/log_view.o \
-	$(OBJDIR)/main.o \
-	$(OBJDIR)/resources.o \
-	$(OBJDIR)/zeromq_log_sink.o \
+	$(OBJDIR)/mstch.o \
+	$(OBJDIR)/render_context.o \
+	$(OBJDIR)/in_section.o \
+	$(OBJDIR)/outside_section.o \
+	$(OBJDIR)/template_type.o \
+	$(OBJDIR)/token.o \
+	$(OBJDIR)/utils.o \
 
 RESOURCES := \
 
@@ -139,7 +140,7 @@ ifeq (/bin,$(findstring /bin,$(SHELL)))
 endif
 
 $(TARGET): $(GCH) $(OBJECTS) $(LDDEPS) $(RESOURCES) ${CUSTOMFILES}
-	@echo Linking cg3lz
+	@echo Linking mstch
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -160,7 +161,7 @@ else
 endif
 
 clean:
-	@echo Cleaning cg3lz
+	@echo Cleaning mstch
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -182,22 +183,25 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
-$(OBJDIR)/file_contents.o: ../../../src/file_contents.cpp
+$(OBJDIR)/mstch.o: ../../../deps/mstch/src/mstch.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/g3logger.o: ../../../src/g3logger.cpp
+$(OBJDIR)/render_context.o: ../../../deps/mstch/src/render_context.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/log_view.o: ../../../src/log_view.cpp
+$(OBJDIR)/in_section.o: ../../../deps/mstch/src/state/in_section.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/main.o: ../../../src/main.cpp
+$(OBJDIR)/outside_section.o: ../../../deps/mstch/src/state/outside_section.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/resources.o: ../../../src/resources.cpp
+$(OBJDIR)/template_type.o: ../../../deps/mstch/src/template_type.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/zeromq_log_sink.o: ../../../src/zeromq_log_sink.cpp
+$(OBJDIR)/token.o: ../../../deps/mstch/src/token.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/utils.o: ../../../deps/mstch/src/utils.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

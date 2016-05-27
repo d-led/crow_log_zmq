@@ -82,7 +82,17 @@ includedirs {
 	'deps/g3log_config',
 	'deps/g3log/src',
 	'deps/g3sinks/logrotate/src',
+	'deps/mstch/include',
+	'deps/mstch/src',
 }
+
+--------------------------------------------------------------------
+make_static_lib('mstch', {
+	'deps/mstch/src/**.cpp',
+	'deps/mstch/src/**.hpp'
+})
+
+use_standard('c++14')
 
 --------------------------------------------------------------------
 make_static_lib('g3log', {
@@ -122,7 +132,7 @@ make_console_app('cg3lz', {
 })
 use_standard('c++14')
 
-links { 'g3log' }
+links { 'g3log', 'mstch' }
 
 configuration 'not windows'
 	links { 'g3sinks' }
