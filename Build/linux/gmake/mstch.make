@@ -13,13 +13,13 @@ endif
 ifeq ($(config),debug_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/linux/gmake/x32/Debug
-  TARGET = $(TARGETDIR)/libg3log.a
-  OBJDIR = ../../../obj/linux/gmake/x32/Debug/g3log
+  TARGET = $(TARGETDIR)/libmstch.a
+  OBJDIR = ../../../obj/linux/gmake/x32/Debug/mstch
   DEFINES += -D_DEBUG
   INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -g -std=c++14
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -g -std=c++11
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
@@ -40,13 +40,13 @@ endif
 ifeq ($(config),debug_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/linux/gmake/x64/Debug
-  TARGET = $(TARGETDIR)/libg3log.a
-  OBJDIR = ../../../obj/linux/gmake/x64/Debug/g3log
+  TARGET = $(TARGETDIR)/libmstch.a
+  OBJDIR = ../../../obj/linux/gmake/x64/Debug/mstch
   DEFINES += -D_DEBUG
   INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++14
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++11
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
@@ -67,13 +67,13 @@ endif
 ifeq ($(config),release_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/linux/gmake/x32/Release
-  TARGET = $(TARGETDIR)/libg3log.a
-  OBJDIR = ../../../obj/linux/gmake/x32/Release/g3log
+  TARGET = $(TARGETDIR)/libmstch.a
+  OBJDIR = ../../../obj/linux/gmake/x32/Release/mstch
   DEFINES +=
   INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -O2 -std=c++14
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -O2 -std=c++11
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
@@ -94,13 +94,13 @@ endif
 ifeq ($(config),release_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/linux/gmake/x64/Release
-  TARGET = $(TARGETDIR)/libg3log.a
-  OBJDIR = ../../../obj/linux/gmake/x64/Release/g3log
+  TARGET = $(TARGETDIR)/libmstch.a
+  OBJDIR = ../../../obj/linux/gmake/x64/Release/mstch
   DEFINES +=
   INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++14
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++11
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
@@ -119,14 +119,13 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/crashhandler_unix.o \
-	$(OBJDIR)/filesink.o \
-	$(OBJDIR)/g3log.o \
-	$(OBJDIR)/logcapture.o \
-	$(OBJDIR)/loglevels.o \
-	$(OBJDIR)/logmessage.o \
-	$(OBJDIR)/logworker.o \
-	$(OBJDIR)/time.o \
+	$(OBJDIR)/mstch.o \
+	$(OBJDIR)/render_context.o \
+	$(OBJDIR)/in_section.o \
+	$(OBJDIR)/outside_section.o \
+	$(OBJDIR)/template_type.o \
+	$(OBJDIR)/token.o \
+	$(OBJDIR)/utils.o \
 
 RESOURCES := \
 
@@ -141,7 +140,7 @@ ifeq (/bin,$(findstring /bin,$(SHELL)))
 endif
 
 $(TARGET): $(GCH) ${CUSTOMFILES} $(OBJECTS) $(LDDEPS) $(RESOURCES)
-	@echo Linking g3log
+	@echo Linking mstch
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -162,7 +161,7 @@ else
 endif
 
 clean:
-	@echo Cleaning g3log
+	@echo Cleaning mstch
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -184,28 +183,25 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
-$(OBJDIR)/crashhandler_unix.o: ../../../deps/g3log/src/crashhandler_unix.cpp
+$(OBJDIR)/mstch.o: ../../../deps/mstch/src/mstch.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/filesink.o: ../../../deps/g3log/src/filesink.cpp
+$(OBJDIR)/render_context.o: ../../../deps/mstch/src/render_context.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/g3log.o: ../../../deps/g3log/src/g3log.cpp
+$(OBJDIR)/in_section.o: ../../../deps/mstch/src/state/in_section.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/logcapture.o: ../../../deps/g3log/src/logcapture.cpp
+$(OBJDIR)/outside_section.o: ../../../deps/mstch/src/state/outside_section.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/loglevels.o: ../../../deps/g3log/src/loglevels.cpp
+$(OBJDIR)/template_type.o: ../../../deps/mstch/src/template_type.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/logmessage.o: ../../../deps/g3log/src/logmessage.cpp
+$(OBJDIR)/token.o: ../../../deps/mstch/src/token.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/logworker.o: ../../../deps/g3log/src/logworker.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/time.o: ../../../deps/g3log/src/time.cpp
+$(OBJDIR)/utils.o: ../../../deps/mstch/src/utils.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

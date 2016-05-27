@@ -92,7 +92,7 @@ make_static_lib('mstch', {
 	'deps/mstch/src/**.hpp'
 })
 
-use_standard('c++14')
+use_standard('c++11')
 
 --------------------------------------------------------------------
 make_static_lib('g3log', {
