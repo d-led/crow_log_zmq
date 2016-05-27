@@ -1,5 +1,7 @@
 # crow + g3log + 0mq == a simple log server #
 
+[![Build Status](https://travis-ci.org/d-led/crow_g3log_zmq.svg?branch=master)](https://travis-ci.org/d-led/crow_g3log_zmq)
+
 > no warranties / use at your own risk
 
 - [crow](https://github.com/ipkn/crow) is a C++11 micro web framework
