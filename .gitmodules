@@ -13,3 +13,6 @@
 [submodule "deps/cppzmq"]
 	path = deps/cppzmq
 	url = https://github.com/zeromq/cppzmq.git
+[submodule "deps/mstch"]
+	path = deps/mstch
+	url = https://github.com/no1msd/mstch.git
