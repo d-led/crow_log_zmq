@@ -19,32 +19,32 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7AD7347F-66A4-8F8A-8FBD-7D327BE9C418}</ProjectGuid>
+    <ProjectGuid>{4479F40F-B08D-1CC1-790F-C020E5E218F2}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>log_some</RootNamespace>
+    <RootNamespace>mstch</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
@@ -66,32 +66,28 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\bin\windows\vs2015\x32\Debug\</OutDir>
-    <IntDir>..\..\..\obj\windows\vs2015\x32\Debug\log_some\</IntDir>
-    <TargetName>log_some</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <IntDir>..\..\..\obj\windows\vs2015\x32\Debug\mstch\</IntDir>
+    <TargetName>mstch</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\bin\windows\vs2015\x64\Debug\</OutDir>
-    <IntDir>..\..\..\obj\windows\vs2015\x64\Debug\log_some\</IntDir>
-    <TargetName>log_some</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <IntDir>..\..\..\obj\windows\vs2015\x64\Debug\mstch\</IntDir>
+    <TargetName>mstch</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\bin\windows\vs2015\x32\Release\</OutDir>
-    <IntDir>..\..\..\obj\windows\vs2015\x32\Release\log_some\</IntDir>
-    <TargetName>log_some</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <IntDir>..\..\..\obj\windows\vs2015\x32\Release\mstch\</IntDir>
+    <TargetName>mstch</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\bin\windows\vs2015\x64\Release\</OutDir>
-    <IntDir>..\..\..\obj\windows\vs2015\x64\Release\log_some\</IntDir>
-    <TargetName>log_some</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <IntDir>..\..\..\obj\windows\vs2015\x64\Release\mstch\</IntDir>
+    <TargetName>mstch</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -104,11 +100,8 @@
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files (x86)\ZeroMQ 4.0.4\lib;D:\Software\boost\boost_1_56_0\lib32-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -122,11 +115,8 @@
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files\ZeroMQ 4.0.4\lib;D:\Software\boost\boost_1_56_0\lib64-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -142,13 +132,10 @@
       <StringPooling>true</StringPooling>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files (x86)\ZeroMQ 4.0.4\lib;D:\Software\boost\boost_1_56_0\lib32-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -164,17 +151,34 @@
       <StringPooling>true</StringPooling>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files\ZeroMQ 4.0.4\lib;D:\Software\boost\boost_1_56_0\lib64-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\log_some.cpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\render_context.hpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\state\in_section.hpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\state\outside_section.hpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\state\render_state.hpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\template_type.hpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\token.hpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\utils.hpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\visitor\get_token.hpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\visitor\has_token.hpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\visitor\is_node_empty.hpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\visitor\render_node.hpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\visitor\render_section.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\deps\mstch\src\mstch.cpp" />
+    <ClCompile Include="..\..\..\deps\mstch\src\render_context.cpp" />
+    <ClCompile Include="..\..\..\deps\mstch\src\state\in_section.cpp" />
+    <ClCompile Include="..\..\..\deps\mstch\src\state\outside_section.cpp" />
+    <ClCompile Include="..\..\..\deps\mstch\src\template_type.cpp" />
+    <ClCompile Include="..\..\..\deps\mstch\src\token.cpp" />
+    <ClCompile Include="..\..\..\deps\mstch\src\utils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

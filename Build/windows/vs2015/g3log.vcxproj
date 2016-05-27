@@ -94,7 +94,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files (x86)\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_56_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\g3log_config;..\..\..\deps\g3log\src;..\..\..\deps\g3sinks\logrotate\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files (x86)\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_56_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\g3log_config;..\..\..\deps\g3log\src;..\..\..\deps\g3sinks\logrotate\src;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <Optimization>Disabled</Optimization>
@@ -109,7 +109,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_56_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\g3log_config;..\..\..\deps\g3log\src;..\..\..\deps\g3sinks\logrotate\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_56_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\g3log_config;..\..\..\deps\g3log\src;..\..\..\deps\g3sinks\logrotate\src;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <Optimization>Disabled</Optimization>
@@ -124,7 +124,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files (x86)\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_56_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\g3log_config;..\..\..\deps\g3log\src;..\..\..\deps\g3sinks\logrotate\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files (x86)\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_56_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\g3log_config;..\..\..\deps\g3log\src;..\..\..\deps\g3sinks\logrotate\src;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -143,7 +143,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_56_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\g3log_config;..\..\..\deps\g3log\src;..\..\..\deps\g3sinks\logrotate\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_56_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\g3log_config;..\..\..\deps\g3log\src;..\..\..\deps\g3sinks\logrotate\src;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
