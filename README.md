@@ -69,6 +69,7 @@ The implementation is naive at the moment, and might potentially interfere with 
 - [cg3lz (server)](src/main.cpp)
 - [log_some](src/log_some.py)
 - [build config](premake5.lua)
+- [demo](src/demo.rb)
 
 ## Building and starting ##
 
