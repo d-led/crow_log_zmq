@@ -6,7 +6,7 @@
 
 Used in the project
 
-- [premake5](https://premake.github.io/) a meta-build generator with some [patterns](https://github.com/d-led/premake-meta-cpp)
+- [premake5](https://premake.github.io/) a meta-build generator used with some [patterns](https://github.com/d-led/premake-meta-cpp)
 - [crow](https://github.com/ipkn/crow) is a C++11 micro web framework
 - [g3log](https://github.com/KjellKod/g3log) is an asynchronous logging library
 - [ØMQ](http://zero.mq/) is a set of communication protocols their implementations for the XXI century
