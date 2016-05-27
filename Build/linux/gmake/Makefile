@@ -13,33 +13,29 @@ endif
 ifeq ($(config),debug_x32)
   cg3lz_config = debug_x32
   g3log_config = debug_x32
-  g3log_repro_config = debug_x32
   g3sinks_config = debug_x32
   log_some_config = debug_x32
 endif
 ifeq ($(config),debug_x64)
   cg3lz_config = debug_x64
   g3log_config = debug_x64
-  g3log_repro_config = debug_x64
   g3sinks_config = debug_x64
   log_some_config = debug_x64
 endif
 ifeq ($(config),release_x32)
   cg3lz_config = release_x32
   g3log_config = release_x32
-  g3log_repro_config = release_x32
   g3sinks_config = release_x32
   log_some_config = release_x32
 endif
 ifeq ($(config),release_x64)
   cg3lz_config = release_x64
   g3log_config = release_x64
-  g3log_repro_config = release_x64
   g3sinks_config = release_x64
   log_some_config = release_x64
 endif
 
-PROJECTS := cg3lz g3log g3log_repro g3sinks log_some
+PROJECTS := cg3lz g3log g3sinks log_some
 
 .PHONY: all clean help $(PROJECTS) 
 
@@ -57,12 +53,6 @@ ifneq (,$(g3log_config))
 	@${MAKE} --no-print-directory -C . -f g3log.make config=$(g3log_config)
 endif
 
-g3log_repro: g3log g3sinks
-ifneq (,$(g3log_repro_config))
-	@echo "==== Building g3log_repro ($(g3log_repro_config)) ===="
-	@${MAKE} --no-print-directory -C . -f g3log_repro.make config=$(g3log_repro_config)
-endif
-
 g3sinks:
 ifneq (,$(g3sinks_config))
 	@echo "==== Building g3sinks ($(g3sinks_config)) ===="
@@ -78,7 +68,6 @@ endif
 clean:
 	@${MAKE} --no-print-directory -C . -f cg3lz.make clean
 	@${MAKE} --no-print-directory -C . -f g3log.make clean
-	@${MAKE} --no-print-directory -C . -f g3log_repro.make clean
 	@${MAKE} --no-print-directory -C . -f g3sinks.make clean
 	@${MAKE} --no-print-directory -C . -f log_some.make clean
 
@@ -96,7 +85,6 @@ help:
 	@echo "   clean"
 	@echo "   cg3lz"
 	@echo "   g3log"
-	@echo "   g3log_repro"
 	@echo "   g3sinks"
 	@echo "   log_some"
 	@echo ""
