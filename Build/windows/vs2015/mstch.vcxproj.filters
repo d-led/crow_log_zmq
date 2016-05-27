@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="state">
+      <UniqueIdentifier>{064A6110-725E-89C1-3BE0-2C21A7B385F2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="visitor">
+      <UniqueIdentifier>{55DA617C-C1B9-E017-CAD1-6BEE36304779}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\deps\mstch\src\render_context.hpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\state\in_section.hpp">
+      <Filter>state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\deps\mstch\src\state\outside_section.hpp">
+      <Filter>state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\deps\mstch\src\state\render_state.hpp">
+      <Filter>state</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\deps\mstch\src\template_type.hpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\token.hpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\utils.hpp" />
+    <ClInclude Include="..\..\..\deps\mstch\src\visitor\get_token.hpp">
+      <Filter>visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\deps\mstch\src\visitor\has_token.hpp">
+      <Filter>visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\deps\mstch\src\visitor\is_node_empty.hpp">
+      <Filter>visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\deps\mstch\src\visitor\render_node.hpp">
+      <Filter>visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\deps\mstch\src\visitor\render_section.hpp">
+      <Filter>visitor</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\deps\mstch\src\mstch.cpp" />
+    <ClCompile Include="..\..\..\deps\mstch\src\render_context.cpp" />
+    <ClCompile Include="..\..\..\deps\mstch\src\state\in_section.cpp">
+      <Filter>state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\deps\mstch\src\state\outside_section.cpp">
+      <Filter>state</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\deps\mstch\src\template_type.cpp" />
+    <ClCompile Include="..\..\..\deps\mstch\src\token.cpp" />
+    <ClCompile Include="..\..\..\deps\mstch\src\utils.cpp" />
+  </ItemGroup>
+</Project>
