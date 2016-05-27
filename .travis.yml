@@ -10,6 +10,8 @@ addons:
   packages:
    - g++-5
    - libboost1.55-all-dev
+   - libzmq3-dev
+   - zlib1g-dev
    
 cache:
  - apt
