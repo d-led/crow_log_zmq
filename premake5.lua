@@ -117,6 +117,7 @@ make_console_app('cg3lz', {
 	'src/zeromq_log_sink.cpp',
 	'src/log_view.cpp',
 	'src/file_contents.cpp',
+	'src/resources.cpp',
 	'src/*.h'
 })
 use_standard('c++14')

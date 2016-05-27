@@ -13,6 +13,7 @@
 #include "zeromq_log_sink.h"
 #include "log_view.h"
 #include "file_contents.h"
+#include "resources.h"
 
 class cg3lz {
   crow::SimpleApp app;
@@ -59,6 +60,14 @@ class cg3lz {
     add_crow_logging_toggle();
     add_kill_switch();
     add_naive_log_file_download();
+
+    CROW_ROUTE(app,"/m")([this] {
+      auto response = crow::response(resources::index_html);
+      response.set_header(
+            "Content-Type",
+            "text/html;charset=UTF-8");
+      return response;
+    });
   }
 
   void add_kill_switch() {
