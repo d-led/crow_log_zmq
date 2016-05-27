@@ -123,6 +123,7 @@ OBJECTS := \
 	$(OBJDIR)/g3logger.o \
 	$(OBJDIR)/log_view.o \
 	$(OBJDIR)/main.o \
+	$(OBJDIR)/main_page.o \
 	$(OBJDIR)/resources.o \
 	$(OBJDIR)/zeromq_log_sink.o \
 
@@ -192,6 +193,9 @@ $(OBJDIR)/log_view.o: ../../../src/log_view.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/main.o: ../../../src/main.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/main_page.o: ../../../src/main_page.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/resources.o: ../../../src/resources.cpp

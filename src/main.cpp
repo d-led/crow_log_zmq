@@ -11,20 +11,16 @@
 #include "default_logger.h"
 #include "g3logger.h"
 #include "zeromq_log_sink.h"
-#include "log_view.h"
 #include "file_contents.h"
-#include "resources.h"
-
-#include <mstch/mstch.hpp>
+#include "main_page.h"
 
 class cg3lz {
   crow::SimpleApp app;
   config cfg;
-
+  main_page index;
   DefaultLogger default_log;
   g3logLogger log;
   zeromq_log_sink sink;
-  log_view view;
 
  public:
   //////////////////////////////
@@ -35,7 +31,7 @@ class cg3lz {
                     default_log.log(m, crow::LogLevel::INFO);
                   },
              log),
-        view(cfg) {
+        index(cfg) {
     configure_routing();
     configure_crow_logging();
   }
@@ -62,19 +58,6 @@ class cg3lz {
     add_crow_logging_toggle();
     add_kill_switch();
     add_naive_log_file_download();
-
-    CROW_ROUTE(app, "/m")([this] {
-      mstch::map context{
-          {"logs",
-           mstch::array{mstch::map{{"filename", std::string{"a.log"}}},
-                        mstch::map{{"filename", std::string{"b.log"}}},
-                        mstch::map{{"filename", std::string{"c.log"}}}, }}};
-      auto response = crow::response(mstch::render(resources::index_html,context));
-      response.set_header(
-            "Content-Type",
-            "text/html;charset=UTF-8");
-      return response;
-    });
   }
 
   void add_kill_switch() {
@@ -110,13 +93,11 @@ class cg3lz {
 
   void add_front_page() {
     CROW_ROUTE(app, "/").name("front_end")([this] {
-      std::string res("Logs: \n");
-      auto logs = view.get_logs();
-      for (auto& entry : logs) {
-        res += " " + entry.filename + " [" + std::to_string(entry.size) + "B] \n";
-      }
-      res += "\n";
-      return res;
+      auto response = crow::response(index.render());
+      response.set_header(
+            "Content-Type",
+            "text/html;charset=UTF-8");
+      return response;
     });
   }
 

@@ -128,6 +128,7 @@ make_console_app('cg3lz', {
 	'src/log_view.cpp',
 	'src/file_contents.cpp',
 	'src/resources.cpp',
+	'src/main_page.cpp',
 	'src/*.h'
 })
 use_standard('c++14')
