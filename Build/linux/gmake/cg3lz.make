@@ -125,7 +125,7 @@ OBJECTS := \
 	$(OBJDIR)/main.o \
 	$(OBJDIR)/main_page.o \
 	$(OBJDIR)/resources.o \
-	$(OBJDIR)/zeromq_log_sink.o \
+	$(OBJDIR)/zeromq_log_source.o \
 
 RESOURCES := \
 
@@ -201,7 +201,7 @@ $(OBJDIR)/main_page.o: ../../../src/main_page.cpp
 $(OBJDIR)/resources.o: ../../../src/resources.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/zeromq_log_sink.o: ../../../src/zeromq_log_sink.cpp
+$(OBJDIR)/zeromq_log_source.o: ../../../src/zeromq_log_source.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
