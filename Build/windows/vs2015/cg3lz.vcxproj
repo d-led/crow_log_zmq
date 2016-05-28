@@ -191,7 +191,7 @@
     <ClInclude Include="..\..\..\src\log_view.h" />
     <ClInclude Include="..\..\..\src\main_page.h" />
     <ClInclude Include="..\..\..\src\resources.h" />
-    <ClInclude Include="..\..\..\src\zeromq_log_sink.h" />
+    <ClInclude Include="..\..\..\src\zeromq_log_source.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\file_contents.cpp" />
@@ -200,7 +200,7 @@
     <ClCompile Include="..\..\..\src\main.cpp" />
     <ClCompile Include="..\..\..\src\main_page.cpp" />
     <ClCompile Include="..\..\..\src\resources.cpp" />
-    <ClCompile Include="..\..\..\src\zeromq_log_sink.cpp" />
+    <ClCompile Include="..\..\..\src\zeromq_log_source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="g3log.vcxproj">

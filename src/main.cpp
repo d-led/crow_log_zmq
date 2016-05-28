@@ -10,7 +10,7 @@
 #include "config.h"
 #include "default_logger.h"
 #include "g3logger.h"
-#include "zeromq_log_sink.h"
+#include "zeromq_log_source.h"
 #include "file_contents.h"
 #include "main_page.h"
 
@@ -20,7 +20,7 @@ class cg3lz {
   main_page index;
   DefaultLogger default_log;
   g3logLogger log;
-  zeromq_log_sink sink;
+  zeromq_log_source sink;
 
  public:
   //////////////////////////////

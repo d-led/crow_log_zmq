@@ -1,4 +1,4 @@
-#include "zeromq_log_sink.h"
+#include "zeromq_log_source.h"
 #include "g3logger.h"
 
 #include <string>
@@ -11,7 +11,7 @@
 #pragma comment(lib, "dbghelp.lib")
 
 
-struct zeromq_log_sink::impl {
+struct zeromq_log_source::impl {
   unsigned int zeromq_log_port;
   g3logLogger& log_sink;
   zmq::context_t context;
@@ -26,7 +26,7 @@ struct zeromq_log_sink::impl {
         started(false) {}
 };
 
-zeromq_log_sink::zeromq_log_sink(unsigned int zp, default_log_t default_log,
+zeromq_log_source::zeromq_log_source(unsigned int zp, default_log_t default_log,
                                  g3logLogger& sink)
     : log(default_log), pimpl(new impl(zp, sink)) {
 
@@ -39,9 +39,9 @@ zeromq_log_sink::zeromq_log_sink(unsigned int zp, default_log_t default_log,
       "\n");
 }
 
-zeromq_log_sink::~zeromq_log_sink() { this->stop(); }
+zeromq_log_source::~zeromq_log_source() { this->stop(); }
 
-void zeromq_log_sink::start_once() {
+void zeromq_log_source::start_once() {
   if (pimpl->started) return;
 
   std::thread([this] {
@@ -56,4 +56,4 @@ void zeromq_log_sink::start_once() {
               }).detach();
 }
 
-void zeromq_log_sink::stop() { pimpl->started = false; }
+void zeromq_log_source::stop() { pimpl->started = false; }
