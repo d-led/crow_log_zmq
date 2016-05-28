@@ -19,32 +19,32 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{68DC370F-D4F0-5FC0-9D72-032009465CF1}</ProjectGuid>
+    <ProjectGuid>{202968B4-8C08-E74F-9520-7226017F4DB1}</ProjectGuid>
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>cg3lz</RootNamespace>
+    <RootNamespace>mal_log</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
@@ -66,32 +66,28 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\bin\windows\vs2015\x32\Debug\</OutDir>
-    <IntDir>..\..\..\obj\windows\vs2015\x32\Debug\cg3lz\</IntDir>
-    <TargetName>cg3lz</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <IntDir>..\..\..\obj\windows\vs2015\x32\Debug\mal_log\</IntDir>
+    <TargetName>mal_log</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
     <OutDir>..\..\..\bin\windows\vs2015\x64\Debug\</OutDir>
-    <IntDir>..\..\..\obj\windows\vs2015\x64\Debug\cg3lz\</IntDir>
-    <TargetName>cg3lz</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <IntDir>..\..\..\obj\windows\vs2015\x64\Debug\mal_log\</IntDir>
+    <TargetName>mal_log</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\bin\windows\vs2015\x32\Release\</OutDir>
-    <IntDir>..\..\..\obj\windows\vs2015\x32\Release\cg3lz\</IntDir>
-    <TargetName>cg3lz</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <IntDir>..\..\..\obj\windows\vs2015\x32\Release\mal_log\</IntDir>
+    <TargetName>mal_log</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
     <OutDir>..\..\..\bin\windows\vs2015\x64\Release\</OutDir>
-    <IntDir>..\..\..\obj\windows\vs2015\x64\Release\cg3lz\</IntDir>
-    <TargetName>cg3lz</TargetName>
-    <TargetExt>.exe</TargetExt>
+    <IntDir>..\..\..\obj\windows\vs2015\x64\Release\mal_log\</IntDir>
+    <TargetName>mal_log</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -103,15 +99,9 @@
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files (x86)\ZeroMQ 4.0.4\lib;D:\Software\boost\boost_1_61_0\lib32-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy "C:\Program Files (x86)\ZeroMQ 4.0.4\bin\*.dll" "$(TargetDir)" /s /d /y</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -123,15 +113,9 @@
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files\ZeroMQ 4.0.4\lib;D:\Software\boost\boost_1_61_0\lib64-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy "C:\Program Files\ZeroMQ 4.0.4\bin\*.dll" "$(TargetDir)" /s /d /y</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -146,17 +130,11 @@
       <StringPooling>true</StringPooling>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files (x86)\ZeroMQ 4.0.4\lib;D:\Software\boost\boost_1_61_0\lib32-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy "C:\Program Files (x86)\ZeroMQ 4.0.4\bin\*.dll" "$(TargetDir)" /s /d /y</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -171,49 +149,71 @@
       <StringPooling>true</StringPooling>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>libzmq-v120-mt-4_0_4.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Program Files\ZeroMQ 4.0.4\lib;D:\Software\boost\boost_1_61_0\lib64-msvc-14.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
-    <PostBuildEvent>
-      <Command>xcopy "C:\Program Files\ZeroMQ 4.0.4\bin\*.dll" "$(TargetDir)" /s /d /y</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\config.h" />
-    <ClInclude Include="..\..\..\src\default_logger.h" />
-    <ClInclude Include="..\..\..\src\file_contents.h" />
-    <ClInclude Include="..\..\..\src\g3logger.h" />
-    <ClInclude Include="..\..\..\src\log_view.h" />
-    <ClInclude Include="..\..\..\src\main_page.h" />
-    <ClInclude Include="..\..\..\src\mal_logger.h" />
-    <ClInclude Include="..\..\..\src\resources.h" />
-    <ClInclude Include="..\..\..\src\zeromq_log_source.h" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\backend_cfg.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\compile_format_validator.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\decltype_wrap.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\extras\boost_filesystem_list_all_files.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\format_tokens.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\frontend.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\frontend_types.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\frontend_types_convenience_funcs_to_current_namespace.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\mal_interface.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\mal_log.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\mal_private.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\mal_strip.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\serialization\basic_encoder_decoder.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\serialization\exporter.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\serialization\fields.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\serialization\header_data.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\serialization\importer_exporter.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\sync_point.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\timestamp.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\atomic.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\chrono.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\integer.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\integer_bits.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\integer_bits_detail.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\integral_enable_if.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\literal.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\max_align.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\mpsc_hybrid_wait_cfg.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\opaque_pod.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\side_effect_assert.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\stack_ostream.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\static_rdbuf.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\system.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\thread.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\include\mal_log\util\variadic_macro_arg_count.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\async_to_sync.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\backend.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\log_files.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\log_writer.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\output.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\queue.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\serialization\byte_stream_convert.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\serialization\importer.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\serialization\printf_modifiers.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\util\aligned_type.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\util\calendar_str.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\util\mem_printf.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\util\memory_mpmc_bounded.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\util\mpmc_bounded.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\util\mpsc.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\util\mpsc_hybrid_wait.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\util\on_stack_dynamic.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\util\placement_new.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\util\raw_circular_buffer.hpp" />
+    <ClInclude Include="..\..\..\deps\mini-async-log\src\mal_log\util\safe_bool.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\file_contents.cpp" />
-    <ClCompile Include="..\..\..\src\g3logger.cpp" />
-    <ClCompile Include="..\..\..\src\log_view.cpp" />
-    <ClCompile Include="..\..\..\src\main.cpp" />
-    <ClCompile Include="..\..\..\src\main_page.cpp" />
-    <ClCompile Include="..\..\..\src\mal_logger.cpp" />
-    <ClCompile Include="..\..\..\src\resources.cpp" />
-    <ClCompile Include="..\..\..\src\zeromq_log_source.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="g3log.vcxproj">
-      <Project>{81AD640F-EDC1-8CC0-B643-3020221789F1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="mal_log.vcxproj">
-      <Project>{202968B4-8C08-E74F-9520-7226017F4DB1}</Project>
-    </ProjectReference>
-    <ProjectReference Include="mstch.vcxproj">
-      <Project>{4479F40F-B08D-1CC1-790F-C020E5E218F2}</Project>
-    </ProjectReference>
+    <ClCompile Include="..\..\..\deps\mini-async-log\src\mal_log\frontend.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

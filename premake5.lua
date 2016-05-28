@@ -134,7 +134,8 @@ end
 --------------------------------------------------------------------
 make_console_app('cg3lz', {
 	'src/main.cpp',
-	'src/g3logger.cpp',
+    'src/g3logger.cpp',
+	'src/mal_logger.cpp',
 	'src/zeromq_log_source.cpp',
 	'src/log_view.cpp',
 	'src/file_contents.cpp',
