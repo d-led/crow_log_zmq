@@ -14,6 +14,7 @@
 #include "zeromq_log_source.h"
 #include "file_contents.h"
 #include "main_page.h"
+#include "log_view.h"
 
 class cg3lz {
   crow::SimpleApp app;
@@ -23,6 +24,7 @@ class cg3lz {
   g3logLogger log;
   zeromq_log_source sink;
   std::uint64_t count = 0;
+  log_view logs;
 
  public:
   //////////////////////////////
@@ -33,7 +35,8 @@ class cg3lz {
                     default_log.log(m, crow::LogLevel::INFO);
                   },
              log),
-        index(cfg.log_path) {
+        index(cfg.log_path),
+        logs(cfg.log_path) {
     configure_routing();
     configure_crow_logging();
   }
@@ -59,7 +62,6 @@ class cg3lz {
     add_logging_rest_endpoint();
     add_crow_logging_toggle();
     add_kill_switch();
-    add_clean_log_folder();
     add_naive_log_file_download();
   }
 
@@ -79,15 +81,6 @@ class cg3lz {
                     std::exit(0);
                   }).detach();
       return "OK! Shutting down!";
-    });
-  }
-
-  void add_clean_log_folder() {
-    // http get http://localhost:18080/clean
-    CROW_ROUTE(app, "/clean")
-      ([this] {
-        log_view(cfg.log_path).delete_logs();
-        return "Cleaned up the log folder!";
     });
   }
 
@@ -123,7 +116,7 @@ class cg3lz {
   void add_naive_log_file_download() {
     CROW_ROUTE(app,
                "/logs/<string>")([this](std::string filename)->crow::response {
-      auto file = file_contents(cfg.log_path + "/" + filename);
+      auto file = file_contents(logs.path_for_filename(filename));
       if (!file.exists()) {
         auto response = crow::response();
         response.code = 404;

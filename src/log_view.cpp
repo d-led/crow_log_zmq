@@ -43,3 +43,7 @@ void log_view::delete_logs() const {
     }
   }
 }
+
+std::string log_view::path_for_filename(std::string const& filename) const {
+  return (path(log_path) / filename).string();
+}
