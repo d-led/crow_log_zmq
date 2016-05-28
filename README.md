@@ -64,6 +64,12 @@ Example view:
 
 The implementation is naive at the moment, and might potentially interfere with the log rotation mechanism.
 
+Download 600mb:
+![](download.png)
+
+Burst logging:
+![](resources.png)
+
 ## Source ##
 
 - [cg3lz (server)](src/main.cpp)

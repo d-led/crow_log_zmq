@@ -45,6 +45,7 @@ void zeromq_log_sink::start_once() {
   if (pimpl->started) return;
 
   std::thread([this] {
+                pimpl->started = true;
                 while (pimpl->started) {
                   zmq::message_t request;
                   pimpl->pull.recv(&request);
@@ -53,8 +54,6 @@ void zeromq_log_sink::start_once() {
                   pimpl->log_sink.log(log_line);
                 }
               }).detach();
-
-  pimpl->started = true;
 }
 
 void zeromq_log_sink::stop() { pimpl->started = false; }
