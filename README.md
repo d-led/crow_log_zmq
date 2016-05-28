@@ -110,6 +110,15 @@ cg3lz (2016-05-27 20:33:41) [DEBUG   ] Connection open, total 1, 0x1a349f0
 134953/s, total: 1600000
 ... -->
 
+### On Windows ###
+
+open `Build\vs2015\cg3lz.sln` and build.
+
+Boost expected at `D:\Software\boost\boost_1_61_0` with libraries in `lib32-msvc-14.0` and `lib64-msvc-14.0`.
+
+### Regenerating the build scripts ###
+
+See the premake build config and premake documentation
 
 ## Commentary ##
 
