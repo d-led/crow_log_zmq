@@ -132,3 +132,7 @@ Download 600mb:
 Burst logging:
 
 ![](resources.png)
+
+After switching to spdlog, memory usage and performance is greatly improved, but crash safety and commit guarantees are not there out of the box:
+
+![](spdlog.png)
