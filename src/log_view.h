@@ -16,4 +16,5 @@ public:
 
 public:
   std::vector<file_entry> get_logs() const;
+  void delete_logs() const;
 };

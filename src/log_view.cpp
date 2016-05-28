@@ -31,3 +31,15 @@ struct file_info {
 std::vector<file_entry> log_view::get_logs() const {
   return file_info(log_path).get();
 }
+
+void log_view::delete_logs() const {
+  directory_iterator end;
+  for (directory_iterator it(log_path); it != end; ++it) {
+    try {
+      remove_all(it->path());
+    }
+    catch (...) {
+      //ignore locked or moved files
+    }
+  }
+}

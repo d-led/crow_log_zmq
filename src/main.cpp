@@ -6,6 +6,7 @@
 #include <string>
 #include <chrono>
 #include <thread>
+#include <cstdint>
 
 #include "config.h"
 #include "default_logger.h"
@@ -21,12 +22,13 @@ class cg3lz {
   DefaultLogger default_log;
   g3logLogger log;
   zeromq_log_source sink;
+  std::uint64_t count = 0;
 
  public:
   //////////////////////////////
   cg3lz(std::string const& name)
       : default_log(cfg.logging),
-        log(name, cfg.log_path),
+      log(name, cfg.log_path, [this] { tick(); }),
         sink(cfg.zeromq_log_port, [this](std::string const& m) {
                     default_log.log(m, crow::LogLevel::INFO);
                   },
@@ -57,7 +59,14 @@ class cg3lz {
     add_logging_rest_endpoint();
     add_crow_logging_toggle();
     add_kill_switch();
+    add_clean_log_folder();
     add_naive_log_file_download();
+  }
+
+  void tick() {
+    count++;
+    if (count % 100000 == 0)
+      default_log.log(std::string("Received ") + std::to_string(count) + " entries\n", crow::LogLevel::INFO);
   }
 
   void add_kill_switch() {
@@ -70,6 +79,15 @@ class cg3lz {
                     std::exit(0);
                   }).detach();
       return "OK! Shutting down!";
+    });
+  }
+
+  void add_clean_log_folder() {
+    // http get http://localhost:18080/clean
+    CROW_ROUTE(app, "/clean")
+      ([this] {
+        log_view(cfg.log_path).delete_logs();
+        return "Cleaned up the log folder!";
     });
   }
 
@@ -87,6 +105,7 @@ class cg3lz {
     CROW_ROUTE(app, "/log")
         .methods("PUT"_method)([this](const crow::request& req) {
            log.log(req.body);
+           tick();
            return crow::response(200);
          });
   }
