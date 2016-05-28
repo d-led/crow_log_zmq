@@ -13,6 +13,7 @@ struct zeromq_log_source::impl {
   zmq::context_t context;
   zmq::socket_t pull;
   std::atomic<bool> started;
+  std::thread loop;
 
   impl(unsigned int zp, default_log_t sink)
       : zeromq_log_port(zp),
@@ -40,7 +41,7 @@ zeromq_log_source::~zeromq_log_source() { this->stop(); }
 void zeromq_log_source::start_once() {
   if (pimpl->started) return;
 
-  std::thread([this] {
+  pimpl->loop.swap(std::thread([this] {
                 pimpl->started = true;
                 while (pimpl->started) {
                   zmq::message_t request;
@@ -49,7 +50,7 @@ void zeromq_log_source::start_once() {
                                        request.size());
                   pimpl->log_sink(log_line);
                 }
-              }).detach();
+              }));
 }
 
 void zeromq_log_source::stop() { pimpl->started = false; }
