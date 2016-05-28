@@ -13,7 +13,7 @@ g3logLogger::g3logLogger(std::string name, std::string path)
     : worker(g3::LogWorker::createLogWorker()) {
   boost::filesystem::path dir(path);
   boost::filesystem::create_directory(dir);
-#ifdef __MSC_VER
+#ifdef _MSC_VER
   auto logger = worker->addDefaultLogger(name, path);
 #else
   auto logger = worker->addSink(std2::make_unique<LogRotate>(name, path),
