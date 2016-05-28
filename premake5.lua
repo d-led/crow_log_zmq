@@ -84,8 +84,7 @@ includedirs {
 	'deps/g3sinks/logrotate/src',
 	'deps/mstch/include',
 	'deps/mstch/src',
-	'deps/mini-async-log/include',
-	'deps/mini-async-log/src',
+	'deps/spdlog/include',
 }
 
 --------------------------------------------------------------------

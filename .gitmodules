@@ -16,3 +16,6 @@
 [submodule "deps/mstch"]
 	path = deps/mstch
 	url = https://github.com/no1msd/mstch.git
+[submodule "deps/spdlog"]
+	path = deps/spdlog
+	url = https://github.com/gabime/spdlog.git
