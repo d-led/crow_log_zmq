@@ -97,15 +97,6 @@ make_static_lib('mstch', {
 use_standard('c++11')
 
 --------------------------------------------------------------------
-make_static_lib('mal_log', {
-	'deps/mini-async-log/include/**.hpp',
-	'deps/mini-async-log/src/**.hpp',
-	'deps/mini-async-log/src/**.cpp',
-})
-
-use_standard('c++11')
-
---------------------------------------------------------------------
 make_static_lib('g3log', {
 	'deps/g3log/src/**.cpp',
 	'deps/g3log/src/**.hpp'
@@ -135,7 +126,7 @@ end
 make_console_app('cg3lz', {
 	'src/main.cpp',
     'src/g3logger.cpp',
-	'src/mal_logger.cpp',
+	'src/spdlogger.cpp',
 	'src/zeromq_log_source.cpp',
 	'src/log_view.cpp',
 	'src/file_contents.cpp',
@@ -145,7 +136,7 @@ make_console_app('cg3lz', {
 })
 use_standard('c++14')
 
-links { 'g3log', 'mal_log', 'mstch' }
+links { 'g3log', 'mstch' }
 
 configuration 'not windows'
 	links { 'g3sinks' }

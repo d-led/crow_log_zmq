@@ -16,7 +16,7 @@ ifeq ($(config),debug_x32)
   TARGET = $(TARGETDIR)/cg3lz
   OBJDIR = ../../../obj/macosx/gmake/x32/Debug/cg3lz
   DEFINES += -D_DEBUG
-  INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src
+  INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/mini-async-log/include -I../../../deps/mini-async-log/src
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -g -std=c++14
@@ -43,7 +43,7 @@ ifeq ($(config),debug_x64)
   TARGET = $(TARGETDIR)/cg3lz
   OBJDIR = ../../../obj/macosx/gmake/x64/Debug/cg3lz
   DEFINES += -D_DEBUG
-  INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src
+  INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/mini-async-log/include -I../../../deps/mini-async-log/src
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++14
@@ -70,7 +70,7 @@ ifeq ($(config),release_x32)
   TARGET = $(TARGETDIR)/cg3lz
   OBJDIR = ../../../obj/macosx/gmake/x32/Release/cg3lz
   DEFINES +=
-  INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src
+  INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/mini-async-log/include -I../../../deps/mini-async-log/src
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -O2 -std=c++14
@@ -97,7 +97,7 @@ ifeq ($(config),release_x64)
   TARGET = $(TARGETDIR)/cg3lz
   OBJDIR = ../../../obj/macosx/gmake/x64/Release/cg3lz
   DEFINES +=
-  INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src
+  INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/mini-async-log/include -I../../../deps/mini-async-log/src
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++14
@@ -123,8 +123,10 @@ OBJECTS := \
 	$(OBJDIR)/g3logger.o \
 	$(OBJDIR)/log_view.o \
 	$(OBJDIR)/main.o \
+	$(OBJDIR)/main_page.o \
 	$(OBJDIR)/resources.o \
-	$(OBJDIR)/zeromq_log_sink.o \
+	$(OBJDIR)/spdlogger.o \
+	$(OBJDIR)/zeromq_log_source.o \
 
 RESOURCES := \
 
@@ -194,10 +196,16 @@ $(OBJDIR)/log_view.o: ../../../src/log_view.cpp
 $(OBJDIR)/main.o: ../../../src/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/main_page.o: ../../../src/main_page.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/resources.o: ../../../src/resources.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/zeromq_log_sink.o: ../../../src/zeromq_log_sink.cpp
+$(OBJDIR)/spdlogger.o: ../../../src/spdlogger.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/zeromq_log_source.o: ../../../src/zeromq_log_source.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

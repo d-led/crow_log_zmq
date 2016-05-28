@@ -15,7 +15,7 @@
 #include "file_contents.h"
 #include "main_page.h"
 #include "log_view.h"
-#include "mal_logger.h"
+#include "spdlogger.h"
 
 #pragma comment(lib, "dbghelp.lib")
 
@@ -25,7 +25,7 @@ class cg3lz {
   main_page index;
   DefaultLogger default_log;
   g3logLogger log;
-  mal_logger mlog;
+  spdlogger mlog;
   zeromq_log_source sink;
   std::uint64_t count = 0;
   log_view logs;

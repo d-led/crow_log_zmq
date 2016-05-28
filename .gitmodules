@@ -16,6 +16,3 @@
 [submodule "deps/mstch"]
 	path = deps/mstch
 	url = https://github.com/no1msd/mstch.git
-[submodule "deps/mini-async-log"]
-	path = deps/mini-async-log
-	url = https://github.com/RafaGago/mini-async-log.git
