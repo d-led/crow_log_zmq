@@ -13,6 +13,10 @@ struct spdlogger::impl {
   impl(std::string name, std::string path)
       : log(spd::rotating_logger_mt("rotating_log", path + "/log",
                                     1048576 * 500, 10)) {}
+
+  ~impl() {
+    spd::drop("rotating_log");
+  }
 };
 
 spdlogger::spdlogger(std::string name, std::string path) {
