@@ -12,25 +12,25 @@
 
 
 struct zeromq_log_sink::impl {
-  config& cfg;
+  unsigned int zeromq_log_port;
   g3logLogger& log_sink;
   zmq::context_t context;
   zmq::socket_t pull;
   std::atomic<bool> started;
 
-  impl(config& c, g3logLogger& sink)
-      : cfg(c),
+  impl(unsigned int zp, g3logLogger& sink)
+      : zeromq_log_port(zp),
         log_sink(sink),
         context(1),
         pull(context, ZMQ_PULL),
         started(false) {}
 };
 
-zeromq_log_sink::zeromq_log_sink(config& c, default_log_t default_log,
+zeromq_log_sink::zeromq_log_sink(unsigned int zp, default_log_t default_log,
                                  g3logLogger& sink)
-    : log(default_log), pimpl(new impl(c, sink)) {
+    : log(default_log), pimpl(new impl(zp, sink)) {
 
-  std::string port = std::to_string(pimpl->cfg.zeromq_log_port);
+  std::string port = std::to_string(pimpl->zeromq_log_port);
   std::string socket_config = "tcp://*:";
   socket_config += port;
   pimpl->pull.bind(socket_config.c_str());

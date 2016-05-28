@@ -6,10 +6,10 @@
 #include <string>
 
 class main_page {
-    config& cfg;
+    std::string log_path;
     log_view view;
 public:
-    main_page(config& c):cfg(c),view(c) {}
+    main_page(std::string const& p):log_path(p),view(p) {}
 public:
 	std::string render() const;
 };

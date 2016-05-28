@@ -1,19 +1,17 @@
 #pragma once
 
-#include "config.h"
-
 #include <crow.h>
 #include <string>
 
 
 class DefaultLogger : public crow::ILogHandler {
-  config& cfg;
+  bool& logging;
 
  public:
-  DefaultLogger(config& c) : cfg(c) {}
+  DefaultLogger(bool& l) : logging(l) {}
 
   inline void log(std::string message, crow::LogLevel level) override {
-    if (cfg.logging)
+    if (logging)
     	std::cout << "cg3lz " << message;
   }
 };

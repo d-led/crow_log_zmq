@@ -9,7 +9,7 @@ std::string main_page::render() const {
   for (auto& entry : logs) {
     logs_context.emplace_back(
         mstch::map{{"filename", entry.filename},
-                   {"url", cfg.log_path + entry.filename},
+                   {"url", log_path + entry.filename},
                    {"size", std::to_string(entry.size) + "B"}});
   }
 

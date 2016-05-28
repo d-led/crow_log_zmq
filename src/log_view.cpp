@@ -29,5 +29,5 @@ struct file_info {
 };
 
 std::vector<file_entry> log_view::get_logs() const {
-  return file_info(cfg.log_path).get();
+  return file_info(log_path).get();
 }

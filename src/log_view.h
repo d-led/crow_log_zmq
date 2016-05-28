@@ -1,7 +1,5 @@
 #pragma once
 
-#include "config.h"
-
 #include <vector>
 #include <string>
 
@@ -11,10 +9,10 @@ struct file_entry {
 };
 
 class log_view {
-  config& cfg;
+  std::string log_path;
 
 public:
-  log_view(config& c):cfg(c) {}
+  log_view(std::string const& p):log_path(p) {}
 
 public:
   std::vector<file_entry> get_logs() const;

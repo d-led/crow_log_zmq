@@ -1,6 +1,5 @@
 #pragma once
 
-#include "config.h"
 #include "g3logger.h"
 
 #include <atomic>
@@ -16,7 +15,7 @@ class zeromq_log_sink {
 
   std::unique_ptr<impl> pimpl;
  public:
-  zeromq_log_sink(config& c, default_log_t default_log, g3logLogger& sink);
+  zeromq_log_sink(unsigned int zmq_port, default_log_t default_log, g3logLogger& sink);
   ~zeromq_log_sink();
 
  public:

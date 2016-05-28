@@ -25,13 +25,13 @@ class cg3lz {
  public:
   //////////////////////////////
   cg3lz(std::string const& name)
-      : default_log(cfg),
+      : default_log(cfg.logging),
         log(name, cfg.log_path),
-        sink(cfg, [this](std::string const& m) {
+        sink(cfg.zeromq_log_port, [this](std::string const& m) {
                     default_log.log(m, crow::LogLevel::INFO);
                   },
              log),
-        index(cfg) {
+        index(cfg.log_path) {
     configure_routing();
     configure_crow_logging();
   }
