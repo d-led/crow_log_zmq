@@ -14,7 +14,7 @@ total = 0
 while True:
 	begin = time.time()
 	for num in range(count):
-    		push.send(str(num))
+    		push.send_string(str(num))
 	end = time.time()
 	total += count
 	print("{}/s, total: {}".format(count/(end-begin),total))

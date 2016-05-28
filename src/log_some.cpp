@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+#include "config.h"
+
 typedef std::chrono::high_resolution_clock Clock;
 
 int main (int argc, char* argv[]) {
@@ -11,14 +13,15 @@ int main (int argc, char* argv[]) {
     zmq::socket_t push(context, ZMQ_PUSH);
     auto count = 100000;
     unsigned long long total = 0;
+    config cfg;
 
     std::string server = (argc == 1) ?
         "localhost"
         :
         argv[1]
     ;
-    std::cout<<"connecting to "<<server<<std::endl;
-    auto connection_string = std::string("tcp://")+server+":18090";
+    auto connection_string = std::string("tcp://") + server + ":" + std::to_string(cfg.zeromq_log_port);
+    std::cout << "connecting to " << connection_string << std::endl;
     push.connect(connection_string.c_str());
 
     while (true) {
