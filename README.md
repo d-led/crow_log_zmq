@@ -62,14 +62,6 @@ Example view:
 
 ![](index.png)
 
-The implementation is naive at the moment, and might potentially interfere with the log rotation mechanism.
-
-Download 600mb:
-![](download.png)
-
-Burst logging:
-![](resources.png)
-
 ## Source ##
 
 - [cg3lz (server)](src/main.cpp)
@@ -117,3 +109,17 @@ cg3lz (2016-05-27 20:33:41) [DEBUG   ] Connection open, total 1, 0x1a349f0
 228311/s, total: 1500000
 134953/s, total: 1600000
 ... -->
+
+
+## Commentary ##
+
+The implementation is naive at the moment, and might potentially interfere with the log rotation mechanism.
+
+Download 600mb:
+
+![](download.png)
+
+Burst logging:
+
+![](resources.png)
+
