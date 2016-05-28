@@ -8,9 +8,6 @@
 // zeromq
 #include <zmq.hpp>
 
-#pragma comment(lib, "dbghelp.lib")
-
-
 struct zeromq_log_source::impl {
   unsigned int zeromq_log_port;
   g3logLogger& log_sink;

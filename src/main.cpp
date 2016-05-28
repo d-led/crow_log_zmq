@@ -16,6 +16,8 @@
 #include "main_page.h"
 #include "log_view.h"
 
+#pragma comment(lib, "dbghelp.lib")
+
 class cg3lz {
   crow::SimpleApp app;
   config cfg;
