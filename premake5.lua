@@ -84,12 +84,23 @@ includedirs {
 	'deps/g3sinks/logrotate/src',
 	'deps/mstch/include',
 	'deps/mstch/src',
+	'deps/mini-async-log/include',
+	'deps/mini-async-log/src',
 }
 
 --------------------------------------------------------------------
 make_static_lib('mstch', {
 	'deps/mstch/src/**.cpp',
 	'deps/mstch/src/**.hpp'
+})
+
+use_standard('c++11')
+
+--------------------------------------------------------------------
+make_static_lib('mal_log', {
+	'deps/mini-async-log/include/**.hpp',
+	'deps/mini-async-log/src/**.hpp',
+	'deps/mini-async-log/src/**.cpp',
 })
 
 use_standard('c++11')
@@ -133,7 +144,7 @@ make_console_app('cg3lz', {
 })
 use_standard('c++14')
 
-links { 'g3log', 'mstch' }
+links { 'g3log', 'mal_log', 'mstch' }
 
 configuration 'not windows'
 	links { 'g3sinks' }

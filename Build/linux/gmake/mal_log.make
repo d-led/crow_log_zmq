@@ -13,13 +13,13 @@ endif
 ifeq ($(config),debug_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/linux/gmake/x32/Debug
-  TARGET = $(TARGETDIR)/libg3sinks.a
-  OBJDIR = ../../../obj/linux/gmake/x32/Debug/g3sinks
+  TARGET = $(TARGETDIR)/libmal_log.a
+  OBJDIR = ../../../obj/linux/gmake/x32/Debug/mal_log
   DEFINES += -D_DEBUG
   INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/mini-async-log/include -I../../../deps/mini-async-log/src
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -g -std=c++14
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -g -std=c++11
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
@@ -40,13 +40,13 @@ endif
 ifeq ($(config),debug_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/linux/gmake/x64/Debug
-  TARGET = $(TARGETDIR)/libg3sinks.a
-  OBJDIR = ../../../obj/linux/gmake/x64/Debug/g3sinks
+  TARGET = $(TARGETDIR)/libmal_log.a
+  OBJDIR = ../../../obj/linux/gmake/x64/Debug/mal_log
   DEFINES += -D_DEBUG
   INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/mini-async-log/include -I../../../deps/mini-async-log/src
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++14
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++11
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
@@ -67,13 +67,13 @@ endif
 ifeq ($(config),release_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/linux/gmake/x32/Release
-  TARGET = $(TARGETDIR)/libg3sinks.a
-  OBJDIR = ../../../obj/linux/gmake/x32/Release/g3sinks
+  TARGET = $(TARGETDIR)/libmal_log.a
+  OBJDIR = ../../../obj/linux/gmake/x32/Release/mal_log
   DEFINES +=
   INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/mini-async-log/include -I../../../deps/mini-async-log/src
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -O2 -std=c++14
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -O2 -std=c++11
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
@@ -94,13 +94,13 @@ endif
 ifeq ($(config),release_x64)
   RESCOMP = windres
   TARGETDIR = ../../../bin/linux/gmake/x64/Release
-  TARGET = $(TARGETDIR)/libg3sinks.a
-  OBJDIR = ../../../obj/linux/gmake/x64/Release/g3sinks
+  TARGET = $(TARGETDIR)/libmal_log.a
+  OBJDIR = ../../../obj/linux/gmake/x64/Release/mal_log
   DEFINES +=
   INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/mini-async-log/include -I../../../deps/mini-async-log/src
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++14
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++11
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS +=
@@ -119,9 +119,7 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/LogRotate.o \
-	$(OBJDIR)/LogRotateUtility.o \
-	$(OBJDIR)/LogRotateWithFilter.o \
+	$(OBJDIR)/frontend.o \
 
 RESOURCES := \
 
@@ -136,7 +134,7 @@ ifeq (/bin,$(findstring /bin,$(SHELL)))
 endif
 
 $(TARGET): $(GCH) ${CUSTOMFILES} $(OBJECTS) $(LDDEPS) $(RESOURCES)
-	@echo Linking g3sinks
+	@echo Linking mal_log
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -157,7 +155,7 @@ else
 endif
 
 clean:
-	@echo Cleaning g3sinks
+	@echo Cleaning mal_log
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(OBJDIR)
@@ -179,13 +177,7 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
-$(OBJDIR)/LogRotate.o: ../../../deps/g3sinks/logrotate/src/LogRotate.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/LogRotateUtility.o: ../../../deps/g3sinks/logrotate/src/LogRotateUtility.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/LogRotateWithFilter.o: ../../../deps/g3sinks/logrotate/src/LogRotateWithFilter.cpp
+$(OBJDIR)/frontend.o: ../../../deps/mini-async-log/src/mal_log/frontend.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

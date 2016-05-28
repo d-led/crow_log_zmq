@@ -15,6 +15,7 @@ ifeq ($(config),debug_x32)
   g3log_config = debug_x32
   g3sinks_config = debug_x32
   log_some_config = debug_x32
+  mal_log_config = debug_x32
   mstch_config = debug_x32
 endif
 ifeq ($(config),debug_x64)
@@ -22,6 +23,7 @@ ifeq ($(config),debug_x64)
   g3log_config = debug_x64
   g3sinks_config = debug_x64
   log_some_config = debug_x64
+  mal_log_config = debug_x64
   mstch_config = debug_x64
 endif
 ifeq ($(config),release_x32)
@@ -29,6 +31,7 @@ ifeq ($(config),release_x32)
   g3log_config = release_x32
   g3sinks_config = release_x32
   log_some_config = release_x32
+  mal_log_config = release_x32
   mstch_config = release_x32
 endif
 ifeq ($(config),release_x64)
@@ -36,16 +39,17 @@ ifeq ($(config),release_x64)
   g3log_config = release_x64
   g3sinks_config = release_x64
   log_some_config = release_x64
+  mal_log_config = release_x64
   mstch_config = release_x64
 endif
 
-PROJECTS := cg3lz g3log g3sinks log_some mstch
+PROJECTS := cg3lz g3log g3sinks log_some mal_log mstch
 
 .PHONY: all clean help $(PROJECTS) 
 
 all: $(PROJECTS)
 
-cg3lz: g3log mstch g3sinks
+cg3lz: g3log mal_log mstch g3sinks
 ifneq (,$(cg3lz_config))
 	@echo "==== Building cg3lz ($(cg3lz_config)) ===="
 	@${MAKE} --no-print-directory -C . -f cg3lz.make config=$(cg3lz_config)
@@ -69,6 +73,12 @@ ifneq (,$(log_some_config))
 	@${MAKE} --no-print-directory -C . -f log_some.make config=$(log_some_config)
 endif
 
+mal_log:
+ifneq (,$(mal_log_config))
+	@echo "==== Building mal_log ($(mal_log_config)) ===="
+	@${MAKE} --no-print-directory -C . -f mal_log.make config=$(mal_log_config)
+endif
+
 mstch:
 ifneq (,$(mstch_config))
 	@echo "==== Building mstch ($(mstch_config)) ===="
@@ -80,6 +90,7 @@ clean:
 	@${MAKE} --no-print-directory -C . -f g3log.make clean
 	@${MAKE} --no-print-directory -C . -f g3sinks.make clean
 	@${MAKE} --no-print-directory -C . -f log_some.make clean
+	@${MAKE} --no-print-directory -C . -f mal_log.make clean
 	@${MAKE} --no-print-directory -C . -f mstch.make clean
 
 help:
@@ -98,6 +109,7 @@ help:
 	@echo "   g3log"
 	@echo "   g3sinks"
 	@echo "   log_some"
+	@echo "   mal_log"
 	@echo "   mstch"
 	@echo ""
 	@echo "For more information, see http://industriousone.com/premake/quick-start"
