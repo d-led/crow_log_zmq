@@ -1,5 +1,4 @@
 #include "zeromq_log_source.h"
-#include "g3logger.h"
 
 #include <string>
 #include <chrono>
@@ -10,12 +9,12 @@
 
 struct zeromq_log_source::impl {
   unsigned int zeromq_log_port;
-  g3logLogger& log_sink;
+  default_log_t log_sink;
   zmq::context_t context;
   zmq::socket_t pull;
   std::atomic<bool> started;
 
-  impl(unsigned int zp, g3logLogger& sink)
+  impl(unsigned int zp, default_log_t sink)
       : zeromq_log_port(zp),
         log_sink(sink),
         context(1),
@@ -24,7 +23,7 @@ struct zeromq_log_source::impl {
 };
 
 zeromq_log_source::zeromq_log_source(unsigned int zp, default_log_t default_log,
-                                 g3logLogger& sink)
+                                 default_log_t sink)
     : log(default_log), pimpl(new impl(zp, sink)) {
 
   std::string port = std::to_string(pimpl->zeromq_log_port);
@@ -48,7 +47,7 @@ void zeromq_log_source::start_once() {
                   pimpl->pull.recv(&request);
                   std::string log_line(static_cast<char*>(request.data()),
                                        request.size());
-                  pimpl->log_sink.log(log_line);
+                  pimpl->log_sink(log_line);
                 }
               }).detach();
 }

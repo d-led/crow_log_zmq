@@ -1,4 +1,4 @@
-# crow + g3log + 0mq + markdeep + mstch == a simple log server #
+# crow + g3log/spdlog + 0mq + markdeep + mstch == a simple log server #
 
 [![Build Status](https://travis-ci.org/d-led/crow_g3log_zmq.svg?branch=master)](https://travis-ci.org/d-led/crow_g3log_zmq)
 
@@ -9,6 +9,7 @@ Used in the project
 - [premake5](https://premake.github.io/) a meta-build generator used with some [patterns](https://github.com/d-led/premake-meta-cpp)
 - [crow](https://github.com/ipkn/crow) is a C++11 micro web framework
 - [g3log](https://github.com/KjellKod/g3log) is an asynchronous logging library
+- [spdlog](https://github.com/gabime/spdlog) is a super fast header-only logging library
 - [ØMQ](http://zero.mq/) is a set of communication protocols their implementations for the XXI century
 - [markdeep](https://casual-effects.com/markdeep/) as the markdown-based front-end
 - [mstch](https://github.com/no1msd/mstch/) for rendering [{{ mustache }}](https://mustache.github.io/)-based templates
@@ -131,4 +132,3 @@ Download 600mb:
 Burst logging:
 
 ![](resources.png)
-

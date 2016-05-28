@@ -24,9 +24,8 @@ class cg3lz {
   config cfg;
   main_page index;
   DefaultLogger default_log;
-  g3logLogger log;
   spdlogger mlog;
-  zeromq_log_source sink;
+  zeromq_log_source source;
   std::uint64_t count = 0;
   log_view logs;
 
@@ -34,12 +33,11 @@ class cg3lz {
   //////////////////////////////
   cg3lz(std::string const& name)
       : default_log(cfg.logging),
-      log(name, cfg.log_path, [this] { tick(); }),
-      mlog(name, cfg.log_path, [this] { tick(); }),
-        sink(cfg.zeromq_log_port, [this](std::string const& m) {
-                    default_log.log(m, crow::LogLevel::INFO);
-                  },
-             log),
+        mlog(name, cfg.log_path),
+        source(cfg.zeromq_log_port, [this](std::string const& m) {
+                                      default_log.log(m, crow::LogLevel::INFO);
+                                    },
+               [this](std::string const& m) { log(m); }),
         index(cfg.log_path),
         logs(cfg.log_path) {
     configure_routing();
@@ -51,7 +49,7 @@ class cg3lz {
     default_log.log(std::string("Saving logs to: ") + cfg.log_path + "\n",
                     crow::LogLevel::INFO);
 
-    sink.start_once();
+    source.start_once();
 
     app.port(cfg.port).multithreaded().run();
   }
@@ -73,14 +71,16 @@ class cg3lz {
   void tick() {
     count++;
     if (count % 100000 == 0)
-      default_log.log(std::string("Received ") + std::to_string(count) + " entries\n", crow::LogLevel::INFO);
+      default_log.log(
+          std::string("Received ") + std::to_string(count) + " entries\n",
+          crow::LogLevel::INFO);
   }
 
   void add_kill_switch() {
     // http get http://localhost:18080/kill
     CROW_ROUTE(app, "/kill")
     ([this] {
-      sink.stop();
+      source.stop();
       std::thread([] {
                     std::this_thread::sleep_for(std::chrono::seconds(1));
                     std::exit(0);
@@ -102,18 +102,20 @@ class cg3lz {
     // echo "bla\c" | http put http://localhost:18080/log
     CROW_ROUTE(app, "/log")
         .methods("PUT"_method)([this](const crow::request& req) {
-           log.log(req.body);
-           tick();
+           log(req.body);
            return crow::response(200);
          });
+  }
+
+  void log(std::string const& m) {
+    mlog.log(m);
+    tick();
   }
 
   void add_front_page() {
     CROW_ROUTE(app, "/").name("front_end")([this] {
       auto response = crow::response(index.render());
-      response.set_header(
-            "Content-Type",
-            "text/html;charset=UTF-8");
+      response.set_header("Content-Type", "text/html;charset=UTF-8");
       return response;
     });
   }
@@ -135,7 +137,6 @@ class cg3lz {
       }
     });
   }
-
 };
 
 int main(int argc, char* argv[]) {
