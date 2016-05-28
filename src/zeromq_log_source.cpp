@@ -41,7 +41,7 @@ zeromq_log_source::~zeromq_log_source() { this->stop(); }
 void zeromq_log_source::start_once() {
   if (pimpl->started) return;
 
-  pimpl->loop.swap(std::thread([this] {
+  pimpl->loop = std::move(std::thread([this] {
                 pimpl->started = true;
                 while (pimpl->started) {
                   zmq::message_t request;
