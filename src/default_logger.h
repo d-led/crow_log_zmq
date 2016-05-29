@@ -3,6 +3,7 @@
 #include <crow.h>
 #include <string>
 #include <spdlog/spdlog.h>
+#include <boost/algorithm/string/trim.hpp>
 
 namespace spd = spdlog;
 
@@ -16,6 +17,7 @@ class DefaultLogger : public crow::ILogHandler {
   inline void log(std::string message, crow::LogLevel level) override {
     if (!logging)
       return;
+    message = boost::trim_copy(message);
     switch (level) {
     case crow::LogLevel::CRITICAL:
       console->critical(message);
@@ -35,7 +37,6 @@ class DefaultLogger : public crow::ILogHandler {
     default:
       console->info(message);
       break;
-
     }
   }
 };
