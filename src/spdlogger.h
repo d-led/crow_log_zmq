@@ -9,7 +9,7 @@ class spdlogger {
   std::unique_ptr<impl> pimpl;
 
  public:
-   spdlogger(std::string name, std::string path, size_t max_file_size, size_t max_number_of_files);
+   spdlogger(std::string name, std::string path, size_t max_file_size, size_t max_number_of_files, int flush_period_seconds);
   ~spdlogger();
 
  public:

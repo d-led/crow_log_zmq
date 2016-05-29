@@ -34,7 +34,7 @@ class cg3lz {
   //////////////////////////////
   cg3lz(std::string const& name)
       : default_log(cfg.logging), // initialized first
-        sink(name, cfg.log_path, cfg.max_file_size, cfg.max_number_of_files),
+        sink(name, cfg.log_path, cfg.max_file_size, cfg.max_number_of_files, cfg.flush_period_seconds),
         source(cfg.zeromq_log_port),
         index(cfg.log_path,cfg.logging),
         logs(cfg.log_path) {
