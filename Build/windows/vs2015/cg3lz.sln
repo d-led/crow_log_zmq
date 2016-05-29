@@ -1,20 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2015
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mstch", "mstch.vcxproj", "{4479F40F-B08D-1CC1-790F-C020E5E218F2}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "g3log", "g3log.vcxproj", "{81AD640F-EDC1-8CC0-B643-3020221789F1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cg3lz", "cg3lz.vcxproj", "{68DC370F-D4F0-5FC0-9D72-032009465CF1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "log_some", "log_some.vcxproj", "{7AD7347F-66A4-8F8A-8FBD-7D327BE9C418}"
 EndProject
 Global
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
 		Debug|x64 = Debug|x64
@@ -30,14 +23,6 @@ Global
 		{4479F40F-B08D-1CC1-790F-C020E5E218F2}.Release|Win32.Build.0 = Release|Win32
 		{4479F40F-B08D-1CC1-790F-C020E5E218F2}.Release|x64.ActiveCfg = Release|x64
 		{4479F40F-B08D-1CC1-790F-C020E5E218F2}.Release|x64.Build.0 = Release|x64
-		{81AD640F-EDC1-8CC0-B643-3020221789F1}.Debug|Win32.ActiveCfg = Debug|Win32
-		{81AD640F-EDC1-8CC0-B643-3020221789F1}.Debug|Win32.Build.0 = Debug|Win32
-		{81AD640F-EDC1-8CC0-B643-3020221789F1}.Debug|x64.ActiveCfg = Debug|x64
-		{81AD640F-EDC1-8CC0-B643-3020221789F1}.Debug|x64.Build.0 = Debug|x64
-		{81AD640F-EDC1-8CC0-B643-3020221789F1}.Release|Win32.ActiveCfg = Release|Win32
-		{81AD640F-EDC1-8CC0-B643-3020221789F1}.Release|Win32.Build.0 = Release|Win32
-		{81AD640F-EDC1-8CC0-B643-3020221789F1}.Release|x64.ActiveCfg = Release|x64
-		{81AD640F-EDC1-8CC0-B643-3020221789F1}.Release|x64.Build.0 = Release|x64
 		{68DC370F-D4F0-5FC0-9D72-032009465CF1}.Debug|Win32.ActiveCfg = Debug|Win32
 		{68DC370F-D4F0-5FC0-9D72-032009465CF1}.Debug|Win32.Build.0 = Debug|Win32
 		{68DC370F-D4F0-5FC0-9D72-032009465CF1}.Debug|x64.ActiveCfg = Debug|x64
