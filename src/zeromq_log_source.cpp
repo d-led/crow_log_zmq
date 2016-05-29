@@ -23,7 +23,8 @@ struct zeromq_log_source::impl {
         started(false) {}
 
   ~impl() {
-    loop.join();
+      if (loop.joinable())
+        loop.join();
   }
 };
 
