@@ -20,7 +20,15 @@ struct spdlogger::impl {
       }
 
   ~impl() {
+    try {
+      shutdown();
+    } catch (...) {}
+  }
+
+  void shutdown() {
+    log->flush();
     spd::drop("rotating_log");
+    log.reset();
   }
 };
 
@@ -33,3 +41,5 @@ spdlogger::spdlogger(std::string name, std::string path) {
 spdlogger::~spdlogger() {}
 
 void spdlogger::log(std::string const& message) { pimpl->log->info(message); }
+
+void spdlogger::shutdown() { pimpl->shutdown(); }

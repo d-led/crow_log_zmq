@@ -21,6 +21,10 @@ struct zeromq_log_source::impl {
         context(1),
         pull(context, ZMQ_PULL),
         started(false) {}
+
+  ~impl() {
+    loop.join();
+  }
 };
 
 zeromq_log_source::zeromq_log_source(unsigned int zp, default_log_t default_log,

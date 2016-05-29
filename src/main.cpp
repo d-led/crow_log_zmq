@@ -44,6 +44,10 @@ class cg3lz {
     configure_crow_logging();
   }
 
+  ~cg3lz() {
+    mlog.shutdown();
+  }
+
   ////////////
   void run() {
     default_log.log(std::string("Saving logs to: ") + cfg.log_path + "\n",

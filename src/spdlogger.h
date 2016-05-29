@@ -14,4 +14,5 @@ class spdlogger {
 
  public:
   void log(std::string const& message);
+  void shutdown();
 };
