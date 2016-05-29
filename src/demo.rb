@@ -21,6 +21,11 @@ def start_latest(what,para)
             (Dir.glob("bin/**/"+ what        ))
         ).max_by {|f| File.mtime(f)}
 
+    if !absolute_path_to_executable then
+        puts "Could not find #{what}! Terminating."
+        exit 1
+    end
+
     # puts absolute_path_to_executable
     start(absolute_path_to_executable,para)
 end
