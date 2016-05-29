@@ -15,8 +15,8 @@ ifeq ($(config),debug_x32)
   TARGETDIR = ../../../bin/linux/gmake/x32/Debug
   TARGET = $(TARGETDIR)/cg3lz
   OBJDIR = ../../../obj/linux/gmake/x32/Debug/cg3lz
-  DEFINES += -D_DEBUG
-  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
+  DEFINES += -DPICOJSON_USE_INT64 -D_DEBUG
+  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include -I../../../deps/picojson -I../../../deps/picojson_serializer
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -g -std=c++14
@@ -42,8 +42,8 @@ ifeq ($(config),debug_x64)
   TARGETDIR = ../../../bin/linux/gmake/x64/Debug
   TARGET = $(TARGETDIR)/cg3lz
   OBJDIR = ../../../obj/linux/gmake/x64/Debug/cg3lz
-  DEFINES += -D_DEBUG
-  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
+  DEFINES += -DPICOJSON_USE_INT64 -D_DEBUG
+  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include -I../../../deps/picojson -I../../../deps/picojson_serializer
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++14
@@ -69,8 +69,8 @@ ifeq ($(config),release_x32)
   TARGETDIR = ../../../bin/linux/gmake/x32/Release
   TARGET = $(TARGETDIR)/cg3lz
   OBJDIR = ../../../obj/linux/gmake/x32/Release/cg3lz
-  DEFINES +=
-  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
+  DEFINES += -DPICOJSON_USE_INT64
+  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include -I../../../deps/picojson -I../../../deps/picojson_serializer
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -O2 -std=c++14
@@ -96,8 +96,8 @@ ifeq ($(config),release_x64)
   TARGETDIR = ../../../bin/linux/gmake/x64/Release
   TARGET = $(TARGETDIR)/cg3lz
   OBJDIR = ../../../obj/linux/gmake/x64/Release/cg3lz
-  DEFINES +=
-  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
+  DEFINES += -DPICOJSON_USE_INT64
+  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include -I../../../deps/picojson -I../../../deps/picojson_serializer
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++14
@@ -119,6 +119,7 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 endif
 
 OBJECTS := \
+	$(OBJDIR)/config_persistence.o \
 	$(OBJDIR)/file_contents.o \
 	$(OBJDIR)/log_view.o \
 	$(OBJDIR)/main.o \
@@ -183,6 +184,9 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
+$(OBJDIR)/config_persistence.o: ../../../src/config_persistence.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/file_contents.o: ../../../src/file_contents.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
