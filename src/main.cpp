@@ -32,7 +32,7 @@ class cg3lz {
   //////////////////////////////
   cg3lz(std::string const& name)
       : default_log(cfg.logging),
-        sink(name, cfg.log_path),
+        sink(name, cfg.log_path, cfg.max_file_size, cfg.max_number_of_files),
         source(cfg.zeromq_log_port, [this](std::string const& m) {
                                       default_log.log(m, crow::LogLevel::INFO);
                                     },
