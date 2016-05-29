@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'rufus-scheduler'
 require 'net/http'
 
