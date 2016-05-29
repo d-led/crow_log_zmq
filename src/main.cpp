@@ -15,13 +15,13 @@
 #include "main_page.h"
 #include "log_view.h"
 #include "spdlogger.h"
-//#include "config_persistence.h"
+#include "config_persistence.h"
 
 #pragma comment(lib, "dbghelp.lib")
 
 class cg3lz {
   config cfg;
-  //config_persistence cfg_persistence;
+  config_persistence cfg_persistence;
   crow::SimpleApp app;
   main_page index;
   DefaultLogger default_log;
@@ -36,18 +36,18 @@ class cg3lz {
       : default_log(cfg.logging), // initialized first
         sink(name, cfg.log_path, cfg.max_file_size, cfg.max_number_of_files),
         source(cfg.zeromq_log_port),
-        index(cfg.log_path),
+        index(cfg.log_path,cfg.logging),
         logs(cfg.log_path) {
     configure_routing();
     configure_logging();
-    //cfg = cfg_persistence.load();
+    cfg = cfg_persistence.load();
   }
 
   ~cg3lz() {
     try {
       source.stop();
       sink.shutdown();
-      //cfg_persistence.save(cfg);
+      cfg_persistence.save(cfg);
     }
     catch (...) {
     }
@@ -76,7 +76,7 @@ class cg3lz {
 
     source.configure_logging(console, files);
 
-    //cfg_persistence.configure_logging(console);
+    cfg_persistence.configure_logging(console);
   }
 
   void configure_routing() {

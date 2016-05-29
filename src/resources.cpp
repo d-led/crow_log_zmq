@@ -8,6 +8,12 @@ Logs
 - [{{filename}}]({{url}}) [{{size}}]
 {{/logs}}
 
+
+Config
+======
+
+App logging enabled: {{app_logging_enabled}}
+
 <style>h1:before, h2:before { content: none; }</style>
 <!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="markdeep.min.js"></script><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>
 )";

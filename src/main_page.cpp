@@ -13,6 +13,9 @@ std::string main_page::render() const {
                    {"size", std::to_string(entry.size) + "B"}});
   }
 
-  mstch::map context{{"logs", logs_context}};
+  mstch::map context{
+    {"logs", logs_context},
+    {"app_logging_enabled", app_logging_enabled},
+  };
   return mstch::render(resources::index_html, context);
 }
