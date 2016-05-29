@@ -1,4 +1,4 @@
-# crow + g3log/spdlog + 0mq + markdeep + mstch == a simple log server #
+# crow + spdlog + 0mq + markdeep + mstch == a simple log server #
 
 [![Build Status](https://travis-ci.org/d-led/crow_g3log_zmq.svg?branch=master)](https://travis-ci.org/d-led/crow_g3log_zmq)
 
@@ -8,7 +8,6 @@ Used in the project
 
 - [premake5](https://premake.github.io/) a meta-build generator used with some [patterns](https://github.com/d-led/premake-meta-cpp)
 - [crow](https://github.com/ipkn/crow) is a C++11 micro web framework
-- [g3log](https://github.com/KjellKod/g3log) is an asynchronous logging library
 - [spdlog](https://github.com/gabime/spdlog) is a super fast header-only logging library
 - [ØMQ](http://zero.mq/) is a set of communication protocols their implementations for the XXI century
 - [markdeep](https://casual-effects.com/markdeep/) as the markdown-based front-end
@@ -78,9 +77,7 @@ Example view:
 d-led@ubuntu:~/src/crow_g3log_zmq$ make -C Build/linux/gmake/ config=release_x64 && \
  bin/linux/gmake/x64/Release/cg3lz
 make: Entering directory '/home/dled/src/crow_g3log_zmq/Build/linux/gmake'
-==== Building g3log (release_x64) ====
 ==== Building mstch (release_x64) ====
-==== Building g3sinks (release_x64) ====
 ==== Building cg3lz (release_x64) ====
 main_page.cpp
 Linking cg3lz
@@ -130,9 +127,5 @@ Download 600mb:
 ![](download.png)
 
 Burst logging:
-
-![](resources.png)
-
-After switching to spdlog, memory usage and performance is greatly improved, but crash safety and commit guarantees are not there out of the box:
 
 ![](spdlog.png)
