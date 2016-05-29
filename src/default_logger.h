@@ -17,7 +17,7 @@ class DefaultLogger : public crow::ILogHandler {
 #endif
 
  public:
-  DefaultLogger(bool& l) : logging(l),console(spd::stdout_logger_mt("cg3lz_crow", true)) {
+  DefaultLogger(bool& l) : logging(l),console(spd::stdout_logger_mt("cg3lz_crow", DO_COLOR)) {
     console->set_level(spd::level::debug);
   }
 
