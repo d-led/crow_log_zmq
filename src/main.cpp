@@ -45,6 +45,8 @@ class cg3lz {
 
   ~cg3lz() {
     try {
+      //source.shutdown();
+      sink.shutdown();
     }
     catch (...) {
     }
@@ -52,7 +54,7 @@ class cg3lz {
 
   ////////////
   void run() {
-    default_log.log(std::string("Saving logs to: ") + cfg.log_path + "\n",
+    default_log.log(std::string("Saving logs to: ") + cfg.log_path,
                     crow::LogLevel::INFO);
 
     source.start_once();
@@ -78,7 +80,7 @@ class cg3lz {
     count++;
     if (count % 100000 == 0)
       default_log.log(
-          std::string("Received ") + std::to_string(count) + " entries\n",
+          std::string("Received ") + std::to_string(count) + " entries",
           crow::LogLevel::INFO);
   }
 

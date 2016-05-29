@@ -36,8 +36,7 @@ zeromq_log_source::zeromq_log_source(unsigned int zp, default_log_t default_log,
   socket_config += port;
   pimpl->pull.bind(socket_config.c_str());
 
-  log(std::string("Listening to 0mq incoming logs on: ") + socket_config +
-      "\n");
+  log(std::string("Listening to 0mq incoming logs on: ") + socket_config);
 }
 
 zeromq_log_source::~zeromq_log_source() { this->stop(); }
