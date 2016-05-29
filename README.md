@@ -120,12 +120,12 @@ See the premake build config and premake documentation
 
 ## Commentary ##
 
-The implementation is naive at the moment, and might potentially interfere with the log rotation mechanism.
-
-Download 600mb:
-
-![](download.png)
-
 Burst logging:
 
 ![](spdlog.png)
+
+The implementation of the download is naive at the moment, and might potentially interfere with the log rotation mechanism, but the memory is cleaned up properly.
+
+Download ~500mb during burst logging:
+
+![](download.png)
