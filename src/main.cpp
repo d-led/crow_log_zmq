@@ -45,7 +45,6 @@ class cg3lz {
 
   ~cg3lz() {
     try {
-      //source.shutdown();
       sink.shutdown();
     }
     catch (...) {
