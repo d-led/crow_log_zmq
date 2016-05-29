@@ -52,4 +52,8 @@ class DefaultLogger : public crow::ILogHandler {
       break;
     }
   }
+
+  inline void shutdown() {
+    console->flush();
+  }
 };

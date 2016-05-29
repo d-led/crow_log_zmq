@@ -43,11 +43,16 @@ class cg3lz {
     cfg = cfg_persistence.load();
   }
 
+  void shutdown() {
+    cfg_persistence.save(cfg);
+    source.stop();
+    sink.shutdown();
+    default_log.shutdown();
+  }
+
   ~cg3lz() {
     try {
-      source.stop();
-      sink.shutdown();
-      cfg_persistence.save(cfg);
+      this->shutdown();
     }
     catch (...) {
     }
@@ -99,11 +104,11 @@ class cg3lz {
     // http get http://localhost:18080/kill
     CROW_ROUTE(app, "/kill")
     ([this] {
-      source.stop();
+      this->shutdown();
       std::thread([] {
-                    std::this_thread::sleep_for(std::chrono::seconds(1));
-                    std::exit(0);
-                  }).detach();
+        std::this_thread::sleep_for(std::chrono::seconds(3));
+        std::exit(0);
+      }).detach();
       return "OK! Shutting down!";
     });
   }
