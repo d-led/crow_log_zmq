@@ -23,7 +23,7 @@ class cg3lz {
   config cfg;
   main_page index;
   DefaultLogger default_log;
-  spdlogger mlog;
+  spdlogger sink;
   zeromq_log_source source;
   std::uint64_t count = 0;
   log_view logs;
@@ -32,7 +32,7 @@ class cg3lz {
   //////////////////////////////
   cg3lz(std::string const& name)
       : default_log(cfg.logging),
-        mlog(name, cfg.log_path),
+        sink(name, cfg.log_path),
         source(cfg.zeromq_log_port, [this](std::string const& m) {
                                       default_log.log(m, crow::LogLevel::INFO);
                                     },
@@ -44,7 +44,7 @@ class cg3lz {
   }
 
   ~cg3lz() {
-    mlog.shutdown();
+    sink.shutdown();
   }
 
   ////////////
@@ -111,7 +111,7 @@ class cg3lz {
   }
 
   void log(std::string const& m) {
-    mlog.log(m);
+    sink.log(m);
     tick();
   }
 
