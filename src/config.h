@@ -10,6 +10,7 @@ struct config {
   std::string log_path = "logs/";
   int64_t max_file_size = 1048576 * 100; // ~100mb
   int64_t max_number_of_files = 10;
+  int flush_period_seconds = 2; // flush log files ever N seconds (performance vs. fidelity)
 
   template<class Archive>
   void json(Archive & ar)
