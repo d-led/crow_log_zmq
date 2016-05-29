@@ -10,7 +10,6 @@
 
 #include "config.h"
 #include "default_logger.h"
-#include "g3logger.h"
 #include "zeromq_log_source.h"
 #include "file_contents.h"
 #include "main_page.h"
