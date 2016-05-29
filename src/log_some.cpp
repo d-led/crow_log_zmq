@@ -1,10 +1,10 @@
 //i.e. g++ zmqclient.cpp -lzmq -o zmqclient -O3 -std=c++11
+#include "config.h"
+
 #include <zmq.hpp>
 #include <chrono>
 #include <iostream>
 #include <string>
-
-#include "config.h"
 
 typedef std::chrono::high_resolution_clock Clock;
 

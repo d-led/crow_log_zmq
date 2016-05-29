@@ -24,6 +24,12 @@ class DefaultLogger : public crow::ILogHandler {
   inline void log(std::string message, crow::LogLevel level) override {
     if (!logging)
       return;
+
+    if (!console) {
+      std::cout<<message<<std::endl;
+      return;
+    }
+
     message = boost::trim_copy(message);
     switch (level) {
     case crow::LogLevel::CRITICAL:

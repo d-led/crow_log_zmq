@@ -97,7 +97,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;PICOJSON_USE_INT64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files (x86)\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -117,7 +117,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;PICOJSON_USE_INT64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -137,7 +137,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;PICOJSON_USE_INT64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files (x86)\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -162,7 +162,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;PICOJSON_USE_INT64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>..\..\..\deps\cppzmq;C:\Program Files\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -185,6 +185,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\config.h" />
+    <ClInclude Include="..\..\..\src\config_persistence.h" />
     <ClInclude Include="..\..\..\src\default_logger.h" />
     <ClInclude Include="..\..\..\src\file_contents.h" />
     <ClInclude Include="..\..\..\src\log_view.h" />
@@ -194,6 +195,7 @@
     <ClInclude Include="..\..\..\src\zeromq_log_source.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\src\config_persistence.cpp" />
     <ClCompile Include="..\..\..\src\file_contents.cpp" />
     <ClCompile Include="..\..\..\src\log_view.cpp" />
     <ClCompile Include="..\..\..\src\main.cpp" />

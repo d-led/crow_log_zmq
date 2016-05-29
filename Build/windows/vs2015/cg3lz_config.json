@@ -1,0 +1,1 @@
+{"log_path":"logs\/","logging":true,"max_file_size":104857600,"max_number_of_files":10,"port":18080,"zeromq_log_port":18090}

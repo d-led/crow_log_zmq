@@ -86,6 +86,10 @@ includedirs {
 	'deps/picojson_serializer',
 }
 
+defines {
+	'PICOJSON_USE_INT64'
+}
+
 --------------------------------------------------------------------
 make_static_lib('mstch', {
 	'deps/mstch/src/**.cpp',
@@ -103,6 +107,7 @@ make_console_app('cg3lz', {
 	'src/file_contents.cpp',
 	'src/resources.cpp',
 	'src/main_page.cpp',
+	'src/config_persistence.cpp',
 	'src/*.h'
 })
 use_standard('c++14')

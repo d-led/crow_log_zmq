@@ -14,10 +14,11 @@ class zeromq_log_source {
 
   std::unique_ptr<impl> pimpl;
  public:
-  zeromq_log_source(unsigned int zmq_port, default_log_t default_log, default_log_t sink);
+  zeromq_log_source(unsigned int zmq_port);
   ~zeromq_log_source();
 
  public:
+  void configure_logging(default_log_t default_log, default_log_t sink);
   void start_once();
   void stop();
 

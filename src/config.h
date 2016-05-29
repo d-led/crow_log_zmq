@@ -5,11 +5,11 @@
 
 struct config {
   bool logging = true;
-  unsigned int port = 18080;
-  unsigned int zeromq_log_port = 18090;
+  int port = 18080;
+  int zeromq_log_port = 18090;
   std::string log_path = "logs/";
-  size_t max_file_size = 1048576 * 100; // ~100mb
-  size_t max_number_of_files = 10;
+  int64_t max_file_size = 1048576 * 100; // ~100mb
+  int64_t max_number_of_files = 10;
 
   template<class Archive>
   void json(Archive & ar)

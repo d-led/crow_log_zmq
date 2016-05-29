@@ -15,12 +15,14 @@
 #include "main_page.h"
 #include "log_view.h"
 #include "spdlogger.h"
+//#include "config_persistence.h"
 
 #pragma comment(lib, "dbghelp.lib")
 
 class cg3lz {
-  crow::SimpleApp app;
   config cfg;
+  //config_persistence cfg_persistence;
+  crow::SimpleApp app;
   main_page index;
   DefaultLogger default_log;
   spdlogger sink;
@@ -31,22 +33,21 @@ class cg3lz {
  public:
   //////////////////////////////
   cg3lz(std::string const& name)
-      : default_log(cfg.logging),
+      : default_log(cfg.logging), // initialized first
         sink(name, cfg.log_path, cfg.max_file_size, cfg.max_number_of_files),
-        source(cfg.zeromq_log_port, [this](std::string const& m) {
-                                      default_log.log(m, crow::LogLevel::INFO);
-                                    },
-               [this](std::string const& m) { log(m); }),
+        source(cfg.zeromq_log_port),
         index(cfg.log_path),
         logs(cfg.log_path) {
     configure_routing();
-    configure_crow_logging();
+    configure_logging();
+    //cfg = cfg_persistence.load();
   }
 
   ~cg3lz() {
     try {
       source.stop();
       sink.shutdown();
+      //cfg_persistence.save(cfg);
     }
     catch (...) {
     }
@@ -63,9 +64,19 @@ class cg3lz {
   }
 
  private:
-  void configure_crow_logging() {
+  void configure_logging() {
     crow::logger::setLogLevel(crow::LogLevel::DEBUG);
     crow::logger::setHandler(&default_log);
+
+    auto console = [this](std::string const& m) {
+      default_log.log(m, crow::LogLevel::INFO);
+    };
+
+    auto files = [this](std::string const& m) { log(m); };
+
+    source.configure_logging(console, files);
+
+    //cfg_persistence.configure_logging(console);
   }
 
   void configure_routing() {

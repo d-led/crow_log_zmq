@@ -15,9 +15,8 @@ struct zeromq_log_source::impl {
   std::atomic<bool> started;
   std::thread loop;
 
-  impl(unsigned int zp, default_log_t sink)
+  impl(unsigned int zp)
       : zeromq_log_port(zp),
-        log_sink(sink),
         context(1),
         pull(context, ZMQ_PULL),
         started(false) {
@@ -30,19 +29,25 @@ struct zeromq_log_source::impl {
   }
 };
 
-zeromq_log_source::zeromq_log_source(unsigned int zp, default_log_t default_log,
-                                 default_log_t sink)
-    : log(default_log), pimpl(new impl(zp, sink)) {
+zeromq_log_source::zeromq_log_source(unsigned int zp)
+    : pimpl(new impl(zp)) {
 
   std::string port = std::to_string(pimpl->zeromq_log_port);
   std::string socket_config = "tcp://*:";
   socket_config += port;
   pimpl->pull.bind(socket_config.c_str());
 
-  log(std::string("Listening to 0mq incoming logs on: ") + socket_config);
+  if (log)
+    log(std::string("Listening to 0mq incoming logs on: ") + socket_config);
 }
 
 zeromq_log_source::~zeromq_log_source() { this->stop(); }
+
+void zeromq_log_source::configure_logging(default_log_t default_log, default_log_t sink) {
+  this->log = default_log;
+  this->sink = sink;
+  pimpl->log_sink = sink;
+}
 
 void zeromq_log_source::start_once() {
   if (pimpl->started) return;
@@ -55,7 +60,8 @@ void zeromq_log_source::start_once() {
                     continue;
                   std::string log_line(static_cast<char*>(request.data()),
                                        request.size());
-                  pimpl->log_sink(log_line);
+                  if (pimpl->log_sink)
+                    pimpl->log_sink(log_line);
                 }
               }));
 }
