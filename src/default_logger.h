@@ -12,7 +12,9 @@ class DefaultLogger : public crow::ILogHandler {
   std::shared_ptr<spd::logger> console;
 
  public:
-  DefaultLogger(bool& l) : logging(l),console(spd::stdout_logger_mt("cg3lz_crow", true)) {}
+  DefaultLogger(bool& l) : logging(l),console(spd::stdout_logger_mt("cg3lz_crow", true)) {
+    console->set_level(spd::level::debug);
+  }
 
   inline void log(std::string message, crow::LogLevel level) override {
     if (!logging)
