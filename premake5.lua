@@ -79,9 +79,6 @@ boost:set_libdirs()
 includedirs {
 	'deps/crow/include',
 	'deps/crow/amalgamate',
-	'deps/g3log_config',
-	'deps/g3log/src',
-	'deps/g3sinks/logrotate/src',
 	'deps/mstch/include',
 	'deps/mstch/src',
 	'deps/spdlog/include',
@@ -96,35 +93,8 @@ make_static_lib('mstch', {
 use_standard('c++11')
 
 --------------------------------------------------------------------
-make_static_lib('g3log', {
-	'deps/g3log/src/**.cpp',
-	'deps/g3log/src/**.hpp'
-})
-
-configuration 'windows'
-	excludes {
-		'deps/g3log/src/crashhandler_unix.cpp'
-	}
-configuration 'not windows'
-	excludes {
-		'deps/g3log/src/*_windows.cpp',
-	}
-
-use_standard('c++14')
-
---------------------------------------------------------------------
-if os.get() ~= 'windows' then
-	make_static_lib('g3sinks', {
-		'deps/g3sinks/logrotate/src/**.cpp',
-	})
-
-	use_standard('c++14')
-end
-
---------------------------------------------------------------------
 make_console_app('cg3lz', {
 	'src/main.cpp',
-    'src/g3logger.cpp',
 	'src/spdlogger.cpp',
 	'src/zeromq_log_source.cpp',
 	'src/log_view.cpp',
@@ -135,11 +105,7 @@ make_console_app('cg3lz', {
 })
 use_standard('c++14')
 
-links { 'g3log', 'mstch' }
-
-configuration 'not windows'
-	links { 'g3sinks' }
-configuration '*'
+links { 'mstch' }
 
 link_zeromq()
 deploy_libzmq()

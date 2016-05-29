@@ -16,14 +16,14 @@ ifeq ($(config),debug_x32)
   TARGET = $(TARGETDIR)/cg3lz
   OBJDIR = ../../../obj/linux/gmake/x32/Debug/cg3lz
   DEFINES += -D_DEBUG
-  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
+  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -g -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -Wl,--start-group ../../../bin/linux/gmake/x32/Debug/libg3log.a ../../../bin/linux/gmake/x32/Debug/libmstch.a ../../../bin/linux/gmake/x32/Debug/libg3sinks.a -Wl,--end-group -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
-  LDDEPS += ../../../bin/linux/gmake/x32/Debug/libg3log.a ../../../bin/linux/gmake/x32/Debug/libmstch.a ../../../bin/linux/gmake/x32/Debug/libg3sinks.a
+  LIBS += ../../../bin/linux/gmake/x32/Debug/libmstch.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
+  LDDEPS += ../../../bin/linux/gmake/x32/Debug/libmstch.a
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib32 -m32
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -43,14 +43,14 @@ ifeq ($(config),debug_x64)
   TARGET = $(TARGETDIR)/cg3lz
   OBJDIR = ../../../obj/linux/gmake/x64/Debug/cg3lz
   DEFINES += -D_DEBUG
-  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
+  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -Wl,--start-group ../../../bin/linux/gmake/x64/Debug/libg3log.a ../../../bin/linux/gmake/x64/Debug/libmstch.a ../../../bin/linux/gmake/x64/Debug/libg3sinks.a -Wl,--end-group -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
-  LDDEPS += ../../../bin/linux/gmake/x64/Debug/libg3log.a ../../../bin/linux/gmake/x64/Debug/libmstch.a ../../../bin/linux/gmake/x64/Debug/libg3sinks.a
+  LIBS += ../../../bin/linux/gmake/x64/Debug/libmstch.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
+  LDDEPS += ../../../bin/linux/gmake/x64/Debug/libmstch.a
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -70,14 +70,14 @@ ifeq ($(config),release_x32)
   TARGET = $(TARGETDIR)/cg3lz
   OBJDIR = ../../../obj/linux/gmake/x32/Release/cg3lz
   DEFINES +=
-  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
+  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -O2 -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -Wl,--start-group ../../../bin/linux/gmake/x32/Release/libg3log.a ../../../bin/linux/gmake/x32/Release/libmstch.a ../../../bin/linux/gmake/x32/Release/libg3sinks.a -Wl,--end-group -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
-  LDDEPS += ../../../bin/linux/gmake/x32/Release/libg3log.a ../../../bin/linux/gmake/x32/Release/libmstch.a ../../../bin/linux/gmake/x32/Release/libg3sinks.a
+  LIBS += ../../../bin/linux/gmake/x32/Release/libmstch.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
+  LDDEPS += ../../../bin/linux/gmake/x32/Release/libmstch.a
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib32 -m32 -s
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -97,14 +97,14 @@ ifeq ($(config),release_x64)
   TARGET = $(TARGETDIR)/cg3lz
   OBJDIR = ../../../obj/linux/gmake/x64/Release/cg3lz
   DEFINES +=
-  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
+  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++14
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS += -Wl,--start-group ../../../bin/linux/gmake/x64/Release/libg3log.a ../../../bin/linux/gmake/x64/Release/libmstch.a ../../../bin/linux/gmake/x64/Release/libg3sinks.a -Wl,--end-group -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
-  LDDEPS += ../../../bin/linux/gmake/x64/Release/libg3log.a ../../../bin/linux/gmake/x64/Release/libmstch.a ../../../bin/linux/gmake/x64/Release/libg3sinks.a
+  LIBS += ../../../bin/linux/gmake/x64/Release/libmstch.a -lzmq -lboost_system -lboost_date_time -lboost_regex -lboost_filesystem -lpthread -lz
+  LDDEPS += ../../../bin/linux/gmake/x64/Release/libmstch.a
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -120,7 +120,6 @@ endif
 
 OBJECTS := \
 	$(OBJDIR)/file_contents.o \
-	$(OBJDIR)/g3logger.o \
 	$(OBJDIR)/log_view.o \
 	$(OBJDIR)/main.o \
 	$(OBJDIR)/main_page.o \
@@ -185,9 +184,6 @@ $(GCH): $(PCH)
 endif
 
 $(OBJDIR)/file_contents.o: ../../../src/file_contents.cpp
-	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/g3logger.o: ../../../src/g3logger.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/log_view.o: ../../../src/log_view.cpp
