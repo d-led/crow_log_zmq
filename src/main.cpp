@@ -137,11 +137,18 @@ class cg3lz {
         response.code = 404;
         return response;
       } else {
-        auto response = crow::response(file.contents());
-        response.set_header(
+        try {
+          auto response = crow::response(file.contents());
+          response.set_header(
             "Content-Type",
             "application/octet-stream");  // or set to whatever you need
-        return response;
+          return response;
+        }
+        catch (std::bad_alloc&) {
+          auto response = crow::response(std::string("Sorry, not enough memory to download ") + filename);
+          response.code = 500;
+          return response;
+        }
       }
     });
   }
