@@ -19,3 +19,9 @@
 [submodule "deps/spdlog"]
 	path = deps/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "deps/picojson_serializer"]
+	path = deps/picojson_serializer
+	url = https://github.com/d-led/picojson_serializer.git
+[submodule "deps/picojson"]
+	path = deps/picojson
+	url = https://github.com/kazuho/picojson.git

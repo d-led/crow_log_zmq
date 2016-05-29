@@ -82,6 +82,8 @@ includedirs {
 	'deps/mstch/include',
 	'deps/mstch/src',
 	'deps/spdlog/include',
+	'deps/picojson',
+	'deps/picojson_serializer',
 }
 
 --------------------------------------------------------------------
