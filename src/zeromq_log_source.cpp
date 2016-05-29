@@ -20,7 +20,9 @@ struct zeromq_log_source::impl {
         log_sink(sink),
         context(1),
         pull(context, ZMQ_PULL),
-        started(false) {}
+        started(false) {
+    pull.setsockopt(ZMQ_RCVTIMEO, 2000);
+  }
 
   ~impl() {
       if (loop.joinable())
@@ -49,7 +51,8 @@ void zeromq_log_source::start_once() {
                 pimpl->started = true;
                 while (pimpl->started) {
                   zmq::message_t request;
-                  pimpl->pull.recv(&request);
+                  if (!pimpl->pull.recv(&request))
+                    continue;
                   std::string log_line(static_cast<char*>(request.data()),
                                        request.size());
                   pimpl->log_sink(log_line);

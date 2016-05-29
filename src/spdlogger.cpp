@@ -26,8 +26,10 @@ struct spdlogger::impl {
   }
 
   void shutdown() {
-    log->flush();
-    spd::drop("rotating_log");
+    if (log) {
+      log->flush();
+      spd::drop("rotating_log");
+    }
     log.reset();
   }
 };
