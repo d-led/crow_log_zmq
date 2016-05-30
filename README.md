@@ -13,9 +13,7 @@ Used in the project
 - [markdeep](https://casual-effects.com/markdeep/) as the markdown-based front-end
 - [mstch](https://github.com/no1msd/mstch/) for rendering [{{ mustache }}](https://mustache.github.io/)-based templates
 
-This project is a hommage to the aforementioned libraries. Its own feature set is arbitrary and will grow at will, but it builds upon the tiny giants mentioned above.
-
-If the speed of the incoming log messages is larger than that of the log sink, the used memory will grow until the process crashes. When all messages are committed, the memory footprint will decrease again.
+This project is a hommage to the aforementioned libraries. Its own feature set is arbitrary and will grow at will, but it builds upon the tiny giants mentioned above. It has been created in bursts of creative output at the cost of family time. As there are no stakeholders, there is neither specification, nor test thereof (yet).
 
 <!-- [![Build Status](https://travis-ci.org/d-led/crow_example.svg)](https://travis-ci.org/d-led/crow_example) -->
 
