@@ -12,6 +12,6 @@ class config_persistence {
 
 public:
   void configure_logging(log_t l);
-  config load();
-  void save(config &);
+  config load() const;
+  void save(config) const;
 };

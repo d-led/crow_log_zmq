@@ -186,6 +186,8 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\src\config.h" />
     <ClInclude Include="..\..\..\src\config_persistence.h" />
+    <ClInclude Include="..\..\..\src\config_serialization.h" />
+    <ClInclude Include="..\..\..\src\config_validation.h" />
     <ClInclude Include="..\..\..\src\default_logger.h" />
     <ClInclude Include="..\..\..\src\file_contents.h" />
     <ClInclude Include="..\..\..\src\log_view.h" />
