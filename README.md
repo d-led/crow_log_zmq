@@ -1,6 +1,6 @@
 # crow + spdlog + 0mq + markdeep + mstch == a simple log server #
 
-[![Build Status](https://travis-ci.org/d-led/crow_g3log_zmq.svg?branch=master)](https://travis-ci.org/d-led/crow_g3log_zmq)
+[![Build Status](https://api.travis-ci.org/d-led/crow_log_zmq.svg?branch=master)](https://travis-ci.org/d-led/crow_log_zmq)
 
 > no warranties / use at your own risk
 
