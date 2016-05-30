@@ -20,7 +20,7 @@ struct file_info {
       if (is_regular_file(it->path())) {
         file_entry e;
         e.filename = it->path().filename().string();
-        e.size = file_size(it->path());
+        e.size = static_cast<size_t>(file_size(it->path()));
         res.emplace_back(e);
       }
     }
