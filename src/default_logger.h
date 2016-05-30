@@ -10,7 +10,7 @@ namespace spd = spdlog;
 class DefaultLogger : public crow::ILogHandler {
   bool& logging;
   std::shared_ptr<spd::logger> console;
-#if defined(WINVER) && WINVER < _WIN32_WINNT_WIN10
+#if defined(WINVER) && WINVER <  0x0A00//_WIN32_WINNT_WIN10
   static const bool DO_COLOR = false;
 #else
   static const bool DO_COLOR = true;
