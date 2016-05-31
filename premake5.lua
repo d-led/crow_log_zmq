@@ -45,15 +45,7 @@ use_standard('c++11')
 
 --------------------------------------------------------------------
 make_console_app('cg3lz', {
-	'src/main.cpp',
-	'src/spdlogger.cpp',
-	'src/zeromq_log_source.cpp',
-	'src/log_view.cpp',
-	'src/file_contents.cpp',
-	'src/resources.cpp',
-	'src/main_page.cpp',
-	'src/config_persistence.cpp',
-	'src/*.h'
+	'src/cg3lz/**.*'
 })
 use_standard('c++14')
 
@@ -74,7 +66,7 @@ configuration 'not windows'
 configuration '*'
 
 --------------------------------------------------------------------
-make_console_app('log_some', { 'src/log_some.cpp' })
+make_console_app('log_some', { 'src/log_some/**.*' })
 use_standard('c++14')
 
 zeromq.link()

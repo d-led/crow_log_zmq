@@ -8,7 +8,7 @@
 #include <thread>
 #include <cstdint>
 
-#include "config.h"
+#include "../common/config.h"
 #include "default_logger.h"
 #include "zeromq_log_source.h"
 #include "file_contents.h"

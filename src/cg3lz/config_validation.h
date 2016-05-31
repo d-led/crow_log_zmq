@@ -1,6 +1,6 @@
 #pragma once
 
-#include "config.h"
+#include "../common/config.h"
 
 #include <unordered_map>
 #include <string>

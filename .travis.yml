@@ -24,5 +24,5 @@ before_script:
 
 script:
   - make -C Build/linux/gmake config=release_x64
-  - ruby src/demo.rb
+  - ruby src/scripts/demo.rb
   - cat logs/*.*

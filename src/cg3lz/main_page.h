@@ -1,7 +1,7 @@
 #pragma once
 
 #include "log_view.h"
-#include "config.h"
+#include "../common/config.h"
 
 #include <string>
 

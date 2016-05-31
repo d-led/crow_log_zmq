@@ -184,28 +184,28 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
-$(OBJDIR)/config_persistence.o: ../../../src/config_persistence.cpp
+$(OBJDIR)/config_persistence.o: ../../../src/cg3lz/config_persistence.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/file_contents.o: ../../../src/file_contents.cpp
+$(OBJDIR)/file_contents.o: ../../../src/cg3lz/file_contents.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/log_view.o: ../../../src/log_view.cpp
+$(OBJDIR)/log_view.o: ../../../src/cg3lz/log_view.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/main.o: ../../../src/main.cpp
+$(OBJDIR)/main.o: ../../../src/cg3lz/main.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/main_page.o: ../../../src/main_page.cpp
+$(OBJDIR)/main_page.o: ../../../src/cg3lz/main_page.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/resources.o: ../../../src/resources.cpp
+$(OBJDIR)/resources.o: ../../../src/cg3lz/resources.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/spdlogger.o: ../../../src/spdlogger.cpp
+$(OBJDIR)/spdlogger.o: ../../../src/cg3lz/spdlogger.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/zeromq_log_source.o: ../../../src/zeromq_log_source.cpp
+$(OBJDIR)/zeromq_log_source.o: ../../../src/cg3lz/zeromq_log_source.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
