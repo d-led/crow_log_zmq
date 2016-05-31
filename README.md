@@ -2,7 +2,7 @@
 
 [![Build Status](https://api.travis-ci.org/d-led/crow_log_zmq.svg?branch=master)](https://travis-ci.org/d-led/crow_log_zmq)
 
-> no warranties / use at your own risk
+> no warranties / use at your own risk / no security features
 
 Used in the project
 
