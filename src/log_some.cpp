@@ -24,10 +24,13 @@ int main (int argc, char* argv[]) {
     std::cout << "connecting to " << connection_string << std::endl;
     push.connect(connection_string.c_str());
 
+    const std::string prefix(1024,'X');
+
     while (true) {
         auto t1 = Clock::now();
 
         for (auto i=0; i<count; i++) {
+          //std::string msg(prefix + std::to_string(total));
           std::string msg(std::to_string(total));
           zmq::message_t hi(msg.length());
           memcpy(hi.data(), msg.data(), msg.length());

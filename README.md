@@ -58,7 +58,7 @@ Open [http://localhost:18080](http://localhost:18080) in the browser. Download t
 
 Example view:
 
-![](index.png)
+![](img/index.png)
 
 ## Source ##
 
@@ -118,12 +118,25 @@ See the premake build config and premake documentation
 
 ## Commentary ##
 
-Burst logging:
+Burst logging of a small string (counter):
 
-![](spdlog.png)
+![](img/spdlog.png)
 
 The implementation of the download is naive at the moment, and might potentially interfere with the log rotation mechanism, but the memory is cleaned up properly.
 
 Download ~500mb during burst logging:
 
-![](download.png)
+![](img/download.png)
+
+Burst logging of a 1kb message from one client via localhost:
+
+Stable rate ~175k messages/s:
+
+```
+[2016-05-31 11:22:38.359] [cg3lz_crow] [info] Received 21200000 entries
+[2016-05-31 11:22:38.930] [cg3lz_crow] [info] Received 21300000 entries
+```
+
+![](img/1kb_msg_client.png)
+
+![](img/1kb_msg_server.png)
