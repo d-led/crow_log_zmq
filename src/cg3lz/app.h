@@ -1,5 +1,7 @@
 #pragma once
 
+#include <crow.h>
+
 #include "../common/config.h"
 #include "default_logger.h"
 #include "config_persistence.h"
@@ -15,6 +17,7 @@ class simple_log_server {
     DefaultLogger default_log;
     std::unique_ptr<spdlogger> sink;
     std::unique_ptr<zeromq_log_source> source;
+    crow::SimpleApp app;
 
 public:
     simple_log_server();
@@ -27,4 +30,8 @@ private:
     void save_config();
     void configure_sink();
     void configure_source();
+    void configure_app();
+    void check_configuration();
+private:
+    void configure_app_logging();
 };

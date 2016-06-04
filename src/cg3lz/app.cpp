@@ -4,12 +4,15 @@
 #include "spdlogger.h"
 #include "zeromq_log_source.h"
 
+#include <stdexcept>
+
 simple_log_server::simple_log_server():
 default_log(cfg.logging)
 {
     load_config();
     configure_sink();
     configure_source();
+    configure_app();
 }
 
 simple_log_server::~simple_log_server() {
@@ -19,7 +22,7 @@ simple_log_server::~simple_log_server() {
 }
 
 void simple_log_server::run() {
-
+    app.run();
 }
 
 void simple_log_server::shutdown() {
@@ -55,4 +58,21 @@ void simple_log_server::configure_source() {
     source = std::unique_ptr<zeromq_log_source>(
         new zeromq_log_source(cfg.zeromq_log_port)
     );
+}
+
+void simple_log_server::configure_app() {
+    configure_app_logging();
+    CROW_ROUTE(app, "/")([] {
+        return "bla";
+    });
+}
+
+void simple_log_server::check_configuration() {
+    if (!source || !sink)
+        throw std::runtime_error("App not configured correctly!");
+}
+
+void simple_log_server::configure_app_logging() {
+    crow::logger::setLogLevel(crow::LogLevel::DEBUG);
+    crow::logger::setHandler(&default_log);
 }
