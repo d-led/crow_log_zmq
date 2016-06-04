@@ -31,7 +31,7 @@ int main (int argc, char* argv[]) {
 
         for (auto i=0; i<count; i++) {
           //std::string msg(prefix + std::to_string(total));
-          std::string msg(std::to_string(total));
+          std::string msg(std::to_string(total+i));
           zmq::message_t hi(msg.length());
           memcpy(hi.data(), msg.data(), msg.length());
           push.send(hi);
