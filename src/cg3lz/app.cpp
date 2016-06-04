@@ -9,7 +9,8 @@
 #include <stdexcept>
 
 simple_log_server::simple_log_server():
-default_log(cfg.logging)
+default_log(cfg.logging),
+count(0)
 {
     load_config();
     configure_sink();

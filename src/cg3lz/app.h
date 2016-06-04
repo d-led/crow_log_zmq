@@ -28,7 +28,7 @@ class simple_log_server {
     std::unique_ptr<main_page> index;
     std::unique_ptr<log_view> logs;
 
-    std::atomic<std::uint64_t> count = 0;
+    std::atomic<std::uint64_t> count;
 
 public:
     simple_log_server();
