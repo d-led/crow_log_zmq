@@ -65,7 +65,7 @@ Example view:
 - [cg3lz (server)](src/cg3lz/main.cpp)
 - [log_some](src/log_some/log_some.py)
 - [build config](premake5.lua)
-- [demo](src/demo.rb)
+- [demo](src/scripts/demo.rb)
 
 ## Building and starting ##
 
