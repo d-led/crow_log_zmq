@@ -44,6 +44,7 @@ void simple_log_server::shutdown() {
         source->stop();
     if (sink)
         sink->shutdown();
+    default_log.shutdown();
 }
 
 void simple_log_server::tick()
