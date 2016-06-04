@@ -16,6 +16,7 @@
 #include "log_view.h"
 #include "spdlogger.h"
 #include "config_persistence.h"
+#include "app.h"
 
 #pragma comment(lib, "dbghelp.lib")
 
@@ -172,7 +173,8 @@ class cg3lz {
 
 int main(int argc, char* argv[]) {
   try {
-    cg3lz app(argv[0]);
+    // cg3lz app(argv[0]);
+    simple_log_server app;
     app.run();
   }
   catch (std::bad_alloc& e) {

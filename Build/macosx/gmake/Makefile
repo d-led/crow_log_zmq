@@ -12,34 +12,26 @@ endif
 
 ifeq ($(config),debug_x32)
   mstch_config = debug_x32
-  g3log_config = debug_x32
-  g3sinks_config = debug_x32
   cg3lz_config = debug_x32
   log_some_config = debug_x32
 endif
 ifeq ($(config),debug_x64)
   mstch_config = debug_x64
-  g3log_config = debug_x64
-  g3sinks_config = debug_x64
   cg3lz_config = debug_x64
   log_some_config = debug_x64
 endif
 ifeq ($(config),release_x32)
   mstch_config = release_x32
-  g3log_config = release_x32
-  g3sinks_config = release_x32
   cg3lz_config = release_x32
   log_some_config = release_x32
 endif
 ifeq ($(config),release_x64)
   mstch_config = release_x64
-  g3log_config = release_x64
-  g3sinks_config = release_x64
   cg3lz_config = release_x64
   log_some_config = release_x64
 endif
 
-PROJECTS := mstch g3log g3sinks cg3lz log_some
+PROJECTS := mstch cg3lz log_some
 
 .PHONY: all clean help $(PROJECTS) 
 
@@ -51,19 +43,7 @@ ifneq (,$(mstch_config))
 	@${MAKE} --no-print-directory -C . -f mstch.make config=$(mstch_config)
 endif
 
-g3log:
-ifneq (,$(g3log_config))
-	@echo "==== Building g3log ($(g3log_config)) ===="
-	@${MAKE} --no-print-directory -C . -f g3log.make config=$(g3log_config)
-endif
-
-g3sinks:
-ifneq (,$(g3sinks_config))
-	@echo "==== Building g3sinks ($(g3sinks_config)) ===="
-	@${MAKE} --no-print-directory -C . -f g3sinks.make config=$(g3sinks_config)
-endif
-
-cg3lz: g3log mstch g3sinks
+cg3lz: mstch
 ifneq (,$(cg3lz_config))
 	@echo "==== Building cg3lz ($(cg3lz_config)) ===="
 	@${MAKE} --no-print-directory -C . -f cg3lz.make config=$(cg3lz_config)
@@ -77,8 +57,6 @@ endif
 
 clean:
 	@${MAKE} --no-print-directory -C . -f mstch.make clean
-	@${MAKE} --no-print-directory -C . -f g3log.make clean
-	@${MAKE} --no-print-directory -C . -f g3sinks.make clean
 	@${MAKE} --no-print-directory -C . -f cg3lz.make clean
 	@${MAKE} --no-print-directory -C . -f log_some.make clean
 
@@ -95,8 +73,6 @@ help:
 	@echo "   all (default)"
 	@echo "   clean"
 	@echo "   mstch"
-	@echo "   g3log"
-	@echo "   g3sinks"
 	@echo "   cg3lz"
 	@echo "   log_some"
 	@echo ""

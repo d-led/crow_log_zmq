@@ -15,8 +15,8 @@ ifeq ($(config),debug_x32)
   TARGETDIR = ../../../bin/macosx/gmake/x32/Debug
   TARGET = $(TARGETDIR)/log_some
   OBJDIR = ../../../obj/macosx/gmake/x32/Debug/log_some
-  DEFINES += -D_DEBUG
-  INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
+  DEFINES += -DPICOJSON_USE_INT64 -D_DEBUG
+  INCLUDES += -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include -I../../../deps/picojson -I../../../deps/picojson_serializer
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -g -std=c++14
@@ -42,8 +42,8 @@ ifeq ($(config),debug_x64)
   TARGETDIR = ../../../bin/macosx/gmake/x64/Debug
   TARGET = $(TARGETDIR)/log_some
   OBJDIR = ../../../obj/macosx/gmake/x64/Debug/log_some
-  DEFINES += -D_DEBUG
-  INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
+  DEFINES += -DPICOJSON_USE_INT64 -D_DEBUG
+  INCLUDES += -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include -I../../../deps/picojson -I../../../deps/picojson_serializer
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++14
@@ -69,8 +69,8 @@ ifeq ($(config),release_x32)
   TARGETDIR = ../../../bin/macosx/gmake/x32/Release
   TARGET = $(TARGETDIR)/log_some
   OBJDIR = ../../../obj/macosx/gmake/x32/Release/log_some
-  DEFINES +=
-  INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
+  DEFINES += -DPICOJSON_USE_INT64
+  INCLUDES += -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include -I../../../deps/picojson -I../../../deps/picojson_serializer
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -O2 -std=c++14
@@ -96,8 +96,8 @@ ifeq ($(config),release_x64)
   TARGETDIR = ../../../bin/macosx/gmake/x64/Release
   TARGET = $(TARGETDIR)/log_some
   OBJDIR = ../../../obj/macosx/gmake/x64/Release/log_some
-  DEFINES +=
-  INCLUDES += -I../../../deps/cppzmq -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/g3log_config -I../../../deps/g3log/src -I../../../deps/g3sinks/logrotate/src -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include
+  DEFINES += -DPICOJSON_USE_INT64
+  INCLUDES += -I/usr/local/Cellar/zeromq/4.1.4/include -I/usr/local/include -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include -I../../../deps/picojson -I../../../deps/picojson_serializer
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++14
@@ -177,7 +177,7 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
-$(OBJDIR)/log_some.o: ../../../src/log_some.cpp
+$(OBJDIR)/log_some.o: ../../../src/log_some/log_some.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
