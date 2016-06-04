@@ -23,6 +23,7 @@
     <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>mstch</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -93,7 +94,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;PICOJSON_USE_INT64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;WIN32;PICOJSON_USE_INT64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -107,7 +108,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;PICOJSON_USE_INT64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;WIN32;PICOJSON_USE_INT64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Program Files\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -121,7 +122,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;PICOJSON_USE_INT64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;WIN32;PICOJSON_USE_INT64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -140,7 +141,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;PICOJSON_USE_INT64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;WIN32;PICOJSON_USE_INT64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Program Files\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
