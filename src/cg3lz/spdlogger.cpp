@@ -15,7 +15,7 @@ struct spdlogger::impl {
         spd::set_async_mode(q_size, spdlog::async_overflow_policy::block_retry,
                        nullptr,
                        std::chrono::seconds(flush_period_seconds));
-        log = spd::rotating_logger_mt("rotating_log", path + "/log",
+        log = spd::rotating_logger_mt("rotating_log", path + "/" + name,
           max_file_size, max_number_of_files);
       }
 
