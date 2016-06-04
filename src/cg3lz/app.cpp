@@ -2,19 +2,19 @@
 
 #include "app.h"
 #include "spdlogger.h"
+#include "zeromq_log_source.h"
 
 simple_log_server::simple_log_server():
 default_log(cfg.logging)
 {
     load_config();
     configure_sink();
+    configure_source();
 }
 
 simple_log_server::~simple_log_server() {
     try {
         shutdown();
-        if (sink)
-            sink->shutdown();
     } catch (...) {}
 }
 
@@ -24,6 +24,10 @@ void simple_log_server::run() {
 
 void simple_log_server::shutdown() {
     save_config();
+    if (source)
+        source->stop();
+    if (sink)
+        sink->shutdown();
 }
 
 void simple_log_server::load_config() {
@@ -45,4 +49,10 @@ void simple_log_server::configure_sink() {
         static_cast<size_t>(cfg.max_number_of_files),
         cfg.flush_period_seconds
     ));
+}
+
+void simple_log_server::configure_source() {
+    source = std::unique_ptr<zeromq_log_source>(
+        new zeromq_log_source(cfg.zeromq_log_port)
+    );
 }
