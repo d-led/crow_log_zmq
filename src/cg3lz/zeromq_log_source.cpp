@@ -10,14 +10,14 @@
 struct zeromq_log_source::impl {
   unsigned int zeromq_log_port;
   default_log_t log_sink;
-  zmq::context_t context;
+  zmq::context_t& context;
   zmq::socket_t pull;
   std::atomic<bool> started;
   std::thread loop;
 
-  impl(unsigned int zp)
+  impl(zmq::context_t& ctx, unsigned int zp)
       : zeromq_log_port(zp),
-        context(1),
+        context(ctx),
         pull(context, ZMQ_PULL),
         started(false) {
     pull.setsockopt(ZMQ_RCVTIMEO, 2000);
@@ -29,8 +29,8 @@ struct zeromq_log_source::impl {
   }
 };
 
-zeromq_log_source::zeromq_log_source(unsigned int zp)
-    : pimpl(new impl(zp)) {
+zeromq_log_source::zeromq_log_source(zmq::context_t& context, unsigned int zp)
+    : pimpl(new impl(context,zp)) {
 
   std::string port = std::to_string(pimpl->zeromq_log_port);
   std::string socket_config = "tcp://*:";

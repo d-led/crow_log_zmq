@@ -1,10 +1,12 @@
-#include <stdexcept>
-
 #include "app.h"
+
+#include <stdexcept>
+#include <zmq.hpp>
 
 int main(int argc, char* argv[]) {
   try {
-    simple_log_server app;
+    zmq::context_t ctx(1);
+    simple_log_server app(ctx);
     app.run();
   }
   catch (std::bad_alloc& e) {

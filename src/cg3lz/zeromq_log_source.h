@@ -6,6 +6,8 @@
 #include <memory>
 #include <functional>
 
+namespace zmq { class context_t; }
+
 class zeromq_log_source {
   typedef std::function<void(std::string const&)> default_log_t;
   default_log_t log;
@@ -14,7 +16,7 @@ class zeromq_log_source {
 
   std::unique_ptr<impl> pimpl;
  public:
-  zeromq_log_source(unsigned int zmq_port);
+  zeromq_log_source(zmq::context_t& context, unsigned int zmq_port);
   ~zeromq_log_source();
 
  public:

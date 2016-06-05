@@ -17,7 +17,10 @@
 class spdlogger;
 class zeromq_log_source;
 
+namespace zmq { class context_t; }
+
 class simple_log_server {
+    zmq::context_t& ctx;
     config cfg;
     config_persistence cfg_persistence;
     DefaultLogger default_log;
@@ -31,7 +34,7 @@ class simple_log_server {
     std::atomic<std::uint64_t> count;
 
 public:
-    simple_log_server();
+    simple_log_server(zmq::context_t& ctx);
     ~simple_log_server();
 public:
     void log(std::string const& m);

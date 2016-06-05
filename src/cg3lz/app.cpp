@@ -8,7 +8,8 @@
 
 #include <stdexcept>
 
-simple_log_server::simple_log_server():
+simple_log_server::simple_log_server(zmq::context_t& context):
+ctx(context),
 default_log(cfg.logging),
 count(0)
 {
@@ -79,7 +80,7 @@ void simple_log_server::configure_sink() {
 
 void simple_log_server::configure_source() {
     source = std::unique_ptr<zeromq_log_source>(
-        new zeromq_log_source(cfg.zeromq_log_port)
+        new zeromq_log_source(ctx, cfg.zeromq_log_port)
     );
 }
 
