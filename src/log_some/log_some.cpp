@@ -10,7 +10,7 @@ typedef std::chrono::high_resolution_clock Clock;
 
 int main (int argc, char* argv[]) {
     zmq::context_t context(1);
-    zmq::socket_t push(context, ZMQ_PUSH);
+    zmq::socket_t push(context, ZMQ_DEALER);
     auto count = 100000;
     unsigned long long total = 0;
     config cfg;

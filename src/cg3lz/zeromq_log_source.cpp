@@ -6,6 +6,7 @@
 
 // zeromq
 #include <zmq.hpp>
+#include <zmq_addon.hpp>
 
 struct zeromq_log_source::impl {
   unsigned int zeromq_log_port;
@@ -18,7 +19,7 @@ struct zeromq_log_source::impl {
   impl(zmq::context_t& ctx, unsigned int zp)
       : zeromq_log_port(zp),
         context(ctx),
-        pull(context, ZMQ_PULL),
+        pull(context, ZMQ_ROUTER),
         started(false) {
     pull.setsockopt(ZMQ_RCVTIMEO, 2000);
   }
@@ -55,13 +56,12 @@ void zeromq_log_source::start_once() {
   pimpl->loop = std::move(std::thread([this] {
                 pimpl->started = true;
                 while (pimpl->started) {
-                  zmq::message_t request;
-                  if (!pimpl->pull.recv(&request))
+                  zmq::multipart_t request(pimpl->pull);
+                  if (!request.peek(0))
                     continue;
-                  std::string log_line(static_cast<char*>(request.data()),
-                                       request.size());
+                  request.pop();
                   if (pimpl->log_sink)
-                    pimpl->log_sink(log_line);
+                    pimpl->log_sink(request.popstr());
                 }
               }));
 }
