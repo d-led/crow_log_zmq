@@ -64,6 +64,33 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 
 endif
 
+ifeq ($(config),debug_arm)
+  RESCOMP = windres
+  TARGETDIR = ../../../bin/linux/gmake/arm/Debug
+  TARGET = $(TARGETDIR)/libmstch.a
+  OBJDIR = ../../../obj/linux/gmake/arm/Debug/mstch
+  DEFINES += -DPICOJSON_USE_INT64 -D_DEBUG
+  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include -I../../../deps/picojson -I../../../deps/picojson_serializer
+  FORCE_INCLUDE +=
+  ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -g -std=c++11
+  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
+  ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
+  LIBS +=
+  LDDEPS +=
+  ALL_LDFLAGS += $(LDFLAGS)
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
+  define PREBUILDCMDS
+  endef
+  define PRELINKCMDS
+  endef
+  define POSTBUILDCMDS
+  endef
+all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
+	@:
+
+endif
+
 ifeq ($(config),release_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/linux/gmake/x32/Release
@@ -106,6 +133,33 @@ ifeq ($(config),release_x64)
   LIBS +=
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
+  LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
+  define PREBUILDCMDS
+  endef
+  define PRELINKCMDS
+  endef
+  define POSTBUILDCMDS
+  endef
+all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
+	@:
+
+endif
+
+ifeq ($(config),release_arm)
+  RESCOMP = windres
+  TARGETDIR = ../../../bin/linux/gmake/arm/Release
+  TARGET = $(TARGETDIR)/libmstch.a
+  OBJDIR = ../../../obj/linux/gmake/arm/Release/mstch
+  DEFINES += -DPICOJSON_USE_INT64
+  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include -I../../../deps/picojson -I../../../deps/picojson_serializer
+  FORCE_INCLUDE +=
+  ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -std=c++11
+  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
+  ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
+  LIBS +=
+  LDDEPS +=
+  ALL_LDFLAGS += $(LDFLAGS) -s
   LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
   define PREBUILDCMDS
   endef

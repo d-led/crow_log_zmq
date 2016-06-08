@@ -20,6 +20,11 @@ ifeq ($(config),debug_x64)
   log_some_config = debug_x64
   mstch_config = debug_x64
 endif
+ifeq ($(config),debug_arm)
+  cg3lz_config = debug_arm
+  log_some_config = debug_arm
+  mstch_config = debug_arm
+endif
 ifeq ($(config),release_x32)
   cg3lz_config = release_x32
   log_some_config = release_x32
@@ -29,6 +34,11 @@ ifeq ($(config),release_x64)
   cg3lz_config = release_x64
   log_some_config = release_x64
   mstch_config = release_x64
+endif
+ifeq ($(config),release_arm)
+  cg3lz_config = release_arm
+  log_some_config = release_arm
+  mstch_config = release_arm
 endif
 
 PROJECTS := cg3lz log_some mstch
@@ -66,8 +76,10 @@ help:
 	@echo "CONFIGURATIONS:"
 	@echo "  debug_x32"
 	@echo "  debug_x64"
+	@echo "  debug_arm"
 	@echo "  release_x32"
 	@echo "  release_x64"
+	@echo "  release_arm"
 	@echo ""
 	@echo "TARGETS:"
 	@echo "   all (default)"

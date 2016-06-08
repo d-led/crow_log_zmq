@@ -64,6 +64,33 @@ all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
 
 endif
 
+ifeq ($(config),debug_arm)
+  RESCOMP = windres
+  TARGETDIR = ../../../bin/linux/gmake/arm/Debug
+  TARGET = $(TARGETDIR)/log_some
+  OBJDIR = ../../../obj/linux/gmake/arm/Debug/log_some
+  DEFINES += -DPICOJSON_USE_INT64 -D_DEBUG
+  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include -I../../../deps/picojson -I../../../deps/picojson_serializer
+  FORCE_INCLUDE +=
+  ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -g -std=c++14
+  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
+  ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
+  LIBS += -lzmq -lpthread
+  LDDEPS +=
+  ALL_LDFLAGS += $(LDFLAGS)
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  define PREBUILDCMDS
+  endef
+  define PRELINKCMDS
+  endef
+  define POSTBUILDCMDS
+  endef
+all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
+	@:
+
+endif
+
 ifeq ($(config),release_x32)
   RESCOMP = windres
   TARGETDIR = ../../../bin/linux/gmake/x32/Release
@@ -106,6 +133,33 @@ ifeq ($(config),release_x64)
   LIBS += -lzmq -lpthread
   LDDEPS +=
   ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
+  LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
+  define PREBUILDCMDS
+  endef
+  define PRELINKCMDS
+  endef
+  define POSTBUILDCMDS
+  endef
+all: $(TARGETDIR) $(OBJDIR) prebuild prelink $(TARGET)
+	@:
+
+endif
+
+ifeq ($(config),release_arm)
+  RESCOMP = windres
+  TARGETDIR = ../../../bin/linux/gmake/arm/Release
+  TARGET = $(TARGETDIR)/log_some
+  OBJDIR = ../../../obj/linux/gmake/arm/Release/log_some
+  DEFINES += -DPICOJSON_USE_INT64
+  INCLUDES += -I../../../deps/cppzmq -I../../../deps/crow/include -I../../../deps/crow/amalgamate -I../../../deps/mstch/include -I../../../deps/mstch/src -I../../../deps/spdlog/include -I../../../deps/picojson -I../../../deps/picojson_serializer
+  FORCE_INCLUDE +=
+  ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2 -std=c++14
+  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CFLAGS)
+  ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
+  LIBS += -lzmq -lpthread
+  LDDEPS +=
+  ALL_LDFLAGS += $(LDFLAGS) -s
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
