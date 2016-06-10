@@ -6,7 +6,7 @@ class websocket_sink : public spdlog::sinks::sink //base_sink < std::mutex >
 {
     void log(const spdlog::details::log_msg& msg) override
     {
-        // Your code here. 
+        // Your code here.
         // details::log_msg is a struct containing the log entry info like level, timestamp, thread id etc.
         // msg.formatted contains the formatted log.
         // msg.raw contains pre formatted log
@@ -15,7 +15,8 @@ class websocket_sink : public spdlog::sinks::sink //base_sink < std::mutex >
 };
 
 
-// https://github.com/zaphoyd/websocketpp/blob/master/examples/telemetry_server/telemetry_server.cpp
+// based on https://github.com/zaphoyd/websocketpp/blob/master/examples/telemetry_server/telemetry_server.cpp
+// original: Copyright (c) 2014, Peter Thorson. All rights reserved.
 #include <websocketpp/config/asio_no_tls.hpp>
 
 #include <websocketpp/server.hpp>
@@ -25,7 +26,6 @@ class websocket_sink : public spdlog::sinks::sink //base_sink < std::mutex >
 #include <set>
 #include <streambuf>
 #include <string>
-
 /**
 * The telemetry server accepts connections and sends a message every second to
 * each client containing an integer count. This example can be used as the

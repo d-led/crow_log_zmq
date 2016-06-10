@@ -12,7 +12,7 @@ Used in the project
 - [ØMQ](http://zero.mq/) is a set of communication protocols their implementations for the XXI century
 - [markdeep](https://casual-effects.com/markdeep/) as the markdown-based front-end
 - [mstch](https://github.com/no1msd/mstch/) for rendering [{{ mustache }}](https://mustache.github.io/)-based templates
-- [websocketpp](https://github.com/zaphoyd/websocketpp) for ticking the incoming logs into the browser, based on the [telemetry server example](https://github.com/zaphoyd/websocketpp/tree/master/examples/telemetry_server)
+- [websocketpp](https://github.com/zaphoyd/websocketpp) for ticking the incoming logs into the browser, based on the [telemetry server example](https://github.com/zaphoyd/websocketpp/tree/master/examples/telemetry_server). [(Credits)](https://github.com/zaphoyd/websocketpp/blob/master/COPYING)
 
 This project is a hommage to the aforementioned libraries. Its own feature set is arbitrary and will grow at will, but it builds upon the tiny giants mentioned above. It has been created in bursts of creative output at the cost of family time. As there are no stakeholders, there is neither specification, nor test thereof (yet).
 

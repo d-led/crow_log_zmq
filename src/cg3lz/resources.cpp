@@ -23,6 +23,7 @@ App logging enabled: {{app_logging_enabled}}
 
 std::string resources::ticker_html = R"(
 <!-- based on https://github.com/zaphoyd/websocketpp/tree/master/examples/telemetry_server -->
+<!-- original: Copyright (c) 2014, Peter Thorson. All rights reserved. -->
 <!doctype html>
 <html>
 <head>
