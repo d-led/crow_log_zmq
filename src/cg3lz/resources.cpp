@@ -9,6 +9,9 @@ Logs
 {{/logs}}
 
 
+[Ticker](/ticker)
+
+
 Config
 ======
 

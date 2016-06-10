@@ -3,6 +3,8 @@
 #include "app.h"
 #include "spdlogger.h"
 #include "zeromq_log_source.h"
+#include "resources.h"
+#include "websocket_tail.h"
 
 #include "file_contents.h"
 
@@ -30,12 +32,17 @@ simple_log_server::~simple_log_server() {
 
 void simple_log_server::log(std::string const& m) {
   sink->log(m);
+  forward_log(m);
   tick();
+}
+
+void simple_log_server::forward_log(std::string const& m) {
 }
 
 void simple_log_server::run() {
   check_configuration();
   source->start_once();
+  start_websocket_ticker();
   app.port(cfg.port).multithreaded().run();
 }
 
@@ -90,6 +97,7 @@ void simple_log_server::configure_app_routing() {
   add_crow_logging_toggle();
   add_kill_switch();
   add_naive_log_file_download();
+  add_websocket_ticker();
 }
 
 void simple_log_server::configure_source_logging() {
@@ -183,4 +191,12 @@ void simple_log_server::add_naive_log_file_download() {
       }
     }
   });
+}
+
+void simple_log_server::add_websocket_ticker() {
+    CROW_ROUTE(app,"/ticker")([this] {
+        auto response = crow::response(resources::ticker_html);
+        response.set_header("Content-Type", "text/html;charset=UTF-8");
+        return response;
+    });
 }

@@ -41,6 +41,7 @@ public:
     void run();
     void shutdown();
 private:
+    void forward_log(std::string const& m);
     void tick();
     void load_config();
     void save_config();
@@ -57,4 +58,5 @@ private:
     void add_crow_logging_toggle();
     void add_kill_switch();
     void add_naive_log_file_download();
+    void add_websocket_ticker();
 };

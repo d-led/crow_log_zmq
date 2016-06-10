@@ -279,6 +279,7 @@
     <ClInclude Include="..\..\..\src\cg3lz\main_page.h" />
     <ClInclude Include="..\..\..\src\cg3lz\resources.h" />
     <ClInclude Include="..\..\..\src\cg3lz\spdlogger.h" />
+    <ClInclude Include="..\..\..\src\cg3lz\websocket_tail.h" />
     <ClInclude Include="..\..\..\src\cg3lz\zeromq_log_source.h" />
   </ItemGroup>
   <ItemGroup>
@@ -290,6 +291,7 @@
     <ClCompile Include="..\..\..\src\cg3lz\main_page.cpp" />
     <ClCompile Include="..\..\..\src\cg3lz\resources.cpp" />
     <ClCompile Include="..\..\..\src\cg3lz\spdlogger.cpp" />
+    <ClCompile Include="..\..\..\src\cg3lz\websocket_tail.cpp" />
     <ClCompile Include="..\..\..\src\cg3lz\zeromq_log_source.cpp" />
   </ItemGroup>
   <ItemGroup>
