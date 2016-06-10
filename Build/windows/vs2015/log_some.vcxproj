@@ -146,7 +146,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;PICOJSON_USE_INT64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;C:\Users\D\.conan\data\websocketpp\0.7.0\TyRoXx\stable\package\5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;..\..\..\deps\websocketpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
     </ClCompile>
@@ -163,7 +163,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;PICOJSON_USE_INT64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;C:\Users\D\.conan\data\websocketpp\0.7.0\TyRoXx\stable\package\5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;..\..\..\deps\websocketpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
     </ClCompile>
@@ -180,7 +180,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;PICOJSON_USE_INT64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;C:\Users\D\.conan\data\websocketpp\0.7.0\TyRoXx\stable\package\5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;..\..\..\deps\websocketpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
     </ClCompile>
@@ -196,7 +196,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;PICOJSON_USE_INT64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;C:\Users\D\.conan\data\websocketpp\0.7.0\TyRoXx\stable\package\5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;..\..\..\deps\websocketpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -218,7 +218,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;PICOJSON_USE_INT64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;C:\Users\D\.conan\data\websocketpp\0.7.0\TyRoXx\stable\package\5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\ZeroMQ 4.0.4\include;D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;..\..\..\deps\websocketpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -240,7 +240,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>NOGDI;_WIN32_WINNT=0x0501;WIN32;PICOJSON_USE_INT64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;C:\Users\D\.conan\data\websocketpp\0.7.0\TyRoXx\stable\package\5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Software\boost\boost_1_61_0;..\..\..\deps\cppzmq;..\..\..\deps\crow\include;..\..\..\deps\crow\amalgamate;..\..\..\deps\mstch\include;..\..\..\deps\mstch\src;..\..\..\deps\spdlog\include;..\..\..\deps\picojson;..\..\..\deps\picojson_serializer;..\..\..\deps\websocketpp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>

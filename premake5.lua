@@ -19,8 +19,6 @@ boost:set_defines()
 boost:set_includedirs()
 boost:set_libdirs()
 
-assert(require 'conanpremake')
-
 includedirs {
 	'deps/cppzmq',
 	'deps/crow/include',
@@ -30,7 +28,7 @@ includedirs {
 	'deps/spdlog/include',
 	'deps/picojson',
 	'deps/picojson_serializer',
-	conan_includedirs,
+    'deps/websocketpp'
 }
 
 defines {
