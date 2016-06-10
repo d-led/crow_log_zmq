@@ -27,6 +27,7 @@ def start_latest(what,para)
     end
 
     # puts absolute_path_to_executable
+    puts "latest binary: #{absolute_path_to_executable}"
     start(absolute_path_to_executable,para)
 end
 
