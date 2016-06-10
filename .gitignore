@@ -233,3 +233,5 @@ logs/
 repro/
 *.opendb
 *config.json
+conanbuildinfo.txt
+conanpremake.lua

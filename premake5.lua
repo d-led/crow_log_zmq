@@ -9,7 +9,6 @@ configuration 'windows'
 	}
 configuration '*'
 
-
 -------------------------------
 
 zeromq = assert(require 'zeromq')
@@ -20,6 +19,8 @@ boost:set_defines()
 boost:set_includedirs()
 boost:set_libdirs()
 
+assert(require 'conanpremake')
+
 includedirs {
 	'deps/cppzmq',
 	'deps/crow/include',
@@ -29,11 +30,30 @@ includedirs {
 	'deps/spdlog/include',
 	'deps/picojson',
 	'deps/picojson_serializer',
+	conan_includedirs,
 }
 
 defines {
 	'PICOJSON_USE_INT64'
 }
+
+function default_links()
+	links { 'mstch' }
+
+	zeromq.link()
+	zeromq.deploy()
+
+	configuration 'not windows'
+		links {
+			'boost_system',
+			'boost_date_time',
+			'boost_regex',
+			'boost_filesystem',
+			'pthread',
+			'z'
+		}
+	configuration '*'
+end
 
 --------------------------------------------------------------------
 make_static_lib('mstch', {
@@ -48,22 +68,7 @@ make_console_app('cg3lz', {
 	'src/cg3lz/**.*'
 })
 use_standard('c++14')
-
-links { 'mstch' }
-
-zeromq.link()
-zeromq.deploy()
-
-configuration 'not windows'
-	links {
-		'boost_system',
-		'boost_date_time',
-		'boost_regex',
-		'boost_filesystem',
-		'pthread',
-		'z'
-	}
-configuration '*'
+default_links()
 
 --------------------------------------------------------------------
 make_console_app('log_some', { 'src/log_some/**.*' })

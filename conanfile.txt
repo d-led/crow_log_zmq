@@ -1,0 +1,6 @@
+[requires]
+websocketpp/0.7.0@TyRoXx/stable
+PremakeGen@0.1@memsharded/testing
+
+[generators]
+Premake
