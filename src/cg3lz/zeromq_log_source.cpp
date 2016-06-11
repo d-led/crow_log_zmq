@@ -67,8 +67,7 @@ void zeromq_log_source::start_once() {
                   auto msg = request.popstr();
                   if (pimpl->log_sink)
                     pimpl->log_sink(msg);
-                  zmq::multipart_t duplicate(msg.data(),msg.length());
-                  pimpl->tick.send(duplicate.pop(), ZMQ_DONTWAIT);
+                  pimpl->tick.send(msg.data(),msg.length(), ZMQ_DONTWAIT);
                 }
               }));
 }
