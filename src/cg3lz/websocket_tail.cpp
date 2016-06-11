@@ -1,35 +1,12 @@
 #include "websocket_tail.h"
-
-#include <spdlog/sinks/sink.h>
-
 #include <zmq_addon.hpp>
-
-
-class websocket_sink : public spdlog::sinks::sink //base_sink < std::mutex >
-{
-    void log(const spdlog::details::log_msg& msg) override
-    {
-        // Your code here.
-        // details::log_msg is a struct containing the log entry info like level, timestamp, thread id etc.
-        // msg.formatted contains the formatted log.
-        // msg.raw contains pre formatted log
-        //std::cout << msg.formatted.str();
-    }
-};
-
 
 // based on https://github.com/zaphoyd/websocketpp/blob/master/examples/broadcast_server/broadcast_server.cpp
 #include <websocketpp/config/asio_no_tls.hpp>
-
 #include <websocketpp/server.hpp>
-
+#include <websocketpp/common/thread.hpp>
 #include <iostream>
 #include <set>
-
-/*#include <boost/thread.hpp>
-#include <boost/thread/mutex.hpp>
-#include <boost/thread/condition_variable.hpp>*/
-#include <websocketpp/common/thread.hpp>
 
 typedef websocketpp::server<websocketpp::config::asio> server;
 
@@ -74,7 +51,6 @@ public:
         // Register handler callbacks
         m_server.set_open_handler(bind(&broadcast_server::on_open, this, ::_1));
         m_server.set_close_handler(bind(&broadcast_server::on_close, this, ::_1));
-        m_server.set_message_handler(bind(&broadcast_server::on_message, this, ::_1, ::_2));
     }
 
     void run(uint16_t port) {
@@ -112,16 +88,6 @@ public:
         m_action_cond.notify_one();
     }
 
-    void on_message(connection_hdl hdl, server::message_ptr msg) {
-        // queue message up for sending by processing thread
-        {
-            lock_guard<mutex> guard(m_action_lock);
-            //std::cout << "on_message" << std::endl;
-            m_actions.push(action(MESSAGE, hdl, msg));
-        }
-        m_action_cond.notify_one();
-    }
-
     void push(std::string const& msg) {
         unique_lock<mutex> lock(m_action_lock);
         con_list::iterator it;
@@ -151,14 +117,6 @@ public:
                 lock_guard<mutex> guard(m_connection_lock);
                 m_connections.erase(a.hdl);
             }
-            else if (a.type == MESSAGE) {
-                lock_guard<mutex> guard(m_connection_lock);
-
-                con_list::iterator it;
-                for (it = m_connections.begin(); it != m_connections.end(); ++it) {
-                    m_server.send(*it, a.msg);
-                }
-            }
             else {
                 // undefined.
             }
@@ -182,16 +140,24 @@ struct websocket_ticker::impl {
 
 websocket_ticker::websocket_ticker(zmq::context_t& c, int port):
     ctx(c),
-    pimpl(std::make_unique<impl>())
+    pimpl(std::make_unique<impl>()),
+    running(false)
 {
 }
 
 websocket_ticker::~websocket_ticker()
 {
+    try {
+        stop();
+    } catch (...) {}
 }
 
 void websocket_ticker::run()
 {
+    if (running)
+        return;
+
+    running = true;
     run_thread = std::thread([this] {
         broadcast_server s;
         ws_loop = std::thread(bind(&broadcast_server::process_messages, &s));
@@ -199,8 +165,9 @@ void websocket_ticker::run()
 
         pair_loop = std::thread([this, &s] {
             zmq::socket_t pair(ctx, ZMQ_PAIR);
+            pair.setsockopt(ZMQ_RCVTIMEO, 1000);
             pair.bind("inproc://tick");
-            while (true) {
+            while (running) {
                 zmq::multipart_t m(pair);
                 s.push(m.popstr());
             }
@@ -212,4 +179,17 @@ void websocket_ticker::run()
 
 void websocket_ticker::stop()
 {
+    if (!running)
+        return;
+
+    running = false;
+
+    //if (ws_loop.joinable())
+    //    ws_loop.join();
+
+    //if (pair_loop.joinable())
+    //    pair_loop.join();
+
+    //if (run_thread.joinable())
+    //    run_thread.join();
 }

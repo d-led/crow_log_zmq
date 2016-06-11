@@ -51,6 +51,8 @@ void simple_log_server::shutdown() {
     save_config();
     if (source)
         source->stop();
+    if (ticker)
+        ticker->stop();
     default_log.shutdown();
     if (sink)
         sink->shutdown();
