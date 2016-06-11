@@ -43,7 +43,7 @@ void simple_log_server::forward_log(std::string const& m) {
 void simple_log_server::run() {
   check_configuration();
   source->start_once();
-  start_websocket_ticker();
+  ticker->run();
   app.port(cfg.port).multithreaded().run();
 }
 

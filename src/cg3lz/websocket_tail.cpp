@@ -78,6 +78,7 @@ public:
     }
 
     void run(uint16_t port) {
+        m_server.clear_access_channels(websocketpp::log::alevel::all);
         // listen on specified port
         m_server.listen(port);
 
@@ -121,9 +122,9 @@ public:
         m_action_cond.notify_one();
     }
 
-    void push() {
+    void push(std::string const& msg) {
+        unique_lock<mutex> lock(m_action_lock);
         con_list::iterator it;
-        auto msg = std::string("hello");
         for (it = m_connections.begin(); it != m_connections.end(); ++it) {
             m_server.send(*it, msg.data(), msg.length(), websocketpp::frame::opcode::TEXT);
         }
@@ -145,7 +146,6 @@ public:
             if (a.type == SUBSCRIBE) {
                 lock_guard<mutex> guard(m_connection_lock);
                 m_connections.insert(a.hdl);
-                push();
             }
             else if (a.type == UNSUBSCRIBE) {
                 lock_guard<mutex> guard(m_connection_lock);
@@ -176,25 +176,40 @@ private:
     condition_variable m_action_cond;
 };
 
-void start_websocket_ticker() {
-    std::thread([] {
-        try {
-            broadcast_server s;
-            std::thread loop(bind(&broadcast_server::process_messages, &s));
+struct websocket_ticker::impl {
+    broadcast_server server;
+};
 
-            std::string docroot;
-            uint16_t port = 9002;
-
-            s.run(port);
-
-            loop.join();
-        }
-        catch (websocketpp::exception const & e) {
-            std::cout << e.what() << std::endl;
-        }
-    }).detach();
+websocket_ticker::websocket_ticker(zmq::context_t& c, int port):
+    ctx(c),
+    pimpl(std::make_unique<impl>())
+{
 }
 
-websocket_ticker::websocket_ticker(zmq::context_t& c, int port):ctx(c)
+websocket_ticker::~websocket_ticker()
+{
+}
+
+void websocket_ticker::run()
+{
+    run_thread = std::thread([this] {
+        broadcast_server s;
+        ws_loop = std::thread(bind(&broadcast_server::process_messages, &s));
+        uint16_t port = 9002;
+
+        pair_loop = std::thread([this, &s] {
+            zmq::socket_t pair(ctx, ZMQ_PAIR);
+            pair.bind("inproc://tick");
+            while (true) {
+                zmq::multipart_t m(pair);
+                s.push(m.popstr());
+            }
+        });
+
+        s.run(port);
+    });
+}
+
+void websocket_ticker::stop()
 {
 }

@@ -24,7 +24,7 @@ struct zeromq_log_source::impl {
         tick(context, ZMQ_PAIR),
         started(false) {
     pull.setsockopt(ZMQ_RCVTIMEO, 2000);
-    tick.setsockopt(ZMQ_SNDHWM, 1000);
+    //tick.setsockopt(ZMQ_SNDHWM, 1000);
   }
 
   ~impl() {
@@ -40,7 +40,7 @@ zeromq_log_source::zeromq_log_source(zmq::context_t& context, unsigned int zp)
   std::string socket_config = "tcp://*:";
   socket_config += port;
   pimpl->pull.bind(socket_config.c_str());
-  pimpl->tick.bind("inproc://tick");
+  pimpl->tick.connect("inproc://tick");
 
   if (log)
     log(std::string("Listening to 0mq incoming logs on: ") + socket_config);
