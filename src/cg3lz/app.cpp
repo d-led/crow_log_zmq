@@ -22,6 +22,7 @@ count(0)
     configure_app_routing();
     configure_source_logging();
     configure_views();
+    configure_websocket_ticker();
 }
 
 simple_log_server::~simple_log_server() {
@@ -121,6 +122,11 @@ void simple_log_server::configure_views()
 void simple_log_server::check_configuration() {
     if (!source || !sink || !index || !logs)
         throw std::runtime_error("App not configured correctly!");
+}
+
+void simple_log_server::configure_websocket_ticker()
+{
+    ticker = std::make_unique<websocket_ticker>(ctx, 9002);
 }
 
 void simple_log_server::configure_app_logging() {

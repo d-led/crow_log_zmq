@@ -16,6 +16,7 @@
 
 class spdlogger;
 class zeromq_log_source;
+class websocket_ticker;
 
 namespace zmq { class context_t; }
 
@@ -26,6 +27,7 @@ class simple_log_server {
     DefaultLogger default_log;
     std::unique_ptr<spdlogger> sink;
     std::unique_ptr<zeromq_log_source> source;
+    std::unique_ptr<websocket_ticker> ticker;
     crow::SimpleApp app;
 
     std::unique_ptr<main_page> index;
@@ -52,6 +54,7 @@ private:
     void configure_source_logging();
     void configure_views();
     void check_configuration();
+    void configure_websocket_ticker();
 private:
     void add_front_page();
     void add_logging_rest_endpoint();

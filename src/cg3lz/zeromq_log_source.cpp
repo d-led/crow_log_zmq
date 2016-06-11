@@ -13,6 +13,7 @@ struct zeromq_log_source::impl {
   default_log_t log_sink;
   zmq::context_t& context;
   zmq::socket_t pull;
+  zmq::socket_t tick;
   std::atomic<bool> started;
   std::thread loop;
 
@@ -20,8 +21,10 @@ struct zeromq_log_source::impl {
       : zeromq_log_port(zp),
         context(ctx),
         pull(context, ZMQ_ROUTER),
+        tick(context, ZMQ_PAIR),
         started(false) {
     pull.setsockopt(ZMQ_RCVTIMEO, 2000);
+    tick.setsockopt(ZMQ_SNDHWM, 1000);
   }
 
   ~impl() {
@@ -37,6 +40,7 @@ zeromq_log_source::zeromq_log_source(zmq::context_t& context, unsigned int zp)
   std::string socket_config = "tcp://*:";
   socket_config += port;
   pimpl->pull.bind(socket_config.c_str());
+  pimpl->tick.bind("inproc://tick");
 
   if (log)
     log(std::string("Listening to 0mq incoming logs on: ") + socket_config);
@@ -60,8 +64,11 @@ void zeromq_log_source::start_once() {
                   if (!request.peek(0))
                     continue;
                   request.pop();
+                  auto msg = request.popstr();
                   if (pimpl->log_sink)
-                    pimpl->log_sink(request.popstr());
+                    pimpl->log_sink(msg);
+                  zmq::multipart_t duplicate(msg.data(),msg.length());
+                  pimpl->tick.send(duplicate.pop(), ZMQ_DONTWAIT);
                 }
               }));
 }
