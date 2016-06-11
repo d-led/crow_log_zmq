@@ -24,7 +24,7 @@ struct zeromq_log_source::impl {
         tick(context, ZMQ_PAIR),
         started(false) {
     pull.setsockopt(ZMQ_RCVTIMEO, 2000);
-    //tick.setsockopt(ZMQ_SNDHWM, 1000);
+    tick.setsockopt(ZMQ_SNDHWM, 1000);
   }
 
   ~impl() {
