@@ -70,6 +70,11 @@ public:
         }
     }
 
+    void stop() {
+        m_server.stop_listening();
+        m_server.stop();
+    }
+
     void on_open(connection_hdl hdl) {
         {
             lock_guard<mutex> guard(m_action_lock);
@@ -154,7 +159,7 @@ websocket_ticker::~websocket_ticker()
 
 void websocket_ticker::run()
 {
-    if (running)
+    if (running || !pimpl)
         return;
 
     running = true;
@@ -164,13 +169,17 @@ void websocket_ticker::run()
         uint16_t port = 9002;
 
         pair_loop = std::thread([this, &s] {
-            zmq::socket_t pair(ctx, ZMQ_PAIR);
-            pair.setsockopt(ZMQ_RCVTIMEO, 1000);
-            pair.bind("inproc://tick");
-            while (running) {
-                zmq::multipart_t m(pair);
-                s.push(m.popstr());
+            try {
+                zmq::socket_t pair(ctx, ZMQ_PAIR);
+                pair.setsockopt(ZMQ_RCVTIMEO, 1000);
+                pair.bind("inproc://tick");
+                while (running) {
+                    zmq::multipart_t m(pair);
+                    s.push(m.popstr());
+                }
             }
+            catch (...) { }
+            s.stop();
         });
 
         s.run(port);
@@ -184,8 +193,10 @@ void websocket_ticker::stop()
 
     running = false;
 
-    //if (ws_loop.joinable())
-    //    ws_loop.join();
+    pimpl.reset();
+
+    if (ws_loop.joinable())
+        ws_loop.join();
 
     //if (pair_loop.joinable())
     //    pair_loop.join();
